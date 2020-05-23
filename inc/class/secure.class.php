@@ -27,4 +27,42 @@ Class secure {
       $_SESSION['csrf'] = $token;
     }
   }
+
+  /**
+    * Check session fingerprint
+    **/
+  function checkFingerprint() {
+    if (isset($_SESSION['fingerprint'])) {
+      if ($_SESSION['fingerprrint'] != sha1($_SERVER['HTTP_USER_AGENT'] . SALT)) {
+        // A session error has occured
+        session_destroy();
+        header('Location: ' . URI_LOGIN);
+        exit;
+      }
+    } else {
+      $_SESSION['fingerprint'] = sha1($_SERVER['HTTP_USER_AGENT'] . SALT);
+    }
+  }
+
+  /**
+    * Encrypt data
+    **/
+  function make_secure($data) {
+    $theKey = hash('sha256', KEY);
+    $theIV = substr(hash('sha256', IV), 0, 16);
+    $encrypt_method = 'AES-256-CBC';
+    return base64_encode(openssl_encrypt($data, $encrypt_method, $theKey, 0, $theIV));
+  }
+
+
+  /**
+    * Decrypt data
+    **/
+  function revert_secure($data) {
+    $theKey = hash('sha256', KEY);
+    $theIV = substr(hash('sha256', IV), 0, 16);
+    $encrypt_method = 'AES-256-CBC';
+    return openssl_decrypt(base64_decode($data), $encrypt_method, $theKey, 0, $theIV);
+  }
+
 }

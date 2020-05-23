@@ -29,14 +29,12 @@ if (!isset($_SESSION['initiated'])) {
   session_regenerate_id();
   $_SESSION['initiated'] = true;
 }
-if (isset($_SESSION['fingerprint'])) {
-  if ($_SESSION['fingerprrint'] != sha1($_SERVER['HTTP_USER_AGENT'] . SALT)) {
-    // A session error has occured
-    session_destroy();
-    header('Location: ' . URI_LOGIN);
-    exit;
-  }
-} else {
-  $_SESSION['fingerprint'] = sha1($_SERVER['HTTP_USER_AGENT'] . SALT);
-}
+$security->checkFingerprint();
 echo $_SESSION['fingerprint'];
+
+// Assume no user
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+  require_once('inc/dms/dms.php');
+} else {
+  require_once('inc/dms/login.php');
+}
