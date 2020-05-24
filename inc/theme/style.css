@@ -72,7 +72,7 @@ input[type=submit] {
   left: 0px;
   height: 50px;
   border-bottom: 1px solid var(--main);
-  padding:10px;
+  padding:7px;
   box-sizing: border-box;
 }
 
@@ -121,11 +121,14 @@ input[type=submit] {
 
 #page-bottom {
   position: absolute;
+  text-align: center;
   left: 0px;
   right: 0px;
   bottom: 0px;
   height: 50px;
   border-top: 1px solid var(--main);
+  padding: 7px;
+  box-sizing: border-box;
 }
 
 #logo {
