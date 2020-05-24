@@ -30,7 +30,6 @@ if (!isset($_SESSION['initiated'])) {
   $_SESSION['initiated'] = true;
 }
 $security->checkFingerprint();
-echo $_SESSION['fingerprint'];
 
 // Assume no user
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {

@@ -33,7 +33,7 @@ Class secure {
     **/
   function checkFingerprint() {
     if (isset($_SESSION['fingerprint'])) {
-      if ($_SESSION['fingerprrint'] != sha1($_SERVER['HTTP_USER_AGENT'] . SALT)) {
+      if ($_SESSION['fingerprint'] != sha1($_SERVER['HTTP_USER_AGENT'] . SALT)) {
         // A session error has occured
         session_destroy();
         header('Location: ' . URI_LOGIN);
