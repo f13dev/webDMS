@@ -41,11 +41,6 @@ if (isset($_POST['email'])) {
 ?>
 
 <div id="login">
-  <?php if (isset($loginerror) && $loginerror == true) { ?>
-  <div class="notice warning">
-    The credentials entered did not match those of an account in the database.
-  </div>
-  <?php } ?>
   <form method="POST">
     <h2 class="text-center">webDMS login</h2>
       <label for="email" class="text-info">Email address:</label><br>
@@ -55,4 +50,9 @@ if (isset($_POST['email'])) {
       <?php echo $security->generate_token(); ?>
       <input type="submit" name="submit" class="btn btn-info btn-md" value="Login">
   </form>
+  <?php if (isset($loginerror) && $loginerror == true) { ?>
+  <div class="notice warning">
+    The credentials entered did not match those of an account in the database, pease try again.
+  </div>
+  <?php } ?>
 </div>
