@@ -32,9 +32,13 @@ if (!isset($_SESSION['initiated'])) {
 
 $security->checkFingerprint();
 
+// Load the page head
+require_once('inc/theme/head.php');
 // Assume no user
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
   require_once('inc/dms/dms.php');
 } else {
   require_once('inc/dms/login.php');
 }
+// Load teh page foot
+require_once('inc/theme/foot.php');

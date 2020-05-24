@@ -15,7 +15,6 @@ Class secure {
     * Validate form token
     **/
   function validate_token($token) {
-    echo '<br><br>' . $_SESSION['csrf_token'] . '<br>' . $token;
     $tokenHash = hash('sha256', $_SESSION['csrf_token'] . SALT);
     if (hash_equals($token, $tokenHash)) {
       return true;
