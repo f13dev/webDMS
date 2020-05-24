@@ -33,7 +33,7 @@ Class secure {
       if ($_SESSION['fingerprint'] != sha1($_SERVER['HTTP_USER_AGENT'] . SALT)) {
         // A session error has occured
         session_destroy();
-        header('Location: ' . URI_LOGIN);
+        header('Location: ' . SITE_URL);
         exit;
       }
     } else {
