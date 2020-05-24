@@ -1,30 +1,28 @@
 <?php
 Class secure {
+
   /**
-    * Validate CSRF token
+    * Generate form token
     **/
-  function validateCSRF($postToken) {
-    global $token;
-    $token = isset($_SESSION['csrf']) ? $_SESSION['csrf'] : "";
-    if ($token && $postToken === $token) {
-      return true;
-    } else {
-      return false;
-    }
+  function generate_token() {
+    $token = bin2hex(openssl_random_pseudo_bytes(24));
+    $tokenHash = hash('sha256', $token . SALT);
+    $_SESSION['csrf_token'] = $token;
+    return '<input type="hidden" name="token" value="' . $tokenHash . '">';
   }
 
   /**
-    * Generate a new CSRF token
+    * Validate form token
     **/
-  function generateCSRF($regen) {
-    if ($regen) {
-      unset($_SESSION['csrf']);
-    }
-    global $token;
-    $token = isset($_SESSION['csrf']) ? $_SESSION['csrf'] : "";
-    if (!$token) {
-      $token = sha1(openssl_random_pseudo_bytes(128));
-      $_SESSION['csrf'] = $token;
+  function validate_token($token) {
+    echo '<br><br>' . $_SESSION['csrf_token'] . '<br>' . $token;
+    $tokenHash = hash('sha256', $_SESSION['csrf_token'] . SALT);
+    if (hash_equals($token, $tokenHash)) {
+      return true;
+    } else {
+      // Hash doesn't match, kill everything!!
+      session_destroy();
+      die;
     }
   }
 
@@ -63,6 +61,13 @@ Class secure {
     $theIV = substr(hash('sha256', IV), 0, 16);
     $encrypt_method = 'AES-256-CBC';
     return openssl_decrypt(base64_decode($data), $encrypt_method, $theKey, 0, $theIV);
+  }
+
+  /**
+    * Hash a password
+    **/
+  function password_hash($password, $salt) {
+    return hash('sha256',$password . $salt . SALT);
   }
 
 }

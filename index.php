@@ -23,12 +23,13 @@ $security = new Secure();
 
 // Session data
 session_start();
-$security->generateCSRF(false);
+//$security->session_token();
 // Session security
 if (!isset($_SESSION['initiated'])) {
   session_regenerate_id();
   $_SESSION['initiated'] = true;
 }
+
 $security->checkFingerprint();
 
 // Assume no user
