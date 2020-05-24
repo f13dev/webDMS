@@ -4,10 +4,17 @@
 }
 
 body {
-  color: var(--main);
   font-family: Arial, Helvetica, sans-serif;
 }
 
+a:link, a:visited, a:active {
+  color: var(--main);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--main);
+  text-decoration: none;
+}
 /* Login form */
 #login {
   width: 450px;
@@ -54,4 +61,73 @@ input[type=submit] {
 .warning {
   background-color: var(--secondary);
   color: #000;
+}
+
+
+/* DMS layout */
+#page-top {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  height: 50px;
+  border-bottom: 1px solid var(--main);
+  padding:10px;
+  box-sizing: border-box;
+}
+
+#page-middle {
+  position:absolute;
+  top: 50px;
+  left: 0px;
+  right: 0px;
+  bottom: 50px;
+}
+
+#page-middle-left {
+  position: absolute;
+  top:0px;
+  bottom: 0px;
+  left: 0px;
+  width: 250px;
+  border-right: 1px solid var(--main);
+}
+
+#page-middle-right {
+  position: absolute;
+  top:0px;
+  bottom:0px;
+  right:0px;
+  left:250px;
+}
+
+#page-middle-right-top {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 50%;
+  border-bottom: 1px solid var(--main);
+}
+
+#page-middle-right-bottom {
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+#page-bottom {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  height: 50px;
+  border-top: 1px solid var(--main);
+}
+
+#logo {
+  float: left;
+  margin-right: 10px;
 }

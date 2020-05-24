@@ -16,7 +16,7 @@ if (isset($_POST['email'])) {
       // email exists in db, check password
       $password = $security->password_hash($_POST['password'], $user['user_salt']);
       // Check the password is correct
-      $statement = $dbc->prepare("SELECT ID FROM users WHERE email = ? AND password = ?");
+      $statement = $dbc->prepare("SELECT ID, first_name, last_name FROM users WHERE email = ? AND password = ?");
       $statement->execute([$email,$password]);
       $password = $statement->fetch();
       if (!empty($password)) {
@@ -25,6 +25,7 @@ if (isset($_POST['email'])) {
         $_SESSION['loggedin'] = true;
         $_SESSION['ID'] = $password['ID'];
         $_SESSION['email'] = $user['email'];
+        $_SESSION['name'] = $password['first_name'] . ' ' . $password['last_name'];
         if (!isset($_GET['p'])) {
           header('Location: ' . SITE_URL);
         } else {
