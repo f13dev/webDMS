@@ -6,7 +6,6 @@ error_reporting(E_ALL);
 
 // Include the settings
 require_once('inc/cfg.php');
-require_once('inc/uri.list.php');
 
 // Include the classes
 foreach (glob("inc/class/*.class.php") as $class) {

@@ -89,8 +89,9 @@ input[type=submit] {
   top:0px;
   bottom: 0px;
   left: 0px;
-  width: 350px;
+  width: 330px;
   overflow-y: scroll;
+  padding: 10px;
 }
 
 #page-middle-right {
@@ -134,4 +135,25 @@ input[type=submit] {
 #logo {
   float: left;
   margin-right: 10px;
+}
+
+/* Lists */
+ul.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul.list > li.category {
+  font-weight: bold;
+  padding: none;
+}
+
+ul.list > li.category > ul {
+  padding-left: 0.5em;
+}
+
+ul.list > li.category > ul > li.folder {
+  font-weight: normal;
+  list-style-type: none;
+  padding: 0;
 }

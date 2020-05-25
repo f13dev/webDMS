@@ -1,6 +1,6 @@
 <?php
 
-define('REWRITE', true);
+define('REWRITE', false);
 /**
   * Get folder URI
   * $f = numeric folder ID
@@ -15,6 +15,7 @@ function folder_uri($f,$n) {
 }
 
 /**
+  * Get document URI
   * $f = numeric folder ID
   * $n = name of folder
   * $d = numeric document ID
@@ -28,9 +29,13 @@ function document_uri($f,$n,$d,$t) {
   }
 }
 
+/**
+  * Get page URI
+  * $p = page
+  **/
 function page_uri($p) {
   if (REWRITE) {
-    return SITE_URL . $p;
+    return SITE_URL . $p . '/';
   } else {
     return SITE_URL . '?p=' . $p;
   }

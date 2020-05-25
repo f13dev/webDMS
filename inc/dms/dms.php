@@ -1,6 +1,9 @@
 <?php
 // Get the page variable
 if (isset($_GET['p'])) { $page = $_GET['p']; } else { $page = 'main'; }
+if (isset($_GET['f'])) { $f = $_GET['f']; } else { $f = -1; }
+// Create new folder
+$theFolder = new folder($f);
 
 // Page layout
 ?>
@@ -17,22 +20,43 @@ if (isset($_GET['p'])) { $page = $_GET['p']; } else { $page = 'main'; }
 
 <div id="page-middle">
   <div id="page-middle-left">
-
+    <a href="<?php echo page_uri('newCategory'); ?>">New category +</a><br>
+    <a href="<?php echo page_uri('newFolder'); ?>">New folder +</a><hr>
     <?php
-    $folders = [1 => 'Test', 2 => 'Test 2', 3 => 'Another folder'];
-
-    foreach ($folders as $key => $value) {
-    //for ($i = 0; $i < 15; $i++) {
-      echo '<a href="' . folder_uri($key,$value) . '">'.$value.'</a><br>';
+    // get the categories
+    $statement = $dbc->prepare("SELECT ID, name FROM categories ORDER BY name");
+    $statement->execute();
+    $categories = $statement->fetchall();
+    // Look through categories
+    echo '<ul class="list">';
+    foreach ($categories as $eachCategory) {
+      echo '<li class="category">' . $eachCategory['name'];
+      $statement = $dbc->prepare("SELECT ID, title FROM folders WHERE category = ? ORDER BY title");
+      $statement->execute([$eachCategory['ID']]);
+      $folders = $statement->fetchAll();
+      if (sizeof($folders) > 0) {
+        echo '<ul>';
+        foreach ($folders as $eachFolder) {
+          echo '<li class="folder"><a href="' . folder_uri($eachFolder['ID'], $eachFolder['title']) . '">' . $eachFolder['title'] . '</a></li>';
+        }
+        echo '</ul>';
+      }
     }
-    echo '<a href="' . document_uri(5,'Folder name', 64, 'Document title') . '">Document title</a>';
-
+    echo '</ul>';
     ?>
-
-
   </div>
   <div id="page-middle-right">
     <div id="page-middle-right-top">
+      <?php
+
+      // file view
+      if ($theFolder->isSet()) {
+        echo '<h2>' . $theFolder->getTitle() . '</h2>';
+      } else {
+        echo '<h2>Please select a folder</h2>';
+      }
+
+      ?>
     </div>
     <div id="page-middle-right-bottom">
     </div>
