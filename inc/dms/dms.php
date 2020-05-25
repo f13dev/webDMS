@@ -52,6 +52,13 @@ $theFolder = new folder($f);
       // file view
       if ($theFolder->isSet()) {
         echo '<h2>' . $theFolder->getTitle() . '</h2>';
+        $documentList = $theFolder->getDocuments();
+        foreach ($documentList as $eachDocument) {
+          $document[$eachDocument['ID']] = new document($eachDocument['ID']);
+          // Change this into tabular view
+          echo $document[$eachDocument['ID']]->getTitle() . ' - ' .
+               $document[$eachDocument['ID']]->getDocDate() . '<br>';
+        }
       } else {
         echo '<h2>Please select a folder</h2>';
       }

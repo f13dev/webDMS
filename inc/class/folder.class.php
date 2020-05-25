@@ -26,7 +26,7 @@
      }
    }
 
-   public function getDocuments($orderBy = 'ID', $desc = true) {
+   public function getDocuments($orderBy = 'document_date', $desc = true) {
      if ($desc == true) {
        $order = 'DESC';
      } else {

@@ -35,4 +35,12 @@ Class document {
   public function isSet() {
     return $this->isSet;
   }
+
+  public function getTitle() {
+    return $this->title;
+  }
+
+  public function getDocDate() {
+    return date(DATE_FORMAT, strtotime($this->document_date));
+  }
 }
