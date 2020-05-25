@@ -52,13 +52,7 @@ $theFolder = new folder($f);
       // file view
       if ($theFolder->isSet()) {
         echo '<h2>' . $theFolder->getTitle() . '</h2>';
-        $documentList = $theFolder->getDocuments();
-        foreach ($documentList as $eachDocument) {
-          $document[$eachDocument['ID']] = new document($eachDocument['ID']);
-          // Change this into tabular view
-          echo $document[$eachDocument['ID']]->getTitle() . ' - ' .
-               $document[$eachDocument['ID']]->getDocDate() . '<br>';
-        }
+        echo $theFolder->buildDocumentTable();
       } else {
         echo '<h2>Please select a folder</h2>';
       }
@@ -72,7 +66,7 @@ $theFolder = new folder($f);
 
 <div id="page-bottom">
   webDMS 0.4 beta &copy; 2020 <a href="https://f13dev.com">James Valentine</a><br>
-  <?php echo getDocumentCount(); ?> documents, using <?php echo getDocumentTotalSize(); ?>, remaining <?php echo humanSize(diskfreespace(".")); ?>
+  <?php echo  getDocumentCount(); ?> documents, using <?php echo getDocumentTotalSize(); ?>, remaining <?php echo humanSize(diskfreespace(".")); ?>
 </div>
 
 

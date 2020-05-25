@@ -36,11 +36,32 @@ Class document {
     return $this->isSet;
   }
 
+  public function getID() {
+    return $this->ID;
+  }
+  
   public function getTitle() {
     return $this->title;
+  }
+
+  public function getNotes() {
+    return $this->notes;
+  }
+
+  public function getFolder() {
+    return $this->folder;
+  }
+
+  public function getUploadDate() {
+    return date(DATE_FORMAT, strtotime($this->upload_date));
   }
 
   public function getDocDate() {
     return date(DATE_FORMAT, strtotime($this->document_date));
   }
+
+  public function getFile() {
+    return $this->file;
+  }
+
 }

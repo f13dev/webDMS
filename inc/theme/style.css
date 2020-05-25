@@ -157,3 +157,19 @@ ul.list > li.category > ul > li.folder {
   list-style-type: none;
   padding: 0;
 }
+
+/* table layout */
+.fileTable {
+  width: 100%;
+  border: 1px solid black;
+}
+
+.fileTable td, .fileTable th {
+  padding: 5px;
+  border-collapse: col
+  margin: 0;
+}
+
+.fileTable tr:hover {
+  background: #ccc;
+}

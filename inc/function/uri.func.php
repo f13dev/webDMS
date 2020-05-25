@@ -40,3 +40,27 @@ function page_uri($p) {
     return SITE_URL . '?p=' . $p;
   }
 }
+
+function doc_edit_uri($id) {
+  if (REWRITE) {
+    return SITE_URL . 'editDoc/D' . $id . '/';
+  } else {
+    return SITE_URL . '?p=editDoc&id=' . $id;
+  }
+}
+
+function doc_del_uri($id) {
+  if (REWRITE) {
+    return SITE_URL . 'delDoc/D' . $id . '/';
+  } else {
+    return SITE_URL . '?p=delDoc&id=' . $id;
+  }
+}
+
+function doc_download_uri($id) {
+  if (REWRITE) {
+    return SITE_URL . 'download/D' . $id . '/';
+  } else {
+    return SITE_URL . '?p=download&id=' . $id;
+  }
+}
