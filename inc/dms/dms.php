@@ -2,6 +2,8 @@
 // Get the page variable
 if (isset($_GET['p'])) { $page = $_GET['p']; } else { $page = 'main'; }
 if (isset($_GET['f'])) { $f = $_GET['f']; } else { $f = -1; }
+if (isset($_GET['orderBy'])) { $orderBy = $_GET['orderBy']; } else ($orderBy = 'document_date');
+if (isset($_GET['desc'])) { $desc = $_GET['desc']; } else { $desc = 'true'; }
 // Create new folder
 $theFolder = new folder($f);
 
@@ -52,7 +54,8 @@ $theFolder = new folder($f);
       // file view
       if ($theFolder->isSet()) {
         echo '<h2>' . $theFolder->getTitle() . '</h2>';
-        echo $theFolder->buildDocumentTable();
+        echo $orderBy . ' ' . $desc;
+        echo $theFolder->buildDocumentTable($orderBy, $desc);
       } else {
         echo '<h2>Please select a folder</h2>';
       }

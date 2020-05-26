@@ -41,6 +41,9 @@ function page_uri($p) {
   }
 }
 
+/**
+  * Gete document edit URI
+  **/
 function doc_edit_uri($id) {
   if (REWRITE) {
     return SITE_URL . 'editDoc/D' . $id . '/';
@@ -49,6 +52,9 @@ function doc_edit_uri($id) {
   }
 }
 
+/**
+  * Get document delete URI
+  **/
 function doc_del_uri($id) {
   if (REWRITE) {
     return SITE_URL . 'delDoc/D' . $id . '/';
@@ -57,6 +63,9 @@ function doc_del_uri($id) {
   }
 }
 
+/**
+  * Get document download URI
+  **/
 function doc_download_uri($id) {
   if (REWRITE) {
     return SITE_URL . 'download/D' . $id . '/';

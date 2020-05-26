@@ -33,6 +33,7 @@
        $order = 'ASC';
      }
      global $dbc;
+     echo $orderBy;
      $statement = $dbc->prepare("SELECT ID FROM documents WHERE folder = ? ORDER BY ? $order");
      $statement->execute([$this->getID(), $orderBy]);
      return $statement->fetchAll();
