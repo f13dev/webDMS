@@ -2,16 +2,18 @@
 // Get the page variable
 if (isset($_GET['p'])) { $page = $_GET['p']; } else { $page = 'main'; }
 if (isset($_GET['f'])) { $f = $_GET['f']; } else { $f = -1; }
+if (isset($_GET['d'])) { $d = $_GET['d']; } else { $d = -1; }
 if (isset($_GET['orderBy'])) { $orderBy = $_GET['orderBy']; } else ($orderBy = 'document_date');
 if (isset($_GET['desc'])) { $desc = $_GET['desc']; } else { $desc = 'true'; }
 // Create new folder
 $theFolder = new folder($f);
+$theDocument = new document($d);
 
 // Page layout
 ?>
 
 <div id="page-top">
-  <img src="favicon-32x32.png" id="logo">
+  <img src="<?php echo SITE_URL; ?>favicon-32x32.png" id="logo">
   <a href="<?php echo SITE_URL; ?>">webDMS</a> -
   <a href="<?php echo page_uri('account'); ?>">Account details</a> -
   <a href="<?php echo page_uri('logout'); ?>">Logout</a>
@@ -63,6 +65,12 @@ $theFolder = new folder($f);
       ?>
     </div>
     <div id="page-middle-right-bottom">
+    <?php
+      print_r($_GET);
+      if ($theDocument->isSet()) {
+        echo '<h2>' . $theDocument->getTitle() . '</h2>';
+      }
+    ?>
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 <?php
 
-define('REWRITE', false);
+define('REWRITE', true);
 /**
   * Get folder URI
   * $f = numeric folder ID
