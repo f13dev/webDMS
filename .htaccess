@@ -1,0 +1,23 @@
+Options +FollowSymlinks
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} -d [OR]
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule (.*) $1 [QSA,L]
+
+#document_uri($f,$n,$d,$t)
+RewriteRule ^F([0-9]+)/(.*)/D([0-9]+)/(.*)/ index.php?f=$1&folder=$2&d=$3&title=$4
+#folder_uri($f,$n)
+RewriteRule ^F([0-9]+)/(.*)/ index.php?f=$1&folder=$2
+
+
+#doc_edit_uri
+RewriteRule ^editDoc/D([0-9]+)/ index.php?p=editDoc&id=$1
+#doc_del_uri
+RewriteRule ^delDoc/D([0-9]+)/ index.php?p=delDoc&id=$1
+#doc_download_uri
+RewriteRule ^download/D([0-9]+)/ index.php?p=download&id=$1
+
+
+#page_uri - Goes right at the bottom
+RewriteRule ^([A-Za-z]*)/ index.php?p=$1
