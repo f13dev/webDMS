@@ -18,8 +18,12 @@ $theDocument = new document($d);
   <a href="<?php echo page_uri('account'); ?>">Account details</a> -
   <a href="<?php echo page_uri('logout'); ?>">Logout</a>
   (<?php echo $_SESSION['name']; ?>)<br>
-  <!-- will become breadcrumb -->
-  webDMS >> Bank statements >> July 2018
+  <!-- Breadcrumb -->
+  <?php
+  if (isset($page)) { echo $page . ' >> '; }
+  if ($theFolder->isSet()) { echo $theFolder->getTitle() . ' >> '; }
+  if ($theDocument->isSet()) { echo $theDocument->getTitle() . ' >> '; }
+  ?>
 </div>
 
 <div id="page-middle">
