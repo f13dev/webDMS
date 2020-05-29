@@ -69,4 +69,48 @@ Class secure {
     return hash('sha256',$password . $salt . SALT);
   }
 
+  /**
+    * JS Session timeout
+    **/
+  function t800() {
+  ?>
+    <div id="timer"></div>
+    <form action="<?php echo page_uri('logout'); ?>" method="POST" id="destroy" style="display:none;">
+      <input type="hidden" name="uri" value="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>" >
+    </form>
+    <script>
+      // Add a countdown to destroy the session if no activity
+      var sec         = <?php echo SESSION_TIME; ?>,
+          countDiv    = document.getElementById("timer"),
+          secpass,
+          countDown   = setInterval(function () {
+            'use strict';
+            secpass();
+      }, 1000);
+
+      function secpass() {
+        'use strict';
+        var min     = Math.floor(sec / 60),
+            remSec  = sec % 60;
+        if (remSec < 10) {
+            remSec = '0' + remSec;
+        }
+        if (min < 10) {
+            min = '0' + min;
+        }
+        countDiv.innerHTML = "Session ends in: " + min + ":" + remSec;
+        if (sec > 0) {
+            sec = sec - 1;
+        } else {
+            clearInterval(countDown);
+            document.getElementById("destroy").submit();
+
+            //window.location = "<?php //echo page_uri('logout') . '?referrer='; ?>" + window.location.href;
+            //location.reload();
+        }
+    }
+    </script>
+    <?php
+  }
+
 }
