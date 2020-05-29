@@ -39,6 +39,7 @@ define('SESSION_UNIQUE_ID', 'Random generated ID');
 define('SALT', 'Random generated salt');
 define('KEY', 'Random generated key');
 define('IV', 'Random generated IV');
+define('SESSION_TIME', 900);
 
 // Formatting
 define('DATE_FORMAT', 'd-M-Y');

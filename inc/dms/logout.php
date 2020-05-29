@@ -1,4 +1,5 @@
 <?php
-
+if (isset($_POST['uri'])) { $referrer = $_POST['uri']; } else { $referrer = SITE_URL; }
 session_destroy();
-header('Location:' . SITE_URL);
+echo $referrer;
+header('Location:' . $referrer);

@@ -173,3 +173,12 @@ ul.list > li.category > ul > li.folder {
 .fileTable tr:hover {
   background: #ccc;
 }
+
+/* Countdown timer */
+#timer {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  width: 200px;
+  color: var(--main);
+}

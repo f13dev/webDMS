@@ -22,6 +22,7 @@ $security = new Secure();
 
 // Session data
 session_start();
+
 //$security->session_token();
 // Session security
 if (!isset($_SESSION['initiated'])) {
