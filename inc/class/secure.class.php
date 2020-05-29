@@ -75,7 +75,7 @@ Class secure {
   function t800() {
   ?>
     <div id="timer"></div>
-    <form action="<?php echo page_uri('logout'); ?>" method="POST" id="destroy" style="display:none;">
+    <form action="<?php echo page_uri('logout'); ?>" method="POST" id="t800" style="display:none;">
       <input type="hidden" name="uri" value="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>" >
     </form>
     <script>
@@ -103,10 +103,7 @@ Class secure {
             sec = sec - 1;
         } else {
             clearInterval(countDown);
-            document.getElementById("destroy").submit();
-
-            //window.location = "<?php //echo page_uri('logout') . '?referrer='; ?>" + window.location.href;
-            //location.reload();
+            document.getElementById("t800").submit();
         }
     }
     </script>
