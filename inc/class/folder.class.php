@@ -40,7 +40,6 @@
      if (!in_array($orderBy,$orders)) { $orderBy = 'document_date'; }
      $orderBy = $orderBy . ' ' . $order;
      global $dbc;
-     echo $orderBy;
      $statement = $dbc->prepare("SELECT ID FROM documents WHERE folder = ? ORDER BY $orderBy");
      $statement->execute([$this->getID()]);
      return $statement->fetchAll();
