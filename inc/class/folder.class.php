@@ -57,11 +57,11 @@
      return $this->ID;
    }
 
-   public function buildDocumentTable($orderBy = 'document_date', $asc = 'false') {
+   public function buildDocumentTable($selected, $orderBy = 'document_date', $asc = 'false') {
      global $d,$title;
 
      $output  = '<table class="fileTable">';
-     $output .= '<tr>';
+     $output .= '<tr class="thead">';
      $output .= '<th>Title
                    <a href="' .  document_uri($this->getID(), $this->getTitle(),$d,$title,'title','true') . '"><i class="fa fa-angle-up"></i></a>
                    <a href="' .  document_uri($this->getID(), $this->getTitle(),$d,$title,'title','false') . '"><i class="fa fa-angle-down"></i></a>
@@ -81,7 +81,11 @@
      $output .= '</tr>';
      foreach ($this->getDocuments($orderBy, $asc) as $each) {
        $doc[$each['ID']] = new document($each['ID']);
-       $output .= '<tr>';
+       if ($doc[$each['ID']]->getID() == $selected) {
+         $output .= '<tr class="selected">';
+       } else {
+         $output .= '<tr>';
+       }
        $output .= '<td><a href="' . document_uri($this->getID(), $this->getTitle(), $doc[$each['ID']]->getID(), $doc[$each['ID']]->getTitle(), $orderBy, $asc) . '">
                   ' . $doc[$each['ID']]->getTitle() . '
                   </a></td>';

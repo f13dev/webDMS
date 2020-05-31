@@ -1,6 +1,7 @@
 :root {
-  --main: #e2611b;
+  --main: #E2611B;
   --secondary: #FFBF9C; /* #EFA37A; */
+  --dark: #A2611B;
 }
 
 body {
@@ -171,9 +172,30 @@ ul.list > li.category > ul > li.folder {
 }
 
 .fileTable tr:hover {
-  background: #ccc;
+  background: #efefef;
 }
 
+.fileTable tr.selected {
+  background: var(--main);
+  color: #fff;
+  font-weight: bold;
+}
+
+.fileTable tr.selected a {
+  color: #fff;
+}
+
+.fileTable tr.selected:hover {
+  background: var(--dark);
+}
+
+.fileTable tr td a:hover {
+  text-decoration: underline;
+}
+
+.fileTable tr.thead:hover {
+  background: unset;
+}
 /* Countdown timer */
 #timer {
   position: absolute;

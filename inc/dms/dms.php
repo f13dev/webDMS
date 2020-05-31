@@ -65,7 +65,7 @@ $theDocument = new document($d);
       // file view
       if ($theFolder->isSet()) {
         echo '<h2>' . $theFolder->getTitle() . '</h2>';
-        echo $theFolder->buildDocumentTable($orderBy, $asc);
+        echo $theFolder->buildDocumentTable($d, $orderBy, $asc);
       } else {
         echo '<h2>Please select a folder</h2>';
       }
