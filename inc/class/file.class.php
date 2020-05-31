@@ -1,4 +1,8 @@
 <?php
+// block direct access
+if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
+  header("Location: ../../");
+}
 Class document {
   // Variables
   private $isSet;
@@ -39,7 +43,7 @@ Class document {
   public function getID() {
     return $this->ID;
   }
-  
+
   public function getTitle() {
     return $this->title;
   }

@@ -1,4 +1,8 @@
 <?php
+// block direct access
+if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
+  header("Location: ../../");
+}
 function humanSize($bytes) {
   $si_prefix = array('B', 'KB', 'MB', 'GB', 'TB', 'EB', 'ZB', 'YB');
   $base = 1024;

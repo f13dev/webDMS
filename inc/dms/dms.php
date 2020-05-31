@@ -1,4 +1,8 @@
 <?php
+// block direct access
+if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
+  header("Location: ../../");
+}
 // Get the page variable
 if (isset($_GET['p'])) { $page = $_GET['p']; } else { $page = 'main'; }
 if (isset($_GET['f'])) { $f = $_GET['f']; } else { $f = false; }
