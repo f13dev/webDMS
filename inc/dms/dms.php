@@ -74,9 +74,10 @@ $theDocument = new document($d);
     </div>
     <div id="page-middle-right-bottom">
     <?php
-      print_r($_GET);
       if ($theDocument->isSet()) {
-        echo '<h2>' . $theDocument->getTitle() . '</h2>';
+        echo $theDocument->showFile();
+      } else {
+        echo '<h2>Please select a file</h2>';
       }
     ?>
     </div>

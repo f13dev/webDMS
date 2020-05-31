@@ -119,6 +119,7 @@ input[type=submit] {
   left: 0px;
   right: 0px;
   bottom: 0px;
+  overflow-y:auto;
 }
 
 #page-bottom {
@@ -138,6 +139,21 @@ input[type=submit] {
   margin-right: 10px;
 }
 
+/* File formatting */
+#page-middle-right-bottom img {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+#page-middle-right-bottom audio {
+  width: 90%;
+  padding-top: 2em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 /* Lists */
 ul.list {
   list-style-type: none;

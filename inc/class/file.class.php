@@ -68,4 +68,38 @@ Class document {
     return $this->file;
   }
 
+  public function getExtension() {
+    $explode = explode('.', $this->getFile());
+    return strtolower(end($explode));
+  }
+
+  public function getFileURL() {
+    return SITE_URL . SITE_DOCS . $this->getFile();
+  }
+
+  public function getPsuedoName() {
+    return str_replace(' ','_',$this->getTitle() . '.' . $this->getExtension());
+  }
+
+  public function showFile() {
+    $ext = $this->getExtension();
+    if (in_array($ext, array('jpg','jpeg','png','gif','tiff'))) {
+      return '<img src="' . $this->getFileURL() . '" class="imgPreview">';
+    } else if ($ext == 'pdf') {
+      return '<object data="' . $this->getFileURL() . '#toolbar=0" type="application/pdf" width="100%" height="99%">
+                alt : <a href="' . $this->getFileURL() . '">' . $this->getPsuedoName() . '</a>
+              </object>';
+    } else if (in_array($ext, array('mp3', 'wav', 'ogg'))) {
+      if ($ext == 'mp3') { $ext = 'mpeg'; }
+      return '<h2>' . $this->getPsuedoName() . '</h2>
+              <audio controls controlslist="nodownload">
+                <source src="' . $this->getFileURL() . '" type="audio/' . $ext . '">
+                Your browser does not support HTML5 audio
+              </audio>';
+    } else if (in_array($ext, array('doc', 'docx', 'xls', 'odf', 'ods'))) {
+      // Process docs and sheets
+    }
+    return false;
+  }
+
 }
