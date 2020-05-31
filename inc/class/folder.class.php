@@ -26,16 +26,19 @@
      }
    }
 
-   public function getDocuments($orderBy = 'document_date', $desc = true) {
-     if ($desc == true) {
+   public function getDocuments($orderBy = 'document_date', $asc = 'false') {
+     if ($asc == 'false') {
        $order = 'DESC';
      } else {
        $order = 'ASC';
      }
+     $orders = array('document_date','title','upload_date');
+     if (!in_array($orderBy,$orders)) { $orderBy = 'document_date'; }
+     $orderBy = $orderBy . ' ' . $order;
      global $dbc;
      echo $orderBy;
-     $statement = $dbc->prepare("SELECT ID FROM documents WHERE folder = ? ORDER BY ? $order");
-     $statement->execute([$this->getID(), $orderBy]);
+     $statement = $dbc->prepare("SELECT ID FROM documents WHERE folder = ? ORDER BY $orderBy");
+     $statement->execute([$this->getID()]);
      return $statement->fetchAll();
    }
 
@@ -51,30 +54,32 @@
      return $this->ID;
    }
 
-   public function buildDocumentTable($orderBy = 'document_date', $desc = true) {
+   public function buildDocumentTable($orderBy = 'document_date', $asc = 'false') {
+     global $d,$title;
+
      $output  = '<table class="fileTable">';
      $output .= '<tr>';
      $output .= '<th>Title
-                   <a href="#"><i class="fa fa-angle-up"></i></a>
-                   <a href="#"><i class="fa fa-angle-down"></i></a>
+                   <a href="' .  document_uri($this->getID(), $this->getTitle(),$d,$title,'title','true') . '"><i class="fa fa-angle-up"></i></a>
+                   <a href="' .  document_uri($this->getID(), $this->getTitle(),$d,$title,'title','false') . '"><i class="fa fa-angle-down"></i></a>
                  </th>';
      $output .= '<th>Date
-                   <a href="#"><i class="fa fa-angle-up"></i></a>
-                   <a href="#"><i class="fa fa-angle-down"></i></a>
+                   <a href="' .  document_uri($this->getID(), $this->getTitle(),$d,$title,'document_date','true') . '"><i class="fa fa-angle-up"></i></a>
+                   <a href="' .  document_uri($this->getID(), $this->getTitle(),$d,$title,'document_date','false') . '"><i class="fa fa-angle-down"></i></a>
                  </th>';
      $output .= '<th>File</th>';
      $output .= '<th>Uploaded
-                   <a href="#"><i class="fa fa-angle-up"></i></a>
-                   <a href="#"><i class="fa fa-angle-down"></i></a>
+                   <a href="' .  document_uri($this->getID(), $this->getTitle(),$d,$title,'upload_date','true') . '"><i class="fa fa-angle-up"></i></a>
+                   <a href="' .  document_uri($this->getID(), $this->getTitle(),$d,$title,'upload_date','false') . '"><i class="fa fa-angle-down"></i></a>
                  </th>';
      $output .= '<th>Edit</th>';
      $output .= '<th>Delete</th>';
      $output .= '<th>Download</th>';
      $output .= '</tr>';
-     foreach ($this->getDocuments($orderBy, $desc) as $each) {
+     foreach ($this->getDocuments($orderBy, $asc) as $each) {
        $doc[$each['ID']] = new document($each['ID']);
        $output .= '<tr>';
-       $output .= '<td><a href="' . document_uri($this->getID(), $this->getTitle(), $doc[$each['ID']]->getID(), $doc[$each['ID']]->getTitle()) . '">
+       $output .= '<td><a href="' . document_uri($this->getID(), $this->getTitle(), $doc[$each['ID']]->getID(), $doc[$each['ID']]->getTitle(), $orderBy, $asc) . '">
                   ' . $doc[$each['ID']]->getTitle() . '
                   </a></td>';
        $output .= '<td>' . $doc[$each['ID']]->getDocDate() . '</td>';

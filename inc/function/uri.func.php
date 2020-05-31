@@ -6,11 +6,11 @@ define('REWRITE', true);
   * $f = numeric folder ID
   * $n = name of folder
   **/
-function folder_uri($f,$n) {
+function folder_uri($f,$n,$orderBy = 'document_date', $asc = 'false') {
   if (REWRITE) {
-    return SITE_URL . 'F' . $f . '/' . urlencode($n) . '/';
+    return SITE_URL . 'F' . $f . '/' . urlencode($n) . '/order-' . $orderBy . '/asc-' . $asc . '/';
   } else {
-    return SITE_URL . '?f=' . $f . '&folder=' . urlencode($n);
+    return SITE_URL . '?f=' . $f . '&folder=' . urlencode($n) . '&orderBy=' . $orderBy . '&asc=' . $asc . '/';
   }
 }
 
@@ -21,11 +21,22 @@ function folder_uri($f,$n) {
   * $d = numeric document ID
   * $t = title of document
   **/
-function document_uri($f,$n,$d,$t) {
+function document_uri($f,$n,$d = false,$t = false,$orderBy = 'document_date', $asc = 'false') {
+  $baseURI = folder_uri($f,$n,$orderBy,$asc);
   if (REWRITE) {
-    return folder_uri($f,$n) . 'D' . $d . '/' . urlencode($t) . '/';
+    if ($d == false) {
+      return $baseURI;
+    } else {
+      return folder_uri($f,$n,$orderBy,$asc) . 'D' . $d . '/' . urlencode($t) . '/';
+    }
+    //return folder_uri($f,$n,$orderBy,$asc) . 'D' . $d . '/' . urlencode($t) . '/';
   } else {
-    return folder_uri($f,$n) . '&d=' . $d . '&titlle=' . urlencode($t);
+    if ($d == false) {
+      return $baseURI;
+    } else {
+      return folder_uri($f,$n,$orderBy,$asc) . '&d=' . $d . '&titlle=' . urlencode($t);
+    }
+    //return folder_uri($f,$n,$orderBy,$asc) . '&d=' . $d . '&titlle=' . urlencode($t);
   }
 }
 

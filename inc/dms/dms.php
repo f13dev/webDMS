@@ -1,10 +1,11 @@
 <?php
 // Get the page variable
 if (isset($_GET['p'])) { $page = $_GET['p']; } else { $page = 'main'; }
-if (isset($_GET['f'])) { $f = $_GET['f']; } else { $f = -1; }
-if (isset($_GET['d'])) { $d = $_GET['d']; } else { $d = -1; }
+if (isset($_GET['f'])) { $f = $_GET['f']; } else { $f = false; }
+if (isset($_GET['d'])) { $d = $_GET['d']; } else { $d = false; }
 if (isset($_GET['orderBy'])) { $orderBy = $_GET['orderBy']; } else ($orderBy = 'document_date');
-if (isset($_GET['desc'])) { $desc = $_GET['desc']; } else { $desc = 'true'; }
+if (isset($_GET['asc'])) { $asc = $_GET['asc']; } else { $asc = 'false'; }
+if (isset($_GET['title'])) {$title = $_GET['title'];} else {$title = 'false';}
 // Create new folder
 $theFolder = new folder($f);
 $theDocument = new document($d);
@@ -60,8 +61,7 @@ $theDocument = new document($d);
       // file view
       if ($theFolder->isSet()) {
         echo '<h2>' . $theFolder->getTitle() . '</h2>';
-        echo $orderBy . ' ' . $desc;
-        echo $theFolder->buildDocumentTable($orderBy, $desc);
+        echo $theFolder->buildDocumentTable($orderBy, $asc);
       } else {
         echo '<h2>Please select a folder</h2>';
       }
