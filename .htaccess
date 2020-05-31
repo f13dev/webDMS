@@ -6,10 +6,10 @@ RewriteCond %{REQUEST_FILENAME} -d [OR]
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule (.*) $1 [QSA,L]
 
-#document_uri($f,$n,$d,$t)
-RewriteRule ^F([0-9]+)/(.*)/D([0-9]+)/(.*)/ index.php?f=$1&folder=$2&d=$3&title=$4
-#folder_uri($f,$n)
-RewriteRule ^F([0-9]+)/(.*)/ index.php?f=$1&folder=$2
+#document_uri($f,$n,$d,$t,$orderBy,$asc)
+RewriteRule ^F([0-9]+)/(.*)/order-(.*)/asc-(.*)/D([0-9]+)/(.*)/ index.php?f=$1&folder=$2&orderBy=$3&asc=$4&d=$5&title=$6
+#folder_uri($f,$n,$orderBy,$asc)
+RewriteRule ^F([0-9]+)/(.*)/order-(.*)/asc-(.*)/ index.php?f=$1&folder=$2&orderBy=$3&asc=$4
 
 #doc_edit_uri
 RewriteRule ^editDoc/D([0-9]+)/ index.php?p=editDoc&id=$1
