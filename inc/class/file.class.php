@@ -89,7 +89,7 @@ Class document {
       return '<object data="' . $this->getFileURL() . '#toolbar=0" type="application/pdf" width="100%" height="99%">
                 alt : <a href="' . $this->getFileURL() . '">' . $this->getPsuedoName() . '</a>
               </object>';
-    } else if (in_array($ext, array('mp3', 'wav', 'ogg'))) {
+    } else if (in_array($ext, array('mp3', 'wav', 'ogg', 'aac', 'webm', 'flac'))) {
       if ($ext == 'mp3') { $ext = 'mpeg'; }
       return '<h2>' . $this->getPsuedoName() . '</h2>
               <audio controls controlslist="nodownload">

@@ -24,6 +24,7 @@ Class secure {
       return true;
     } else {
       // Hash doesn't match, kill everything!!
+      echo 'There was a session token error, please try again.';
       session_destroy();
       die;
     }
