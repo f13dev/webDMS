@@ -12,8 +12,12 @@ define('REWRITE', true);
   **/
 function folder_uri($f,$n,$orderBy = 'document_date', $asc = 'false') {
   if (REWRITE) {
-    return SITE_URL . 'F' . $f . '/' . urlencode($n) . '/order-' . $orderBy . '/asc-' . $asc . '/';
+    if ($orderBy == 'document_date') { $orderByString = ''; } else { $orderByString = '/order-' . $orderBy; }
+    if ($asc == 'false') { $ascString = ''; } else { $ascString = '/asc-' . $asc; }
+    return SITE_URL . 'F' . $f . '/' . urlencode($n) . $orderByString . $ascString . '/';
   } else {
+    if ($orderBy == 'document_date') { $orderByString = ''; } else { $orderByString = '&orderBy=' . $orderBy; }
+    if ($asc == 'false') { $ascString = ''; } else { $ascString = '&asc=' . $asc; }
     return SITE_URL . '?f=' . $f . '&folder=' . urlencode($n) . '&orderBy=' . $orderBy . '&asc=' . $asc . '/';
   }
 }
