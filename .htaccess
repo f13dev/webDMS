@@ -11,6 +11,24 @@ RewriteRule ^F([0-9]+)/(.*)/order-(.*)/asc-(.*)/D([0-9]+)/(.*)/ index.php?f=$1&f
 #folder_uri($f,$n,$orderBy,$asc)
 RewriteRule ^F([0-9]+)/(.*)/order-(.*)/asc-(.*)/ index.php?f=$1&folder=$2&orderBy=$3&asc=$4
 
+#Without $asc
+#document_uri($f,$n,$d,$t,$orderBy)
+RewriteRule ^F([0-9]+)/(.*)/order-(.*)/D([0-9]+)/(.*)/ index.php?f=$1&folder=$2&orderBy=$3&d=$4&title=$5
+#folder_uri($f,$n,$orderBy)
+RewriteRule ^F([0-9]+)/(.*)/order-(.*)/ index.php?f=$1&folder=$2&orderBy=$3
+
+#Without $orderBy
+#document_uri($f,$n,$d,$t,$asc)
+RewriteRule ^F([0-9]+)/(.*)/asc-(.*)/D([0-9]+)/(.*)/ index.php?f=$1&folder=$2&asc=$3&d=$4&title=$5
+#folder_uri($f,$n,$asc)
+RewriteRule ^F([0-9]+)/(.*)/asc-(.*)/ index.php?f=$1&folder=$2&asc=$3
+
+#Without &orderBy and $asc
+#document_uri($f,$n,$d,$t)
+RewriteRule ^F([0-9]+)/(.*)/D([0-9]+)/(.*)/ index.php?f=$1&folder=$2&d=$3&title=$4
+#folder_uri($f,$n)
+RewriteRule ^F([0-9]+)/(.*)/ index.php?f=$1&folder=$2
+
 #doc_edit_uri
 RewriteRule ^editDoc/D([0-9]+)/ index.php?p=editDoc&id=$1
 #doc_del_uri
