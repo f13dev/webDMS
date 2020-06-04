@@ -24,7 +24,7 @@ Class secure {
       return true;
     } else {
       // Hash doesn't match, kill everything!!
-      echo 'There was a session token error, please try again.';
+      echo 'There was a session token error.';
       session_destroy();
       die;
     }
@@ -44,6 +44,14 @@ Class secure {
     } else {
       $_SESSION['fingerprint'] = sha1($_SERVER['HTTP_USER_AGENT'] . SALT);
     }
+  }
+
+  /**
+    * Sanitise inputs
+    **/
+  function sanitise($data) {
+    // code to sanitise inputs, remove quotes etc...
+    return $data;
   }
 
   /**

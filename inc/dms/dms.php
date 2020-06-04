@@ -33,9 +33,15 @@ $theDocument = new document($d);
 
 <div id="page-middle">
   <div id="page-middle-left">
+    <form>
+      <input type="text" placeholder="Search..." style="display:inline-block; width:250px">
+      <input type="submit" value="Go" style="display:inline-block; width: 58px">
+    </form>
     <a href="<?php echo page_uri('newCategory'); ?>">New category +</a><br>
-    <a href="<?php echo page_uri('newFolder'); ?>">New folder +</a><hr>
+    <a href="<?php echo page_uri('newFolder'); ?>">New folder +</a>
+    <hr>
     <?php
+    // Shift this to category.class.php
     // get the categories
     $statement = $dbc->prepare("SELECT ID, name FROM categories ORDER BY name");
     $statement->execute();
