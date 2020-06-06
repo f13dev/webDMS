@@ -6,7 +6,7 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
 ?>
 
 <div id="page-middle-left">
-  <form method="get " action="<?php echo search_uri(); ?>">
+  <form method="POST" action="<?php echo SITE_URL; ?>">
     <input type="hidden" name="p" value="search">
     <input type="text" name="searchString" placeholder="Search..." style="display:inline-block; width:250px">
     <input type="submit" value="Go" style="display:inline-block; width: 58px">
@@ -47,7 +47,11 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
       echo '<h2>' . $theFolder->getTitle() . '</h2>';
       echo $theFolder->buildFolderHead();
       echo $theFolder->buildDocumentTable($d, $orderBy, $asc);
-    } else if (isset($_GET["searchString"])) {
+    } else if (isset($_GET["searchString"]) || (isset($_POST['searchString']))) {
+      // Force a reload if post data is present 
+      if (isset($_POST['searchString'])) {
+        header("location:" . search_uri($_POST['searchString']));
+      }
       $search = new search($_GET['searchString']);
       echo '<h2>Search: ' . $search->getTerm() . '</h2>';
       echo 'The search term ' . $search->getTerm() . ' returned ' . $search->getResultCount() . ' results';

@@ -127,10 +127,14 @@ function deleteFolder_uri($id, $title) {
 }
 
 /**
- * Get search URI
+ * Get search term URI
  */
-function search_uri() {
-    return SITE_URL;
+function search_uri($term) {
+  if (REWRITE) {
+    return SITE_URL . 'search/' . urlencode($term) . '/';
+  } else {
+    return SITE_URL . '?p=search&searchString=' . urlencode($term);
+  }
 }
 
 /**
