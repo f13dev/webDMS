@@ -92,3 +92,36 @@ function doc_download_uri($id) {
     return SITE_URL . '?p=download&id=' . $id;
   }
 }
+
+/**
+ * Get document upload URI for a given folder
+ */
+function uploadDocument_uri($id, $title) {
+  if (REWRITE) {
+    return SITE_URL . 'upload/F' . $id . '/' . urlencode($title) . '/';
+  } else {
+    return SITE_URL . '?p=upload&id=' . $id . '&title=' . urlencode($title);
+  }
+}
+
+/**
+ * Get edit folder URI for a given folder
+ */
+function editFolder_uri($id, $title) {
+  if (REWRITE) {
+    return SITE_URL . 'editFolder/F' . $id . '/' . urlencode($title) . '/';
+  } else {
+    return SITE_URL . '?p=editFolder&id=' . $id . '&title=' . urlencode($title);
+  }
+}
+
+/**
+ * Get delete folder URI for a given folder
+ */
+function deleteFolder_uri($id, $title) {
+  if (REWRITE) {
+    return SITE_URL . 'deleteFolder/F' . $id . '/' . urlencode($title) . '/';
+  } else {
+    return SITE_URL . '?p=deleteFolder&id=' . $id . '&title=' . urlencode($title);
+  }
+}

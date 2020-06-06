@@ -44,6 +44,7 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
     // file view
     if ($theFolder->isSet()) {
       echo '<h2>' . $theFolder->getTitle() . '</h2>';
+      echo $theFolder->buildFolderHead();
       echo $theFolder->buildDocumentTable($d, $orderBy, $asc);
     } else {
       echo '<h2>Please select a folder</h2>';

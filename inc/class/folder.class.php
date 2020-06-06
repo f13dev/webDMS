@@ -30,6 +30,24 @@
      }
    }
 
+   public function getDescription() {
+     return $this->description;
+   }
+
+   public function buildFolderHead() {
+     $return = '<table width="100%">';
+     if ($this->getDescription() == '') {
+       $return .= '<tr><td colspan="3"><strong>Description: </strong>' . $this->getDescription() . '</td></tr>';
+     }
+     $return .= '<tr>';
+      $return .= '<td><a href="' . uploadDocument_uri($this->getID(), $this->getTitle()) . '">Upload document</a></td>';
+      $return .= '<td><a href="' . editFolder_uri($this->getID(), $this->getTitle()) . '">Edit folder</a></td>';
+      $return .= '<td><a href="' . deleteFolder_uri($this->getID(), $this->getTitle()) . '">Delete folder</a></td>';
+     $return .= '</tr>';
+     $return .= '</table>';
+     return $return;
+   }
+
    public function getDocuments($orderBy = 'document_date', $asc = 'false') {
      if ($asc == 'false') {
        $order = 'DESC';
