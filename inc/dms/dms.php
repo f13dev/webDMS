@@ -27,6 +27,7 @@ $theDocument = new document($d);
   <?php
   if (isset($page)) { echo $page . ' >> '; }
   if ($theFolder->isSet()) { echo $theFolder->getTitle() . ' >> '; }
+  if (isset($_GET['searchString'])) { echo $_GET['searchString'] . ' >> '; }
   if ($theDocument->isSet()) { echo $theDocument->getTitle() . ' >> '; }
   ?>
 </div>
