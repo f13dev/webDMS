@@ -36,7 +36,7 @@
 
    public function buildFolderHead() {
      $return = '<table width="100%">';
-     if ($this->getDescription() == '') {
+     if ($this->getDescription() != '') {
        $return .= '<tr><td colspan="3"><strong>Description: </strong>' . $this->getDescription() . '</td></tr>';
      }
      $return .= '<tr>';

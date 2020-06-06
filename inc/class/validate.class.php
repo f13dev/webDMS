@@ -12,6 +12,10 @@
         return preg_match($pattern, $input);
     }
 
+    public function numeric($input) {
+        return preg_match("/[0-9]+/", $input);
+    }
+
     public function length($input, $length=32) {
         return strlen($input) <= $length;
     }

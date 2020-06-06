@@ -31,12 +31,17 @@ a:hover {
 label {
   font-size: 1.1em;
 }
-input {
+input, select, textarea {
   box-sizing: border-box;
   padding:0.5em;
   width: 100%;
   margin: 0;
   margin-bottom: 1em;
+}
+
+textarea {
+  height: 12em;
+  resize: vertical;
 }
 
 input[type=submit] {
