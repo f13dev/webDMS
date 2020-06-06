@@ -56,6 +56,11 @@ Class document {
     return $this->folder;
   }
 
+  public function getFolderTitle() {
+    $folder = new folder($this->getFolder());
+    return $folder->getTitle();
+  }
+
   public function getUploadDate() {
     return date(DATE_FORMAT, strtotime($this->upload_date));
   }

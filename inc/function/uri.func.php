@@ -130,9 +130,16 @@ function deleteFolder_uri($id, $title) {
  * Get search URI
  */
 function search_uri() {
+    return SITE_URL;
+}
+
+/**
+ * Get search results document URI for a given search term and document 
+ */
+function searchDocument_uri($term, $doc, $title) {
   if (REWRITE) {
-    return SITE_URL . 'search/';
+    return SITE_URL . 'search/' . urlencode($term) . '/D' . $doc . '/' . urlencode($title) . '/';
   } else {
-    return SITE_URL . '?p=search';
+    return SITE_URL . '?p=search&searchString=' . $term . '&d=' . $doc . '&title=' . urlencode($title);
   }
 }

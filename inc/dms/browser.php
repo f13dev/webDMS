@@ -6,7 +6,8 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
 ?>
 
 <div id="page-middle-left">
-  <form method="post" action="<?php echo search_uri(); ?>">
+  <form method="get " action="<?php echo search_uri(); ?>">
+    <input type="hidden" name="p" value="search">
     <input type="text" name="searchString" placeholder="Search..." style="display:inline-block; width:250px">
     <input type="submit" value="Go" style="display:inline-block; width: 58px">
   </form>
@@ -46,8 +47,11 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
       echo '<h2>' . $theFolder->getTitle() . '</h2>';
       echo $theFolder->buildFolderHead();
       echo $theFolder->buildDocumentTable($d, $orderBy, $asc);
-    } else if (isset($_POST["searchString"])) {
-      echo '<h2>Search: ' . $_POST['searchString'] . '</h2>';
+    } else if (isset($_GET["searchString"])) {
+      $search = new search($_GET['searchString']);
+      echo '<h2>Search: ' . $search->getTerm() . '</h2>';
+      echo 'The search term ' . $search->getTerm() . ' returned ' . $search->getResultCount() . ' results';
+      echo $search->buildSearchResultsTable($d);
     } else {
       echo '<h2>Please select a folder</h2>';
     }
