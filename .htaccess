@@ -29,12 +29,24 @@ RewriteRule ^F([0-9]+)/(.*)/D([0-9]+)/(.*)/ index.php?f=$1&folder=$2&d=$3&title=
 #folder_uri($f,$n)
 RewriteRule ^F([0-9]+)/(.*)/ index.php?f=$1&folder=$2
 
-#doc_edit_uri
-RewriteRule ^editDoc/D([0-9]+)/ index.php?p=editDoc&id=$1
+#editFile
+RewriteRule ^editFile/D([0-9]+)/ index.php?p=editFile&id=$1
 #doc_del_uri
-RewriteRule ^delDoc/D([0-9]+)/ index.php?p=delDoc&id=$1
+RewriteRule ^deleletFile/D([0-9]+)/ index.php?p=deleteFile&id=$1
 #doc_download_uri
 RewriteRule ^download/D([0-9]+)/ index.php?p=download&id=$1
+#newFile uri 
+RewriteRule ^newFile/F([0-9]+)/(.*)/ index.php?p=newFile&id=$1&title=$2
+
+#editFolder 
+RewriteRule ^editFolder/F([0-9]+)/(.*)/ index.php?p=editFolder&id=$1&title=$2
+#deleteFolder
+RewriteRule ^deleteFolder/F([0-9]+)/(.*)/ index.php?p=deleteFolder&id=$1&title=$2
+
+# Search
+RewriteRule ^search/(.*)/D([0-9]+) index.php?p=search&searchString=$1&d=$2
+RewriteRule ^search/(.*)/ index.php?p=search&searchString=$1
+
 
 #page_uri - Goes right at the bottom
 RewriteRule ^([A-Za-z]*)/ index.php?p=$1
