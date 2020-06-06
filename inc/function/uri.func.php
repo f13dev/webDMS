@@ -96,11 +96,11 @@ function doc_download_uri($id) {
 /**
  * Get document upload URI for a given folder
  */
-function uploadDocument_uri($id, $title) {
+function newFile_uri($id, $title) {
   if (REWRITE) {
-    return SITE_URL . 'upload/F' . $id . '/' . urlencode($title) . '/';
+    return SITE_URL . 'newFile/F' . $id . '/' . urlencode($title) . '/';
   } else {
-    return SITE_URL . '?p=upload&id=' . $id . '&title=' . urlencode($title);
+    return SITE_URL . '?p=newFile&id=' . $id . '&title=' . urlencode($title);
   }
 }
 
@@ -123,5 +123,16 @@ function deleteFolder_uri($id, $title) {
     return SITE_URL . 'deleteFolder/F' . $id . '/' . urlencode($title) . '/';
   } else {
     return SITE_URL . '?p=deleteFolder&id=' . $id . '&title=' . urlencode($title);
+  }
+}
+
+/**
+ * Get search URI
+ */
+function search_uri() {
+  if (REWRITE) {
+    return SITE_URL . 'search/';
+  } else {
+    return SITE_URL . '?p=search';
   }
 }

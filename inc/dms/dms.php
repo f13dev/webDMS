@@ -34,7 +34,19 @@ $theDocument = new document($d);
 <div id="page-middle">
 <?php
 
-$pages = array("accountDetails", "deleteCategory", "deleteFile", "deleteFolder", "downloadFile", "editFile", "editFolder", "getFile", "newCategory", "newFile", "newFolder");
+$pages = array(
+  "account", 
+  "deleteCategory", 
+  "deleteFile", 
+  "deleteFolder", 
+  "downloadFile", 
+  "editFile", 
+  "editFolder", 
+  "getFile", 
+  "newCategory", 
+  "newFile", 
+  "newFolder"
+);
 if (in_array($page, $pages)) {
     require('inc/dms/' . $page . '.php');
 } else {

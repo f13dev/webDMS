@@ -40,7 +40,7 @@
        $return .= '<tr><td colspan="3"><strong>Description: </strong>' . $this->getDescription() . '</td></tr>';
      }
      $return .= '<tr>';
-      $return .= '<td><a href="' . uploadDocument_uri($this->getID(), $this->getTitle()) . '">Upload document</a></td>';
+      $return .= '<td><a href="' . newFile_uri($this->getID(), $this->getTitle()) . '">Upload document</a></td>';
       $return .= '<td><a href="' . editFolder_uri($this->getID(), $this->getTitle()) . '">Edit folder</a></td>';
       $return .= '<td><a href="' . deleteFolder_uri($this->getID(), $this->getTitle()) . '">Delete folder</a></td>';
      $return .= '</tr>';
