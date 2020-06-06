@@ -38,7 +38,7 @@ if (isset($_POST['email'])) {
 }
 ?>
 
-<div id="login">
+<div id="form">
   <form method="POST">
     <h2 class="text-center">webDMS login</h2>
       <label for="email" class="text-info">Email address:</label><br>

@@ -16,8 +16,8 @@ a:hover {
   color: var(--main);
   text-decoration: none;
 }
-/* Login form */
-#login {
+/* Forms */
+#form {
   width: 450px;
   border: 1px solid black;
   border-radius: 0.5em;
@@ -25,6 +25,7 @@ a:hover {
   margin: auto;
   margin-top: 5em;
 }
+
 
 /* General form */
 label {

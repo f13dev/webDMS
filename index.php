@@ -19,6 +19,8 @@ foreach (glob("inc/function/*.func.php") as $func) {
 
 // Initiate secure
 $security = new Secure();
+// Initiate validate
+$validate = new Validate();
 
 // Session data
 session_start();
