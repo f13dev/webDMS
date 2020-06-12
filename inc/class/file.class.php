@@ -86,25 +86,34 @@ Class document {
     return str_replace(' ','_',$this->getTitle() . '.' . $this->getExtension());
   }
 
+  public function getFileLocation() {
+    return SITE_ROOT . SITE_DOCS . $this->getFile();
+  }
+
   public function showFile() {
-    $ext = $this->getExtension();
-    if (in_array($ext, array('jpg','jpeg','png','gif','tiff'))) {
-      return '<img src="' . $this->getFileURL() . '" class="imgPreview">';
-    } else if ($ext == 'pdf') {
-      return '<object data="' . $this->getFileURL() . '#toolbar=0" type="application/pdf" width="100%" height="99%">
-                alt : <a href="' . $this->getFileURL() . '">' . $this->getPsuedoName() . '</a>
-              </object>';
-    } else if (in_array($ext, array('mp3', 'wav', 'ogg', 'aac', 'webm', 'flac'))) {
-      if ($ext == 'mp3') { $ext = 'mpeg'; }
-      return '<h2>' . $this->getPsuedoName() . '</h2>
-              <audio controls controlslist="nodownload">
-                <source src="' . $this->getFileURL() . '" type="audio/' . $ext . '">
-                Your browser does not support HTML5 audio
-              </audio>';
-    } else if (in_array($ext, array('doc', 'docx', 'xls', 'odf', 'ods'))) {
-      // Process docs and sheets
+    if (file_exists($this->getFileLocation())) {
+      $ext = $this->getExtension();
+      if (in_array($ext, array('jpg','jpeg','png','gif','tiff'))) {
+        return '<img src="' . $this->getFileURL() . '" class="imgPreview">';
+      } else if ($ext == 'pdf') {
+        return '<object data="' . $this->getFileURL() . '#toolbar=0" type="application/pdf" width="100%" height="99%">
+                  alt : <a href="' . $this->getFileURL() . '">' . $this->getPsuedoName() . '</a>
+                </object>';
+      } else if (in_array($ext, array('mp3', 'wav', 'ogg', 'aac', 'webm', 'flac'))) {
+        if ($ext == 'mp3') { $ext = 'mpeg'; }
+        return '<h2>' . $this->getPsuedoName() . '</h2>
+                <audio controls controlslist="nodownload">
+                  <source src="' . $this->getFileURL() . '" type="audio/' . $ext . '">
+                  Your browser does not support HTML5 audio
+                </audio>';
+      } else if (in_array($ext, array('doc', 'docx', 'xls', 'odf', 'ods'))) {
+        // Process docs and sheets
+      }
+      // File exists, but is not a supported filetype
+      return '<h2>Error: Filetype not supported<h2>';
     }
-    return false;
+    // File does not exist, return an error
+    return '<h2>Error: File could not be found</h2>';
   }
 
 }
