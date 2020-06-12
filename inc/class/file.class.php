@@ -90,24 +90,44 @@ Class document {
     return SITE_ROOT . SITE_DOCS . $this->getFile();
   }
 
+  public function getFileAsPDF() {
+    return str_replace($this->getExtension(), 'pdf', $this->getFile());
+  }
+
+  public function showPDF() {
+    return '<object data="' . $this->getFileURL() . '#toolbar=0" type="application/pdf" width="100%" height="99%">
+      alt : <a href="' . $this->getFileURL() . '">' . $this->getPsuedoName() . '</a>
+    </object>';
+  }
+
+  public function showImage() {
+    return '<img src="' . $this->getFileURL() . '" class="imgPreview">';
+  }
+
+  public function showAudio() {
+    return '<h2>' . $this->getPsuedoName() . '</h2>
+      <audio controls controlslist="nodownload">
+        <source src="' . $this->getFileURL() . '" type="audio/' . $ext . '">
+        Your browser does not support HTML5 audio
+      </audio>';
+  }
+
+  public function showOfficeFile() {
+    // check if a PDF exists, if so show it, if not see if office app installed and create pdf, then show it.
+  }
+
   public function showFile() {
     if (file_exists($this->getFileLocation())) {
       $ext = $this->getExtension();
       if (in_array($ext, array('jpg','jpeg','png','gif','tiff'))) {
-        return '<img src="' . $this->getFileURL() . '" class="imgPreview">';
+        return $this->showImage();
       } else if ($ext == 'pdf') {
-        return '<object data="' . $this->getFileURL() . '#toolbar=0" type="application/pdf" width="100%" height="99%">
-                  alt : <a href="' . $this->getFileURL() . '">' . $this->getPsuedoName() . '</a>
-                </object>';
+        return $this->showPDF();
       } else if (in_array($ext, array('mp3', 'wav', 'ogg', 'aac', 'webm', 'flac'))) {
         if ($ext == 'mp3') { $ext = 'mpeg'; }
-        return '<h2>' . $this->getPsuedoName() . '</h2>
-                <audio controls controlslist="nodownload">
-                  <source src="' . $this->getFileURL() . '" type="audio/' . $ext . '">
-                  Your browser does not support HTML5 audio
-                </audio>';
+        return $this->showAudio();
       } else if (in_array($ext, array('doc', 'docx', 'xls', 'odf', 'ods'))) {
-        // Process docs and sheets
+        return $this->showOfficeFile();
       }
       // File exists, but is not a supported filetype
       return '<h2>Error: Filetype not supported<h2>';
