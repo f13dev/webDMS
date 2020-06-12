@@ -97,7 +97,8 @@ input[type=submit] {
   bottom: 0px;
   left: 0px;
   width: 330px;
-  overflow-y: scroll;
+  overflow-y: auto;
+  border-right: 1px solid var(--main);
   padding: 10px;
 }
 
@@ -116,7 +117,8 @@ input[type=submit] {
   right: 0px;
   bottom: 50%;
   border-bottom: 1px solid var(--main);
-  overflow-y: scroll;
+  overflow-y: auto;
+  padding: 0 1.2em;
 }
 
 #page-middle-right-bottom {
@@ -126,6 +128,10 @@ input[type=submit] {
   right: 0px;
   bottom: 0px;
   overflow-y:auto;
+}
+
+#page-middle-right-bottom h2 {
+  padding: 0 1.2em;
 }
 
 #page-bottom {
