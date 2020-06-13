@@ -78,42 +78,70 @@ Class document {
     return strtolower(end($explode));
   }
 
-  public function getFileURL() {
-    return SITE_URL . SITE_DOCS . $this->getFile();
+  public function getFileURL($asPDF = false) {
+    $file = $this->getFile();
+    if ($asPDF == true) {
+      $file = $this->getFileAsPDF();
+    }
+    return SITE_URL . SITE_DOCS . $file;
   }
 
   public function getPsuedoName() {
     return str_replace(' ','_',$this->getTitle() . '.' . $this->getExtension());
   }
 
-  public function getFileLocation() {
-    return SITE_ROOT . SITE_DOCS . $this->getFile();
+  public function getFileLocation($asPDF = false) {
+    $file = $this->getFile();
+    if ($asPDF == true) {
+      $file = $this->getFileAsPDF();
+    }
+    return SITE_ROOT . SITE_DOCS . $file;
   }
 
-  public function getFileAsPDF() {
+  private function getFileAsPDF() {
     return str_replace($this->getExtension(), 'pdf', $this->getFile());
   }
 
-  public function showPDF() {
-    return '<object data="' . $this->getFileURL() . '#toolbar=0" type="application/pdf" width="100%" height="99%">
-      alt : <a href="' . $this->getFileURL() . '">' . $this->getPsuedoName() . '</a>
+  private function showPDF() {
+    return '<object data="' . $this->getFileURL(true) . '#toolbar=0" type="application/pdf" width="100%" height="99%">
+      alt : <a href="' . $this->getFileURL(true) . '">' . $this->getPsuedoName() . '</a>
     </object>';
   }
 
-  public function showImage() {
+  private function showImage() {
     return '<img src="' . $this->getFileURL() . '" class="imgPreview">';
   }
 
-  public function showAudio() {
+  private function showAudio($type) {
     return '<h2>' . $this->getPsuedoName() . '</h2>
       <audio controls controlslist="nodownload">
-        <source src="' . $this->getFileURL() . '" type="audio/' . $ext . '">
+        <source src="' . $this->getFileURL() . '" type="audio/' . $type . '">
         Your browser does not support HTML5 audio
       </audio>';
   }
 
-  public function showOfficeFile() {
-    // check if a PDF exists, if so show it, if not see if office app installed and create pdf, then show it.
+  private function showOfficeFile() {
+    if (file_exists($this->getFileLocation(true)) || $this->generatePDF()) {
+      return $this->showPDF();
+    } else {
+      return $this->showFileNotSupported();
+    }
+  }
+
+  private function generatePDF() {
+    $cmd = 'export HOME=/tmp && soffice --headless --convert-to pdf --outdir ' .  SITE_ROOT . SITE_DOCS . ' ' .  SITE_ROOT . SITE_DOCS . $this->getFile();
+    exec($cmd);
+    if (file_exists($this->getFileLocation(true))) {
+    }
+    return file_exists($this->getFileLocation(true));
+  }
+
+  private function showFileNotSupported() {
+    return '<h2>Error: Filetype not supported<h2>';
+  }
+
+  private function showFileNotExist() {
+    return '<h2>Error: File could not be found</h2>';
   }
 
   public function showFile() {
@@ -125,15 +153,13 @@ Class document {
         return $this->showPDF();
       } else if (in_array($ext, array('mp3', 'wav', 'ogg', 'aac', 'webm', 'flac'))) {
         if ($ext == 'mp3') { $ext = 'mpeg'; }
-        return $this->showAudio();
-      } else if (in_array($ext, array('doc', 'docx', 'xls', 'odf', 'ods'))) {
+        return $this->showAudio($ext);
+      } else if (in_array($ext, array('doc', 'docx', 'xls', 'xlsx', 'odf', 'ods'))) {
         return $this->showOfficeFile();
       }
-      // File exists, but is not a supported filetype
-      return '<h2>Error: Filetype not supported<h2>';
+      return $this->showFileNotSupported();
     }
-    // File does not exist, return an error
-    return '<h2>Error: File could not be found</h2>';
+    return $this->showFileNotExist();
   }
 
 }
