@@ -11,13 +11,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     $filename = $_GET['file'];
 
     header('Content-type: '. mime_content_type($file));
-    if (isset($_GET['ID']) && isset($_GET['download'])) {
-        $doc = new document($_GET['ID']);
-        header('Content-Disposition: attachment; filename="'.$doc->getPsuedoName().'"');
-    } else {
-        header('Content-Disposition: inline; filename="'.$filename.'"');
-    }
     header('Content-Length:'.filesize($file));
-    header('Accept-Ranges: bytes');
     @readfile($file);
 }
