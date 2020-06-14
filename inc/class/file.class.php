@@ -148,27 +148,38 @@ Class document {
    * Returns the HTML value to embed the file as a PDF
    */
   private function showPDF() {
-    return '<object data="' . $this->getFileURL(true) . '#toolbar=0" type="application/pdf" width="100%" height="99%">
-      alt : <a href="' . $this->getFileURL(true) . '">' . $this->getPsuedoName() . '</a>
+    $file = str_replace($this->getExtension(), 'pdf', $this->getFile());
+    $fileURL = SITE_URL.'inc/dms/fileScraper.php?file='.$file;
+    return '<object data="' . $fileURL . '#toolbar=0" type="application/pdf" width="100%" height="99%">
+      alt : <a href="' . $fileURL . '">' . $this->getPsuedoName() . '</a>
     </object>';
+    //return '<object type="application/pdf" data="inc/dms/fileScraper.php?file='.$this-getFile(true).'" width="100%" height="100%" style="overflow:auto;border:0"></object>';
+    //file_get_contents('inc/dms/fileScraper.php?file='.$this-getFile(true));
+    //$fileURL = SITE_URL . 'inc/dms/fileScraper.php?file=' . $this-getFile();
+
+    return '<embed src="'.$fileURL.'" width="100%" height="100%" />';
   }
 
   /**
    * Returns the HTML value to embed the file as an image
    */
   private function showImage() {
-    return '<img src="' . $this->getFileURL() . '" class="imgPreview">';
+    //return '<img src="' . $this->getFileURL() . '" class="imgPreview">';
+
+    $fileURL = SITE_URL.'inc/dms/fileScraper.php?file='.$this->getFile();
+    return '<img src="'.$fileURL.'" class="imgPreview">';
   }
 
   /**
    * Returns the HTML value to embed the file as audio
    */
   private function showAudio($type) {
+    $fileURL = SITE_URL.'inc/dms/fileScraper.php?file='.$this->getFile();
     return '<h2>' . $this->getPsuedoName() . '</h2>
-      <audio controls controlslist="nodownload">
-        <source src="' . $this->getFileURL() . '" type="audio/' . $type . '">
-        Your browser does not support HTML5 audio
-      </audio>';
+    <audio controls controlslist="nodownload">
+      <source src="' . $fileURL . '" type="audio/' . $type . '">
+      Your browser does not support HTML5 audio
+    </audio>';
   }
 
   /**
@@ -188,6 +199,9 @@ Class document {
   private function generatePDF() {
     $cmd = 'export HOME=/tmp && soffice --headless --convert-to pdf --outdir ' .  SITE_ROOT . SITE_DOCS . ' ' .  SITE_ROOT . SITE_DOCS . $this->getFile();
     exec($cmd);
+    chmod(SITE_ROOT . SITE_DOCS . $this->getFile(true), 777);
+    $cmd = 'chmod 0777 ' . SITE_ROOT . SITE_DOCS . $this->getFile(true);
+
     if (file_exists($this->getFileLocation(true))) {
     }
     return file_exists($this->getFileLocation(true));
