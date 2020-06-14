@@ -89,6 +89,7 @@ input[type=submit] {
   left: 0px;
   right: 0px;
   bottom: 50px;
+  overflow-x: auto;
 }
 
 #page-middle-left {
@@ -231,4 +232,51 @@ ul.list > li.category > ul > li.folder {
   top: 15px;
   width: 200px;
   color: var(--main);
+}
+
+
+/* File uplaod */
+
+input[type=file] {
+  border: 4px dashed #eee;
+  border-radius: 1em;
+  display: inline-block;
+  cursor: pointer;
+  width:100%;
+  height:125px;
+
+}
+
+input[type=file]::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+
+input[type=file]::before {
+  content: 'Choose a document';
+  display: inline-block;
+  background: #eee;
+  border: 1px solid #999;
+  width: 170px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  margin: auto;
+  font-weight: 700;
+  font-size: 10pt;
+  position: absolute;
+  left: 50%;
+  margin-left: -85px;
+  margin-top: 30px;
+}
+
+input[type=file]:hover::before {
+  border-color: black;
+}
+
+input[type=file]:active::beffore {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
