@@ -38,6 +38,7 @@ $security->checkFingerprint();
 require_once('inc/theme/head.php');
 // Assume no user
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+  $security->checkUserToken();
   require_once('inc/dms/dms.php');
 } else {
   require_once('inc/dms/login.php');

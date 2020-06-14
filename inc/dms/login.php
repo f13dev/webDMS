@@ -26,6 +26,8 @@ if (isset($_POST['email'])) {
         $_SESSION['ID'] = $password['ID'];
         $_SESSION['email'] = $user['email'];
         $_SESSION['name'] = $password['first_name'] . ' ' . $password['last_name'];
+        $_SESSION['salt'] = $security->generateSessionSalt();
+        $_SESSION['usertoken'] = $security->generateUserToken();
         $currentURI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         header('Location:'.$currentURI);
       } else {

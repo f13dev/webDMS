@@ -82,6 +82,22 @@ Class secure {
     return hash('sha256',$password . $salt . SALT);
   }
 
+  function generateSessionSalt() {
+    return bin2hex(random_bytes(32));
+  }
+
+  function generateUserToken() {
+    return hash('sha256',$_SESSION['email'] . $_SESSION['salt'] . SALT);
+  }
+
+  function checkUserToken() {
+    if (hash_equals($this->generateUserToken(), $_SESSION['usertoken'])) {
+      return true;
+    } else {
+      die();
+    }
+  }
+
   /**
     * JS Session timeout
     **/
