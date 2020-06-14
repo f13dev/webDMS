@@ -68,6 +68,10 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
       echo $theDocument->showFile();
     } else {
       echo '<h2>Please select a file</h2>';
+      // Test code to view session data
+      foreach ($_SESSION as $key=>$value) {
+        echo $key . ' => ' . $value . '<br>';
+      }
     }
   ?>
   </div>
