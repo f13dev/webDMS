@@ -2,6 +2,7 @@
 // Check the user is logged in 
 session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+    echo '<h1>Error</h1><h2>You do not have the required permissions to view this file</h2>';
     exit();
 } else {
     // Requirements
