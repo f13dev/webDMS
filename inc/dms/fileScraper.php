@@ -1,10 +1,11 @@
 <?php
+require ('../cfg.php');
 // Check the user is logged in 
 session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
     exit();
 } else {
-    $file = '/var/www/html/webdmsTest/documents/'.$_GET['file'];
+    $file = SITE_DOCS . $_GET['file'];
     $filename = $_GET['file'];
 
     header('Content-type: '. mime_content_type($file));

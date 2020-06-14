@@ -134,7 +134,7 @@ Class document {
     if ($asPDF == true) {
       $file = $this->getFileAsPDF();
     }
-    return SITE_ROOT . SITE_DOCS . $file;
+    return SITE_DOCS . $file;
   }
 
   /**
