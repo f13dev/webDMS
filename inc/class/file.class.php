@@ -111,12 +111,12 @@ Class document {
   /**
    * Returns the absolute URL of the file, this will become a temporary URL for the file
    */
-  public function getFileURL($asPDF = false) {
+  public function getFilePath($asPDF = false) {
     $file = $this->getFile();
     if ($asPDF == true) {
       $file = $this->getFileAsPDF();
     }
-    return SITE_URL . SITE_DOCS . $file;
+    return SITE_URL . 'inc/dms/fileScraper.php?file=' . $file;
   }
 
   /**
@@ -148,31 +148,25 @@ Class document {
    * Returns the HTML value to embed the file as a PDF
    */
   private function showPDF() {
-    $file = str_replace($this->getExtension(), 'pdf', $this->getFile());
-    $fileURL = SITE_URL.'inc/dms/fileScraper.php?file='.$file;
-    return '<object data="' . $fileURL . '#toolbar=0" type="application/pdf" width="100%" height="99%">
-      alt : <a href="' . $fileURL . '">' . $this->getPsuedoName() . '</a>
+    return '<object data="' . $this->getFilePath(true) . '#toolbar=0" type="application/pdf" width="100%" height="99%">
+      There was an error displaying this PDF.
     </object>';
-
-    return '<embed src="'.$fileURL.'" width="100%" height="100%" />';
   }
 
   /**
    * Returns the HTML value to embed the file as an image
    */
   private function showImage() {
-    $fileURL = SITE_URL.'inc/dms/fileScraper.php?file='.$this->getFile();
-    return '<img src="'.$fileURL.'" class="imgPreview">';
+    return '<img src="'.$this->getFilePath().'" class="imgPreview">';
   }
 
   /**
    * Returns the HTML value to embed the file as audio
    */
   private function showAudio($type) {
-    $fileURL = SITE_URL.'inc/dms/fileScraper.php?file='.$this->getFile();
     return '<h2>' . $this->getPsuedoName() . '</h2>
     <audio controls controlslist="nodownload">
-      <source src="' . $fileURL . '" type="audio/' . $type . '">
+      <source src="' . $this->getFilePath() . '" type="audio/' . $type . '">
       Your browser does not support HTML5 audio
     </audio>';
   }
