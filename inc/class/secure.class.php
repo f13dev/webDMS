@@ -94,6 +94,8 @@ Class secure {
     if (hash_equals($this->generateUserToken(), $_SESSION['usertoken'])) {
       return true;
     } else {
+      echo '<h1>Error</h1><h2>There has been a session error</h2>';
+      session_destroy();
       die();
     }
   }
