@@ -10,7 +10,7 @@
 
     public function __construct($term) {
         $this->term = $term;
-        $term = '%' . $term . '%';
+        $term = '%' . str_replace('*','%',$term) . '%';
         global $dbc;
         $statement = $dbc->prepare("SELECT ID, title FROM documents WHERE title LIKE ?");
         $statement->execute([$term]);
