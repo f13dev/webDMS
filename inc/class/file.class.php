@@ -153,9 +153,6 @@ Class document {
     return '<object data="' . $fileURL . '#toolbar=0" type="application/pdf" width="100%" height="99%">
       alt : <a href="' . $fileURL . '">' . $this->getPsuedoName() . '</a>
     </object>';
-    //return '<object type="application/pdf" data="inc/dms/fileScraper.php?file='.$this-getFile(true).'" width="100%" height="100%" style="overflow:auto;border:0"></object>';
-    //file_get_contents('inc/dms/fileScraper.php?file='.$this-getFile(true));
-    //$fileURL = SITE_URL . 'inc/dms/fileScraper.php?file=' . $this-getFile();
 
     return '<embed src="'.$fileURL.'" width="100%" height="100%" />';
   }
@@ -164,8 +161,6 @@ Class document {
    * Returns the HTML value to embed the file as an image
    */
   private function showImage() {
-    //return '<img src="' . $this->getFileURL() . '" class="imgPreview">';
-
     $fileURL = SITE_URL.'inc/dms/fileScraper.php?file='.$this->getFile();
     return '<img src="'.$fileURL.'" class="imgPreview">';
   }
