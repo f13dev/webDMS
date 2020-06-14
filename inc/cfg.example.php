@@ -27,7 +27,7 @@ try {
 // Structure
 define('SITE_URL', 'http://nightfury/webdmsTest/');
 define('SITE_ROOT', '/var/www/html/webdmsTest/');
-define('SITE_DOCS', 'documents/');
+define('SITE_DOCS', '/var/www/docs/');
 define('EMAIL_FROM', 'you@domain.com');
 
 // Is LibreOffice installed on the server?
