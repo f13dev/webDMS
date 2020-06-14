@@ -186,13 +186,9 @@ Class document {
    * Generate a PDF file from an existing office file
    */
   private function generatePDF() {
-    $cmd = 'export HOME=/tmp && soffice --headless --convert-to pdf --outdir ' .  SITE_ROOT . SITE_DOCS . ' ' .  SITE_ROOT . SITE_DOCS . $this->getFile();
+    $cmd = 'export HOME=/tmp && soffice --headless --convert-to pdf --outdir ' . SITE_DOCS . ' ' . SITE_DOCS . $this->getFile();
     exec($cmd);
-    chmod(SITE_ROOT . SITE_DOCS . $this->getFile(true), 777);
-    $cmd = 'chmod 0777 ' . SITE_ROOT . SITE_DOCS . $this->getFile(true);
-
-    if (file_exists($this->getFileLocation(true))) {
-    }
+    chmod(SITE_DOCS . $this->getFile(true), 777);
     return file_exists($this->getFileLocation(true));
   }
 
