@@ -16,3 +16,22 @@ New repo for 0.4b
 * chmod the folder as 0777 to enable write access 
 * ensure www-data group has read/write access to the folder
 * Update SITE_DOCS in cfg.php to reflect the new folder
+
+
+# Features left to implement
+* New file
+* Edit folder
+* Edit file
+* Recycling bin
+* Delete file
+* Delete folder
+* Delete category
+* Manage details
+* Email notifications
+* Reset password via email
+* Add Access level checks to the required pages - i.e. disallow delete file from level 3 or 4
+* Remove links depending on access level - i.e. hide file delete link for level 3 or 4
+* User management
+* User creation
+* Installation script
+* Documentation
