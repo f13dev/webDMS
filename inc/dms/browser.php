@@ -52,7 +52,7 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
       if (isset($_POST['searchString'])) {
         header("location:" . search_uri($_POST['searchString']));
       }
-      $search = new search($_GET['searchString']);
+      $search = new search($searchString);
       echo '<h2>Search: ' . $search->getTerm() . '</h2>';
       echo 'The search term ' . $search->getTerm() . ' returned ' . $search->getResultCount() . ' results';
       echo $search->buildSearchResultsTable($d);

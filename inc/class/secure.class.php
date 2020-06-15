@@ -51,7 +51,7 @@ Class secure {
     **/
   function sanitise($data) {
     // code to sanitise inputs, remove quotes etc...
-    return $data;
+    return htmlspecialchars($data);
   }
 
   /**

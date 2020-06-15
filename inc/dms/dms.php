@@ -4,12 +4,13 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
   header("Location: ../../");
 }
 // Get the page variable
-if (isset($_GET['p'])) { $page = $_GET['p']; } else { $page = 'main'; }
-if (isset($_GET['f'])) { $f = $_GET['f']; } else { $f = false; }
-if (isset($_GET['d'])) { $d = $_GET['d']; } else { $d = false; }
-if (isset($_GET['orderBy'])) { $orderBy = $_GET['orderBy']; } else ($orderBy = 'document_date');
-if (isset($_GET['asc'])) { $asc = $_GET['asc']; } else { $asc = 'false'; }
-if (isset($_GET['title'])) {$title = $_GET['title'];} else {$title = 'false';}
+if (isset($_GET['p'])) { $page = $security->sanitise($_GET['p']); } else { $page = 'main'; }
+if (isset($_GET['f'])) { $f = $security->sanitise($_GET['f']); } else { $f = false; }
+if (isset($_GET['d'])) { $d = $security->sanitise($_GET['d']); } else { $d = false; }
+if (isset($_GET['orderBy'])) { $orderBy = $security->sanitise($_GET['orderBy']); } else ($orderBy = 'document_date');
+if (isset($_GET['asc'])) { $asc = $security->sanitise($_GET['asc']); } else { $asc = 'false'; }
+if (isset($_GET['title'])) {$title = $security->sanitise($_GET['title']);} else {$title = 'false';}
+if (isset($_GET['searchString'])) { $searchString = $security->sanitise($_GET['searchString']); }
 // Create new folder
 $theFolder = new folder($f);
 $theDocument = new document($d);
@@ -27,7 +28,7 @@ $theDocument = new document($d);
   <?php
   if (isset($page)) { echo $page . ' >> '; }
   if ($theFolder->isSet()) { echo $theFolder->getTitle() . ' >> '; }
-  if (isset($_GET['searchString'])) { echo $_GET['searchString'] . ' >> '; }
+  if (isset($searchString)) { echo $searchString . ' >> '; }
   if ($theDocument->isSet()) { echo $theDocument->getTitle() . ' >> '; }
   ?>
 </div>
