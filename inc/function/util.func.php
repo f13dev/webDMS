@@ -10,7 +10,7 @@ function humanSize($bytes) {
   return sprintf('%1.2f', $bytes / pow($base,$class)) . ' ' . $si_prefix[$class];
 }
 
-function getDocumentTotalSize($path = SITE_ROOT.SITE_DOCS) {
+function getDocumentTotalSize($path = SITE_DOCS) {
   $bytestotal = 0;
   $path = realpath($path);
   if ($path!==false && $path!='' && file_exists($path)) {
