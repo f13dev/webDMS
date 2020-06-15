@@ -64,7 +64,7 @@ Class Uri {
     /**
      * Gete document edit URI
     **/
-    function doc_edit_uri($id) {
+    function editDocument($id) {
     if (REWRITE) {
         return SITE_URL . 'editDoc/D' . $id . '/';
     } else {
@@ -97,7 +97,7 @@ Class Uri {
     /**
      * Get document upload URI for a given folder
      */
-    function newFile($id, $title) {
+    function newDocument($id, $title) {
     if (REWRITE) {
         return SITE_URL . 'newFile/F' . $id . '/' . urlencode($title) . '/';
     } else {

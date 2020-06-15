@@ -28,7 +28,7 @@ if (isset($_POST['title'])) {
       }
     }
     if ($error == false) {
-      header("location:" . folder_uri($dbc->lastInsertId(), $security->sanitise($_POST['title'])));
+      header("location:" . $uri->folder($dbc->lastInsertId(), $security->sanitise($_POST['title'])));
     }
   }
 }

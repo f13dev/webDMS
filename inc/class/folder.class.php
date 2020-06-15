@@ -35,14 +35,15 @@
    }
 
    public function buildFolderHead() {
+     global $uri;
      $return = '<table width="100%">';
      if ($this->getDescription() != '') {
        $return .= '<tr><td colspan="3"><strong>Description: </strong>' . $this->getDescription() . '</td></tr>';
      }
      $return .= '<tr>';
-      $return .= '<td><a href="' . newFile_uri($this->getID(), $this->getTitle()) . '">Upload document</a></td>';
-      $return .= '<td><a href="' . editFolder_uri($this->getID(), $this->getTitle()) . '">Edit folder</a></td>';
-      $return .= '<td><a href="' . deleteFolder_uri($this->getID(), $this->getTitle()) . '">Delete folder</a></td>';
+      $return .= '<td><a href="' . $uri->newDocument($this->getID(), $this->getTitle()) . '">Upload document</a></td>';
+      $return .= '<td><a href="' . $uri->editFolder($this->getID(), $this->getTitle()) . '">Edit folder</a></td>';
+      $return .= '<td><a href="' . $uri->deleteFolder($this->getID(), $this->getTitle()) . '">Delete folder</a></td>';
      $return .= '</tr>';
      $return .= '</table>';
      return $return;
@@ -76,22 +77,22 @@
    }
 
    public function buildDocumentTable($selected, $orderBy = 'document_date', $asc = 'false') {
-     global $d,$title;
+     global $d,$title,$uri;
 
      $output  = '<table class="fileTable">';
      $output .= '<tr class="thead">';
      $output .= '<th>Title
-                   <a href="' .  document_uri($this->getID(), $this->getTitle(),$d,$title,'title','true') . '"><i class="fa fa-angle-up"></i></a>
-                   <a href="' .  document_uri($this->getID(), $this->getTitle(),$d,$title,'title','false') . '"><i class="fa fa-angle-down"></i></a>
+                   <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'title','true') . '"><i class="fa fa-angle-up"></i></a>
+                   <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'title','false') . '"><i class="fa fa-angle-down"></i></a>
                  </th>';
      $output .= '<th>Date
-                   <a href="' .  document_uri($this->getID(), $this->getTitle(),$d,$title,'document_date','true') . '"><i class="fa fa-angle-up"></i></a>
-                   <a href="' .  document_uri($this->getID(), $this->getTitle(),$d,$title,'document_date','false') . '"><i class="fa fa-angle-down"></i></a>
+                   <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'document_date','true') . '"><i class="fa fa-angle-up"></i></a>
+                   <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'document_date','false') . '"><i class="fa fa-angle-down"></i></a>
                  </th>';
      $output .= '<th>File</th>';
      $output .= '<th>Uploaded
-                   <a href="' .  document_uri($this->getID(), $this->getTitle(),$d,$title,'upload_date','true') . '"><i class="fa fa-angle-up"></i></a>
-                   <a href="' .  document_uri($this->getID(), $this->getTitle(),$d,$title,'upload_date','false') . '"><i class="fa fa-angle-down"></i></a>
+                   <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'upload_date','true') . '"><i class="fa fa-angle-up"></i></a>
+                   <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'upload_date','false') . '"><i class="fa fa-angle-down"></i></a>
                  </th>';
      $output .= '<th>Edit</th>';
      $output .= '<th>Delete</th>';
@@ -104,14 +105,14 @@
        } else {
          $output .= '<tr>';
        }
-       $output .= '<td><a href="' . document_uri($this->getID(), $this->getTitle(), $doc[$each['ID']]->getID(), $doc[$each['ID']]->getTitle(), $orderBy, $asc) . '">
+       $output .= '<td><a href="' . $uri->document($this->getID(), $this->getTitle(), $doc[$each['ID']]->getID(), $doc[$each['ID']]->getTitle(), $orderBy, $asc) . '">
                   ' . $doc[$each['ID']]->getTitle() . '
                   </a></td>';
        $output .= '<td>' . $doc[$each['ID']]->getDocDate() . '</td>';
        $output .= '<td>' . $doc[$each['ID']]->getFile() . '</td>';
        $output .= '<td>' . $doc[$each['ID']]->getUploadDate() . '</td>';
-       $output .= '<td><a href="' . doc_edit_uri($doc[$each['ID']]->getID()) . '"><i class="fa fa-edit"></a></td>';
-       $output .= '<td><a href="' . doc_del_uri($doc[$each['ID']]->getID()) . '"<i class="fa fa-minus-circle"></i></a></td>';
+       $output .= '<td><a href="' . $uri->editDocument($doc[$each['ID']]->getID()) . '"><i class="fa fa-edit"></a></td>';
+       $output .= '<td><a href="' . $uri->deleteDocument($doc[$each['ID']]->getID()) . '"<i class="fa fa-minus-circle"></i></a></td>';
        //$output .= '<td><a href="' . doc_download_uri($doc[$each['ID']]->getID()) . '"<i class="fa fa-download"></i></a></td>';
        $output .= '<td><a download="' . $doc[$each['ID']]->getTitle() . '.' . $doc[$each['ID']]->getExtension() . '" href="' . SITE_URL . 'inc/dms/fileScraper.php?file=' . $doc[$each['ID']]->getFile() . '"><i class="fa fa-download"></i></a></td>';
        $output .= '</tr>';

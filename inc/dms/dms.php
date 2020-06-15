@@ -21,8 +21,8 @@ $theDocument = new document($d);
 <div id="page-top">
   <img src="<?php echo SITE_URL; ?>favicon-32x32.png" id="logo">
   <a href="<?php echo SITE_URL; ?>">webDMS</a> -
-  <a href="<?php echo page_uri('account'); ?>">Account details</a> -
-  <a href="<?php echo page_uri('logout'); ?>">Logout</a>
+  <a href="<?php echo $uri->page('account'); ?>">Account details</a> -
+  <a href="<?php echo $uri->page('logout'); ?>">Logout</a>
   (<?php echo $_SESSION['name']; ?>)<br>
   <!-- Breadcrumb -->
   <?php

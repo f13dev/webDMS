@@ -7,6 +7,10 @@ error_reporting(E_ALL);
 // Include the settings
 require_once('inc/cfg.php');
 
+// Initiate the Uri class before loading other classes
+require('inc/class/uri.class.first.php');
+$uri = new Uri();
+
 // Include the classes
 foreach (glob("inc/class/*.class.php") as $class) {
   require $class;
@@ -21,6 +25,7 @@ foreach (glob("inc/function/*.func.php") as $func) {
 $security = new Secure();
 // Initiate validate
 $validate = new Validate();
+
 
 // Session data
 session_start();

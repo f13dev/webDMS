@@ -11,8 +11,8 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
     <input type="text" name="searchString" placeholder="Search..." style="display:inline-block; width:250px">
     <input type="submit" value="Go" style="display:inline-block; width: 58px">
   </form>
-  <a href="<?php echo page_uri('newCategory'); ?>">New category +</a><br>
-  <a href="<?php echo page_uri('newFolder'); ?>">New folder +</a>
+  <a href="<?php echo $uri->page('newCategory'); ?>">New category +</a><br>
+  <a href="<?php echo $uri->page('newFolder'); ?>">New folder +</a>
   <hr>
   <?php
   // Shift this to category.class.php
@@ -30,7 +30,7 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
     if (sizeof($folders) > 0) {
       echo '<ul>';
       foreach ($folders as $eachFolder) {
-        echo '<li class="folder"><a href="' . folder_uri($eachFolder['ID'], $eachFolder['title']) . '">' . $eachFolder['title'] . '</a></li>';
+        echo '<li class="folder"><a href="' . $uri->folder($eachFolder['ID'], $eachFolder['title']) . '">' . $eachFolder['title'] . '</a></li>';
       }
       echo '</ul>';
     }
@@ -50,7 +50,7 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
     } else if (isset($_GET["searchString"]) || (isset($_POST['searchString']))) {
       // Force a reload if post data is present 
       if (isset($_POST['searchString'])) {
-        header("location:" . search_uri($_POST['searchString']));
+        header("location:" . $uri->search($_POST['searchString']));
       }
       $search = new search($searchString);
       echo '<h2>Search: ' . $search->getTerm() . '</h2>';
