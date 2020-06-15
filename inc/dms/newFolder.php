@@ -22,7 +22,7 @@ if (isset($_POST['title'])) {
     if ($error == false) {
       // If no errors, process the new folder 
       $statement = $dbc->prepare("INSERT INTO folders (title, category, description) VALUES (?,?,?)");
-      if (!$statement->execute([$_POST['title'], $_POST['category'], $_POST['description']])) {
+      if (!$statement->execute([$security->sanitise($_POST['title']), $security->sanitise($_POST['category']), $security->sanitise($_POST['description'])])) {
         $error = true;
         $errormsg .= '<p>There was a database error.</p>';
       }

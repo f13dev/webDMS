@@ -22,7 +22,7 @@ if (isset($_POST['title'])) {
     if ($error == false) {
       // If no errors, process the new category 
       $statement = $dbc->prepare("INSERT INTO categories (name) VALUES (?)");
-      if (!$statement->execute([$_POST['title']])) {
+      if (!$statement->execute([$security->sanitise($_POST['title'])])) {
         $error = true;
         $errormsg .= '<p>There was a database error.</p>';
       }
