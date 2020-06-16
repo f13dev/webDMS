@@ -20,7 +20,6 @@ New repo for 0.4b
 
 # Features left to implement
 * New file
-* Edit folder
 * Edit file
 * Recycling bin
 * Delete file
@@ -35,3 +34,6 @@ New repo for 0.4b
 * User creation
 * Installation script
 * Documentation
+
+# Feature list done
+* Edit folder
