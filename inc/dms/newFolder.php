@@ -19,16 +19,19 @@ if (isset($_POST['title'])) {
       $error = true;
       $errormsg .= '<p>The category is not a valid numeric identifier.</p>';
     }
-    if ($error == false) {
+    if ($error == false) { 
       // If no errors, process the new folder 
-      $statement = $dbc->prepare("INSERT INTO folders (title, category, description) VALUES (?,?,?)");
-      if (!$statement->execute([$security->sanitise($_POST['title']), $security->sanitise($_POST['category']), $security->sanitise($_POST['description'])])) {
+
+      if (new folder([
+        'title'=>$security->sanitise($_POST['title']),
+        'category'=>$security->sanitise($_POST['category']),
+        'description'=>$security->sanitise($_POST['description']),
+      ]) == false) {
         $error = true;
         $errormsg .= '<p>There was a database error.</p>';
+      } else {
+        header('location:'.$uri->folder($dbc->lastInsertId(), $security->sanitise($_POST['title'])));
       }
-    }
-    if ($error == false) {
-      header("location:" . $uri->folder($dbc->lastInsertId(), $security->sanitise($_POST['title'])));
     }
   }
 }
@@ -45,7 +48,12 @@ if (isset($_POST['title'])) {
       <select name='category'>
         <?php 
         $categories = new category();
-        echo $categories->getCategories();
+        if (isset($_POST['category'])) {
+          $category = $_POST['category'];
+        } else {
+          $category = false;
+        }
+        echo $categories->getCategoryOption($category);
         ?>
       </select>
       <?php //print_r($categories->getCategories()); ?>

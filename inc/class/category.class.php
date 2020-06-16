@@ -5,7 +5,7 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
 }
 
 Class category {
-  public function getCategories() {
+  public function getCategoryOption($id = false) {
     global $dbc;
     $statement = $dbc->prepare("SELECT ID, name FROM categories ORDER BY name");
     $statement->execute();
@@ -13,7 +13,7 @@ Class category {
     $return = '';
     foreach ($results as $result) {
       $selected = '';
-      if (isset($_POST['category']) && $_POST['category'] == $result['ID']) {
+      if ($id != false && $id == $result['ID']) {
         $selected = ' selected ';
       }
       $return .= '<option value="' . $result['ID'] . '"' . $selected . '>' . $result['name'] . '</option>';

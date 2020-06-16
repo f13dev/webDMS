@@ -11,7 +11,18 @@
    private $category;
    private $description;
 
-   public function __construct($id) {
+   public function __construct($array) {
+     $this->isSet = false;
+     if (array_key_exists('ID', $array)) {
+       return $this->get($array['ID']);
+     } else if (array_key_exists('title',$array) && array_key_exists('category',$array) && array_key_exists('description', $array)) {
+       return $this->set($array['title'], $array['category'], $array['description']);
+     } else {
+       return false;
+     }
+   }
+
+   public function get($id) {
      global $dbc;
      $statement = $dbc->prepare("SELECT ID, title, category, description FROM folders WHERE ID = ?");
      $statement->execute([$id]);
@@ -28,6 +39,36 @@
        $this->category = $folder['category'];
        $this->description = $folder['description'];
      }
+     return $this->isSet;
+   }
+
+   public function set($title, $category, $description) {
+      global $dbc;
+      $statement = $dbc->prepare("INSERT INTO folders (title, category, description) VALUES (?,?,?)");
+      $statement->execute([$title, $category,$description]);
+      return $dbc->lastInsertId();
+   }
+
+   public function getCategory() {
+     return $this->category;
+   }
+
+   public function setCategory($category) {
+     global $dbc;
+     $statement = $dbc->prepare("UPDATE folders SET category=? WHERE ID=?");
+     return $statement->execute([$category, $this->getID()]);
+   }
+
+   public function setDescription($description) {
+     global $dbc;
+     $statement = $dbc->prepare("UPDATE folders SET description=? WHERE ID=?");
+     return $statement->execute([$description, $this->getID()]);
+   }
+
+   public function setTitle($title) {
+     global $dbc;
+     $statement = $dbc->prepare("UPDATE folders SET title=? WHERE ID=?");
+     return $statement->execute([$title, $this->getID()]);
    }
 
    public function getDescription() {
@@ -38,7 +79,7 @@
      global $uri;
      $return = '<table width="100%">';
      if ($this->getDescription() != '') {
-       $return .= '<tr><td colspan="3"><strong>Description: </strong>' . $this->getDescription() . '</td></tr>';
+       $return .= '<tr><td colspan="3"><strong>Description: </strong>' . nl2br($this->getDescription()) . '</td></tr>';
      }
      $return .= '<tr>';
       $return .= '<td><a href="' . $uri->newDocument($this->getID(), $this->getTitle()) . '">Upload document</a></td>';
@@ -113,7 +154,6 @@
        $output .= '<td>' . $doc[$each['ID']]->getUploadDate() . '</td>';
        $output .= '<td><a href="' . $uri->editDocument($doc[$each['ID']]->getID()) . '"><i class="fa fa-edit"></a></td>';
        $output .= '<td><a href="' . $uri->deleteDocument($doc[$each['ID']]->getID()) . '"<i class="fa fa-minus-circle"></i></a></td>';
-       //$output .= '<td><a href="' . doc_download_uri($doc[$each['ID']]->getID()) . '"<i class="fa fa-download"></i></a></td>';
        $output .= '<td><a download="' . $doc[$each['ID']]->getTitle() . '.' . $doc[$each['ID']]->getExtension() . '" href="' . $uri->downloadDocument($doc[$each['ID']]->getFile()) . '"><i class="fa fa-download"></i></a></td>';
        $output .= '</tr>';
      }

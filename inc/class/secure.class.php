@@ -104,9 +104,10 @@ Class secure {
     * JS Session timeout
     **/
   function t800() {
+    global $uri;
   ?>
     <div id="timer"></div>
-    <form action="<?php echo page_uri('logout'); ?>" method="POST" id="t800" style="display:none;">
+    <form action="<?php echo $uri->page('logout'); ?>" method="POST" id="t800" style="display:none;">
       <input type="hidden" name="uri" value="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>" >
     </form>
     <script>

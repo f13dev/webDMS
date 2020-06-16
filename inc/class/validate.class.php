@@ -9,7 +9,7 @@
      */
     public function alphaNum($input) {
         $pattern = '^[a-zA-Z]([\w -]*[a-zA-Z])?$^';
-        return preg_match($pattern, $input);
+        return preg_match("/[a-zA-Z0-9]+/", $input);
     }
 
     /**
@@ -34,7 +34,7 @@
     }
 
     /**
-     * Check the inpute has at least 1 lower case character
+     * Check the input has at least 1 lower case character
      */
     public function hasLower($input) {
         return preg_match("/[a-z]/", $input);

@@ -75,7 +75,7 @@ Class document {
    * Returns the title of the folder the file is associated with
    */
   public function getFolderTitle() {
-    $folder = new folder($this->getFolder());
+    $folder = new folder(['ID' => $this->getFolder()]);
     return $folder->getTitle();
   }
 
