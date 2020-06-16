@@ -112,11 +112,12 @@ Class document {
    * Returns the absolute URL of the file, this will become a temporary URL for the file
    */
   public function getFilePath($asPDF = false) {
+    global $uri;
     $file = $this->getFile();
     if ($asPDF == true) {
       $file = $this->getFileAsPDF();
     }
-    return SITE_URL . 'inc/dms/fileScraper.php?file=' . $file;
+    return $uri->downloadDocument($file);
   }
 
   /**
