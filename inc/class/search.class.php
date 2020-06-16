@@ -35,6 +35,7 @@
     }
 
     public function buildSearchResultsTable($selected) {
+        global $uri;
         $return = '<table class="fileTable">';
             $return .= '<tr>';
                 $return .= '<th>Title</th>';
@@ -51,12 +52,12 @@
                 } else {
                     $return .= '<tr>';
                 }
-                    $return .= '<td><a href="' . searchDocument_uri($this->getTerm(), $result->getID(), $result->getTitle()) . '">'. $result->getTitle() . '</a></td>';
+                    $return .= '<td><a href="' . $uri->searchDocument($this->getTerm(), $result->getID(), $result->getTitle()) . '">'. $result->getTitle() . '</a></td>';
                     $return .= '<td>' . $result->getDocDate() . '</td>';
                     $return .= '<td>' . $result->getFile() . '</td>';
                     $return .= '<td>' . $result->getUploadDate() . '</td>';
-                    $return .= '<td><a href="' . folder_uri($result->getFolder(), $result->getFolderTitle()) . '">' . $result->getFolderTitle() . '</a></td>';
-                    $return .= '<td><a href="' . doc_download_uri($result->getID()) . '"<i class="fa fa-download"></i></a></td>';
+                    $return .= '<td><a href="' . $uri->folder($result->getFolder(), $result->getFolderTitle()) . '">' . $result->getFolderTitle() . '</a></td>';
+                    $return .= '<td><a download="' . $result->getTitle() . '.' . $result->getExtension() . '" href="' . $uri->downloadDocument($result->getFile()) . '" download=""><i class="fa fa-download"></i></a></td>';
                 $return .= '</tr>';
             }
         $return .= '</table>';

@@ -86,11 +86,11 @@ Class Uri {
     /**
      * Get document download URI
     **/
-    function downloadDocument($id) {
+    function downloadDocument($file) {
     if (REWRITE) {
-        return SITE_URL . 'download/D' . $id . '/';
+        return SITE_URL . 'download/' . $file . '/';
     } else {
-        return SITE_URL . '?p=download&id=' . $id;
+        return SITE_URL . 'fileScraper.php?file=' . $file;
     }
     }
 

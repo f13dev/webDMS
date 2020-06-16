@@ -72,6 +72,10 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
       foreach ($_SESSION as $key=>$value) {
         echo $key . ' => ' . $value . '<br>';
       }
+      print_r($_GET);
+      foreach ($_GET as $key=>$value) {
+        echo $key . ' => ' . $value . '<br>';
+      }
     }
   ?>
   </div>

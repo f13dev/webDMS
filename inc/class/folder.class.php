@@ -114,7 +114,7 @@
        $output .= '<td><a href="' . $uri->editDocument($doc[$each['ID']]->getID()) . '"><i class="fa fa-edit"></a></td>';
        $output .= '<td><a href="' . $uri->deleteDocument($doc[$each['ID']]->getID()) . '"<i class="fa fa-minus-circle"></i></a></td>';
        //$output .= '<td><a href="' . doc_download_uri($doc[$each['ID']]->getID()) . '"<i class="fa fa-download"></i></a></td>';
-       $output .= '<td><a download="' . $doc[$each['ID']]->getTitle() . '.' . $doc[$each['ID']]->getExtension() . '" href="' . SITE_URL . 'inc/dms/fileScraper.php?file=' . $doc[$each['ID']]->getFile() . '"><i class="fa fa-download"></i></a></td>';
+       $output .= '<td><a download="' . $doc[$each['ID']]->getTitle() . '.' . $doc[$each['ID']]->getExtension() . '" href="' . $uri->downloadDocument($doc[$each['ID']]->getFile()) . '"><i class="fa fa-download"></i></a></td>';
        $output .= '</tr>';
      }
      $output .= '</table>';
