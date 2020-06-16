@@ -30,7 +30,8 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
     if (sizeof($folders) > 0) {
       echo '<ul>';
       foreach ($folders as $eachFolder) {
-        echo '<li class="folder"><a href="' . $uri->folder($eachFolder['ID'], $eachFolder['title']) . '">' . $eachFolder['title'] . '</a></li>';
+        $eachFolder = new folder(['ID'=>$eachFolder['ID']]);
+        echo '<li class="folder"><a href="' . $uri->folder($eachFolder->getID(), $eachFolder->getTitle()) . '">' . $eachFolder->getTitle() . ' (' . $eachFolder->getNumberFiles() .  ')</a></li>';
       }
       echo '</ul>';
     }

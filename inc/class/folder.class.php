@@ -75,6 +75,13 @@
      return $this->description;
    }
 
+   public function getNumberFiles() {
+     global $dbc;
+     $statement=$dbc->prepare("SELECT count(*) FROM documents WHERE folder = ?");
+     $statement->execute([$this->getID()]);
+     return $statement->fetchColumn();
+   }
+
    public function buildFolderHead() {
      global $uri;
      $return = '<table width="100%">';
