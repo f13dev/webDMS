@@ -144,8 +144,8 @@ Class document {
   /**
    * Returns the date of the file
    */
-  public function getDocDate() {
-    return date(DATE_FORMAT, strtotime($this->document_date));
+  public function getDocDate($format = DATE_FORMAT) {
+    return date($format, strtotime($this->document_date));
   }
 
   /**

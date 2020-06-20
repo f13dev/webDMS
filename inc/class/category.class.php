@@ -20,4 +20,23 @@ Class category {
     }
     return $return;
   }
+
+  public function getCategoryFolderOption($id = false) {
+    global $dbc;
+    $statement = $dbc->prepare("SELECT ID, name FROM categories ORDER BY name");
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $return = '';
+    foreach ($results as $result) {
+      $return .= '<option disabled>' . $result['name'] . '</option>';
+      $fstatement = $dbc->prepare("SELECT ID, title FROM folders WHERE category = ? ORDER BY title");
+      $fstatement->execute([$result['ID']]);
+      $fresults = $fstatement->fetchAll();
+      foreach ($fresults as $fresult) {
+        if ($id != false && $id == $fresult['ID']) $selected = ' selected '; else $selected = '';
+        $return .= '<option value="' . $fresult['ID'] . '"' . $selected . '>&nbsp; &nbsp;' . $fresult['title'] . '</option>';
+      }
+    }
+    return $return;
+  }
 }

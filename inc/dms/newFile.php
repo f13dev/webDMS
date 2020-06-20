@@ -45,7 +45,7 @@ if (isset($_POST['title'])) {
 
 ?>
 
-<div id="form" enctype="multipart/form-data">
+<div id="form">
   <form method="POST" enctype="multipart/form-data">
     <h2 class="text-center"><?php echo $folder->getTitle(); ?>: Upload document</h2>
       <label for="title" class="text-info">Title:</label><br>
