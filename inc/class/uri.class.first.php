@@ -64,11 +64,11 @@ Class Uri {
     /**
      * Gete document edit URI
     **/
-    function editDocument($id) {
+    function editDocument($id,$title) {
     if (REWRITE) {
-        return SITE_URL . 'editDoc/D' . $id . '/';
+        return SITE_URL . 'editDoc/D' . $id . '/' . urlencode($title) . '/';
     } else {
-        return SITE_URL . '?p=editDoc&id=' . $id;
+        return SITE_URL . '?p=editDoc&id=' . $id . '&title=' . urlencode($title);
     }
     }
 
