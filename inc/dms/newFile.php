@@ -23,23 +23,21 @@ if (isset($_POST['title'])) {
       $error = true;
       $errormsg .= '<p>The document date must be set as a valid date.</p>';
     }
-    $error = true;
-    print_r($_POST);
-    print_r($_FILES);
     if ($error == false) {
       // If no errors, process the new file
-
-      if (new File([
+      $document = new document([
         'title'=>$security->sanitise($_POST['title']),
-        'folder'=>$security->sanitise($_POST['folder']),
+        'folder'=>$folder->getID(),
         'description'=>$security->sanitise($_POST['description']),
+        'document_date'=>$security->sanitise($_POST['document_date']),
         'file'=>$_FILES,
-      ]) == false) {
+      ]);
+      if ($document == false) {
         $error = true;
         $errormsg .= '<p>There was a database error.</p>';
       } else {
         // Generate the URL to direct to
-        //header('location:'.$uri->file($dbc->lastInsertId())
+        header('location:'.$uri->document($folder->getID(),$folder->getTitle(),$dbc->lastInsertId(),$security->sanitise($_POST['title'])));
       }
     }
   }

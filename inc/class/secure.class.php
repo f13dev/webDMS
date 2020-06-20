@@ -100,6 +100,10 @@ Class secure {
     }
   }
 
+  function generateFileName() {
+    return time();
+  }
+
   /**
     * JS Session timeout
     **/

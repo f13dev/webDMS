@@ -49,12 +49,23 @@ Class document {
   }
 
   public function set($title,$folder,$description,$date,$file) {
-    global $dbc;
-    if ($this->setFile($file)) {
-      $statement = $dbc->prepare("INSERT INTO documents (title,folder,description,document_date,upload_date,file) VALUES (?,?,?,?,?,?)");
-      $statement->execute([$title,$folder,$decription,$date,$upload_date,$file]);
+    global $dbc, $security;
+    $ext = explode('.',$file['file']['name']);
+    $ext = end($ext);
+    $filename = $security->generateFileName() . '.' . $ext;
+    $today = date('Y-m-d');
+    if ($this->setFile($file['file'],$filename)) {
+      $statement = $dbc->prepare("INSERT INTO documents (title,notes,folder,upload_date,document_date,file) VALUES (?,?,?,?,?,?)");
+      $statement->execute([$title,$description,$folder,$today,$date,$filename]);
       return $dbc->lastInsertId();
+    } else {
+      return false;
     }
+  }
+
+  public function setFile($file,$filename) {
+    $target = SITE_DOCS . $filename;
+    return (move_uploaded_file($file['tmp_name'], str_replace("'","",$target)));
   }
 
   /**
