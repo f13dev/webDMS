@@ -19,7 +19,6 @@ New repo for 0.4b
 
 
 # Features left to implement
-* Edit file
 * Recycling bin
 * Delete file
 * Delete folder
@@ -37,3 +36,4 @@ New repo for 0.4b
 # Feature list done
 * Edit folder
 * New file
+* Edit file
