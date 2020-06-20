@@ -80,6 +80,31 @@ Class document {
     }
   }
 
+  public function setTitle($title) {
+    global $dbc;
+    $statement = $dbc->prepare("UPDATE documents SET title = ? WHERE ID = ?");
+    return $statement->execute([$title,$this->getID()]);
+    
+  }
+
+  public function setDocDate($date) {
+    global $dbc;
+    $statement = $dbc->prepare("UPDATE documents SET document_date = ? WHERE ID = ?");
+    return $statement->execute([$date,$this->getID()]);
+  }
+
+  public function setNotes($notes) {
+    global $dbc;
+    $statement = $dbc->prepare("UPDATE documents SET notes = ? WHERE ID = ?");
+    return $statement->execute([$notes,$this->getID()]);
+  }
+
+  public function setFolder($folder) {
+    global $dbc;
+    $statement = $dbc->prepare("UPDATE documents SET folder = ? WHERE ID = ?");
+    return $statement->execute([$folder,$this->getID()]);
+  }
+
   /**
    * Uploads and renames a file to associated with the document object 
    * file = array(tmp_name), filename = new unique filename
