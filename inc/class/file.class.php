@@ -18,8 +18,8 @@ Class document {
     $this->isSet = false;
     if (array_key_exists('ID',$array)) {
       return $this->get($array['ID']);
-    } else if (array_key_exists('title',$array) && array_key_exists('folder',$array) && array_key_exists('file',$array)) {
-      return $this->set($array['title'],$array['folder'],$array['description'],$array['file']);
+    } else if (array_key_exists('title',$array) && array_key_exists('folder',$array) && array_key_exists('document_date',$array) && array_key_exists('file',$array)) {
+      return $this->set($array['title'],$array['folder'],$array['description'],$array['document_date'],$array['file']);
     } else {
       return false;
     }
@@ -46,6 +46,15 @@ Class document {
       $this->file = $document['file'];
     }
     return $this->isSet;
+  }
+
+  public function set($title,$folder,$description,$date,$file) {
+    global $dbc;
+    if ($this->setFile($file)) {
+      $statement = $dbc->prepare("INSERT INTO documents (title,folder,description,document_date,upload_date,file) VALUES (?,?,?,?,?,?)");
+      $statement->execute([$title,$folder,$decription,$date,$upload_date,$file]);
+      return $dbc->lastInsertId();
+    }
   }
 
   /**

@@ -77,4 +77,8 @@
         }
         return true;
     }
+
+    public function date($input) {
+        return true;
+    }
  }
