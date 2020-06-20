@@ -5,7 +5,6 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
 }
 
 if (isset($_POST['title'])) {
-  print_r($_POST);
   $error = false;
   $errormsg = '';
   // Check for CSRF

@@ -147,7 +147,7 @@
      $output .= '<th>Download</th>';
      $output .= '</tr>';
      foreach ($this->getDocuments($orderBy, $asc) as $each) {
-       $doc[$each['ID']] = new document($each['ID']);
+       $doc[$each['ID']] = new document(['ID'=>$each['ID']]);
        if ($doc[$each['ID']]->getID() == $selected) {
          $output .= '<tr class="selected">';
        } else {

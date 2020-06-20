@@ -21,7 +21,7 @@
         $resultObject = [];
 
         foreach ($results as $result) {
-            $resultObject[$result['ID']] = new Document($result['ID']);
+            $resultObject[$result['ID']] = new Document(['ID'=>$result['ID']]);
         }
 
         $this->results = $resultObject;

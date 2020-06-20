@@ -4,44 +4,46 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
   header("Location: ../../");
 }
 
+$folder = new folder(['ID'=>$_GET['id']]);
+if (!$folder->isSet()) {
+  // kill
+}
+
 if (isset($_POST['title'])) {
-  print_r($_POST);
   $error = false;
   $errormsg = '';
   // Check for CSRF
   if ($security->validate_token($_POST['token'])) {
-
-    /*
-    // Check the category is a-zA-Z0-9 space, hypen, underscore
+    // Check the title is valid
     if (!$validate->title($_POST['title'])) {
       $error = true;
-      $errormsg .= '<p>The category title must be between 1 and 32 characters in length, containing only letters, numbers, space, underscore and hyphen.</p>';
+      $errormsg .= '<p>The file title must be between 1 and 32 characters in length, containing only letters, numbers, space, underscore and hyphen.</p>';
     }
-    if (!$validate->numeric($_POST['category'])) {
-      $error = true;
-      $errormsg .= '<p>The category is not a valid numeric identifier.</p>';
-    }
+    $error = true;
+    print_r($_POST);
+    print_r($_FILES);
     if ($error == false) {
-      // If no errors, process the new folder 
-      $statement = $dbc->prepare("INSERT INTO folders (title, category, description) VALUES (?,?,?)");
-      if (!$statement->execute([$_POST['title'], $_POST['category'], $_POST['description']])) {
+      // If no errors, process the new file
+
+      if (new File([
+        'title'=>$security->sanitise($_POST['title']),
+        'folder'=>$security->sanitise($_POST['folder']),
+        'description'=>$security->sanitise($_POST['description']),
+        'file'=>$_FILES,
+      ]) == false) {
         $error = true;
         $errormsg .= '<p>There was a database error.</p>';
+      } else {
+        // Generate the URL to direct to
+        //header('location:'.$uri->file($dbc->lastInsertId())
       }
     }
-    if ($error == false) {
-      header("location:" . folder_uri($dbc->lastInsertId(), $_POST['title']));
-    } */
   }
 }
 
-$folder = new folder($_GET['id']);
-if (!$folder->isSet()) {
-  // kill
-}
 ?>
 
-<div id="form">
+<div id="form" enctype="multipart/form-data">
   <form method="POST" enctype="multipart/form-data">
     <h2 class="text-center"><?php echo $folder->getTitle(); ?>: Upload document</h2>
       <label for="title" class="text-info">Title:</label><br>

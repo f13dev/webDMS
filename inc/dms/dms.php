@@ -13,7 +13,7 @@ if (isset($_GET['title'])) {$title = $security->sanitise($_GET['title']);} else 
 if (isset($_GET['searchString'])) { $searchString = $security->sanitise($_GET['searchString']); }
 // Create new folder
 $theFolder = new folder(['ID' => $f]);
-$theDocument = new document($d);
+$theDocument = new document(['ID'=>$d]);
 
 // Page layout
 ?>

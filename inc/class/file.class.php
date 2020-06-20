@@ -14,7 +14,18 @@ Class document {
   private $document_date;
   private $file;
 
-  public function __construct($id) {
+  public function __construct($array) {
+    $this->isSet = false;
+    if (array_key_exists('ID',$array)) {
+      return $this->get($array['ID']);
+    } else if (array_key_exists('title',$array) && array_key_exists('folder',$array) && array_key_exists('file',$array)) {
+      return $this->set($array['title'],$array['folder'],$array['description'],$array['file']);
+    } else {
+      return false;
+    }
+  }
+
+  public function get($id) {
     global $dbc;
     $statement = $dbc->prepare("SELECT ID, title, notes, folder, upload_date, document_date, file FROM documents WHERE ID = ?");
     $statement->execute([$id]);
@@ -34,6 +45,7 @@ Class document {
       $this->document_date = $document['document_date'];
       $this->file = $document['file'];
     }
+    return $this->isSet;
   }
 
   /**
