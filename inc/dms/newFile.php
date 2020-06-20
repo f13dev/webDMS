@@ -23,6 +23,10 @@ if (isset($_POST['title'])) {
       $error = true;
       $errormsg .= '<p>The document date must be set as a valid date.</p>';
     }
+    if (!$validate->file($_FILES['file']['name'])) {
+      $error = true;
+      $errormsg .= '<p>Please select a valid file [pdf,doc,docx,xls,xlsx,odf,ods,mp3,wav,ogg].</p>';
+    }
     if ($error == false) {
       // If no errors, process the new file
       $document = new document([

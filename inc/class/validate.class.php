@@ -81,4 +81,15 @@
     public function date($input) {
         return true;
     }
+
+    /**
+     * Return true if a valid file extension is provided
+     */
+    public function file($input) {
+        $ext = explode('.',$input);
+        $ext = end($ext);
+        $ext = strtolower($ext);
+        $valid = ['pdf','doc','docx','xls','xlsx','odf','ods','mp3','wav','ogg'];
+        return in_array($ext,$valid);
+    }
  }
