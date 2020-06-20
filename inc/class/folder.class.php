@@ -189,7 +189,7 @@
                    <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'document_date','true') . '"><i class="fa fa-angle-up"></i></a>
                    <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'document_date','false') . '"><i class="fa fa-angle-down"></i></a>
                  </th>';
-     $output .= '<th>File</th>';
+     $output .= '<th>Filetype</th>';
      $output .= '<th>Uploaded
                    <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'upload_date','true') . '"><i class="fa fa-angle-up"></i></a>
                    <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'upload_date','false') . '"><i class="fa fa-angle-down"></i></a>
@@ -209,7 +209,9 @@
                   ' . $doc[$each['ID']]->getTitle() . '
                   </a></td>';
        $output .= '<td>' . $doc[$each['ID']]->getDocDate() . '</td>';
-       $output .= '<td>' . $doc[$each['ID']]->getFile() . '</td>';
+       $output .= '<td>' . $doc[$each['ID']]->getFileType() . '</td>';
+       
+       
        $output .= '<td>' . $doc[$each['ID']]->getUploadDate() . '</td>';
        $output .= '<td><a href="' . $uri->editDocument($doc[$each['ID']]->getID(),$doc[$each['ID']]->getTitle()) . '"><i class="fa fa-edit"></a></td>';
        $output .= '<td><a href="' . $uri->deleteDocument($doc[$each['ID']]->getID()) . '"<i class="fa fa-minus-circle"></i></a></td>';

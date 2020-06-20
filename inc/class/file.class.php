@@ -163,6 +163,26 @@ Class document {
     return strtolower(end($explode));
   }
 
+  public function getFileType() {
+    $doc = ['doc','docx','odf'];
+    $spr = ['xls','xlsx','ods'];
+    $img = ['jpg','jpeg','tif','tiff','gif','png'];
+    $aud = ['mp3','wav','ogg'];
+    if (strtolower($this->getExtension()) == 'pdf') {
+      return '<i class="fa fa-image"></i> PDF';
+    } else if (in_array(strtolower($this->getExtension()),$doc)) {
+      return '<i class="fa fa-file-word"></i> Document';
+    } else if (in_array(strtolower($this->getExtension()),$spr)) {
+      return '<i class="fa fa-file-excel"></i> Sheet';
+    } else if (in_array(strtolower($this->getExtension()),$img)) {
+      return '<i class="fa fa-image"></i> Image';
+    } else if (in_array(strtolower($this->getExtension()),$aud)) {
+      return '<i class="fa fa-file-audio"></i> Audio';
+    } else {
+      return '<i class="fa fa-file"></i> Unknown';
+    }
+  }
+
   /**
    * Returns the absolute URL of the file, this will become a temporary URL for the file
    */
