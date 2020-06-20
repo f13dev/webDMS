@@ -11,6 +11,13 @@
    private $category;
    private $description;
 
+   /**
+    * Constructor
+    * Input of an array containing either:
+    * 1. an ID key
+    * 2. a title, category and description key
+    * ID = numeric folder ID, title = string, category = nueric category ID, description = string
+    */
    public function __construct($array) {
      $this->isSet = false;
      if (array_key_exists('ID', $array)) {
@@ -22,6 +29,10 @@
      }
    }
 
+   /**
+    * Assigns an existinng folder to the object
+    * ID = numeric identifier associated with the folders database row
+    */
    public function get($id) {
      global $dbc;
      $statement = $dbc->prepare("SELECT ID, title, category, description FROM folders WHERE ID = ?");
@@ -42,6 +53,11 @@
      return $this->isSet;
    }
 
+   /**
+    * Creates a enw file row in the databasee
+    * 
+    * Returns true if successful, otherwise false
+    */
    public function set($title, $category, $description) {
       global $dbc;
       $statement = $dbc->prepare("INSERT INTO folders (title, category, description) VALUES (?,?,?)");
@@ -49,32 +65,50 @@
       return $dbc->lastInsertId();
    }
 
+   /**
+    * Returns the category of the object
+    */
    public function getCategory() {
      return $this->category;
    }
 
+   /**
+    * Updates the category of the object
+    */
    public function setCategory($category) {
      global $dbc;
      $statement = $dbc->prepare("UPDATE folders SET category=? WHERE ID=?");
      return $statement->execute([$category, $this->getID()]);
    }
 
+   /**
+    * Sets the description of the object
+    */
    public function setDescription($description) {
      global $dbc;
      $statement = $dbc->prepare("UPDATE folders SET description=? WHERE ID=?");
      return $statement->execute([$description, $this->getID()]);
    }
 
+   /**
+    * Sets the title of the object
+    */
    public function setTitle($title) {
      global $dbc;
      $statement = $dbc->prepare("UPDATE folders SET title=? WHERE ID=?");
      return $statement->execute([$title, $this->getID()]);
    }
 
+   /**
+    * Returns the description of the object
+    */
    public function getDescription() {
      return $this->description;
    }
 
+   /**
+    * Returns the numer of files associated with the folder object
+    */
    public function getNumberFiles() {
      global $dbc;
      $statement=$dbc->prepare("SELECT count(*) FROM documents WHERE folder = ?");
@@ -82,6 +116,9 @@
      return $statement->fetchColumn();
    }
 
+   /**
+    * Returns a HTML header for the folder object view
+    */
    public function buildFolderHead() {
      global $uri;
      $return = '<table width="100%">';
@@ -97,6 +134,9 @@
      return $return;
    }
 
+   /**
+    * Returns an array of documentt objects associated with the folder object
+    */
    public function getDocuments($orderBy = 'document_date', $asc = 'false') {
      if ($asc == 'false') {
        $order = 'DESC';
@@ -112,18 +152,30 @@
      return $statement->fetchAll();
    }
 
+   /**
+    * Returns true if a valid folder is set
+    */
    public function isSet() {
      return $this->isSet;
    }
 
+   /** 
+    * Returns the title of the object
+    */
    public function getTitle() {
      return $this->title;
    }
 
+   /**
+    * Returns the ID of the object
+    */
    public function getID() {
      return $this->ID;
    }
 
+   /**
+    * Returns a HTML table showing the document objects associated with the folder object
+    */
    public function buildDocumentTable($selected, $orderBy = 'document_date', $asc = 'false') {
      global $d,$title,$uri;
 

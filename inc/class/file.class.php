@@ -14,6 +14,13 @@ Class document {
   private $document_date;
   private $file;
 
+  /**
+   * Constructor
+   * Input of an array containing either:
+   * 1. an ID key
+   * 2. a title, folder, document_date and file key 
+   * ID = numeric, title = string, document_date = date, file = array
+   */
   public function __construct($array) {
     $this->isSet = false;
     if (array_key_exists('ID',$array)) {
@@ -25,6 +32,10 @@ Class document {
     }
   }
 
+  /**
+   * Assigns an existing file to the document object
+   * ID = numeric identifier of a database row
+   */
   public function get($id) {
     global $dbc;
     $statement = $dbc->prepare("SELECT ID, title, notes, folder, upload_date, document_date, file FROM documents WHERE ID = ?");
@@ -48,6 +59,12 @@ Class document {
     return $this->isSet;
   }
 
+  /**
+   * Uploads a file to the documents directory and enters a row in the database to reflect the new document 
+   * title = string, folder = numeric ID of a folder, description = string, date = date, file = array
+   * 
+   * Returns false if the database or file upload failed, returns newly created ID if successful
+   */
   public function set($title,$folder,$description,$date,$file) {
     global $dbc, $security;
     $ext = explode('.',$file['file']['name']);
@@ -63,6 +80,12 @@ Class document {
     }
   }
 
+  /**
+   * Uploads and renames a file to associated with the document object 
+   * file = array(tmp_name), filename = new unique filename
+   * 
+   * returns true if successful, otherwise false
+   */
   public function setFile($file,$filename) {
     $target = SITE_DOCS . $filename;
     return (move_uploaded_file($file['tmp_name'], str_replace("'","",$target)));
