@@ -196,4 +196,13 @@ Class Uri {
             return SITE_URL . 'p=deleteCategory&id=' . $id;
         }
     }
+
+    function redirect($url) {
+        // End/clean the output buffer
+        ob_end_clean();
+        // Re-send headers
+        header('location:'.$url);
+        // Stop processing
+        exit;
+    }
 }

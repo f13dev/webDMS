@@ -1,4 +1,6 @@
 <?php
+// Start output buffer 
+ob_start();
 // Show all errors for testing, must remove for production
 ini_set('display_errors', 1);
 ini_set('display_startup_error', 1);
@@ -50,3 +52,6 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 }
 // Load teh page foot
 require_once('inc/theme/foot.php');
+
+// Flush the output buffer 
+ob_end_flush();
