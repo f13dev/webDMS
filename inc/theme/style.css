@@ -197,7 +197,7 @@ ul.list > li.category > ul > li.folder {
 
 .fileTable td, .fileTable th {
   padding: 5px;
-  border-collapse: col
+  border-collapse: column;
   margin: 0;
 }
 
