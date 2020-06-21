@@ -12,7 +12,7 @@
         $this->term = $term;
         $term = '%' . str_replace('*','%',$term) . '%';
         global $dbc;
-        $statement = $dbc->prepare("SELECT ID, title FROM documents WHERE title LIKE ?");
+        $statement = $dbc->prepare("SELECT ID, title FROM documents WHERE title LIKE ? AND recycle = 0");
         $statement->execute([$term]);
         $results = $statement->fetchAll();
 
@@ -23,10 +23,7 @@
         foreach ($results as $result) {
             $resultObject[$result['ID']] = new Document(['ID'=>$result['ID']]);
         }
-
         $this->results = $resultObject;
-
-
     }
 
 
