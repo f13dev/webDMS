@@ -19,8 +19,8 @@ New repo for 0.4b
 
 
 # Features left to implement
-* Recycling bin
-* Delete file
+* Restore from recycle bin
+* Permenently delete from recycle bin
 * Delete folder
 * Delete category
 * Manage details
@@ -34,6 +34,7 @@ New repo for 0.4b
 * Documentation
 
 # Feature list done
+* Recycling bin
 * Edit folder
 * New file
 * Edit file
