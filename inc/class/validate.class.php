@@ -89,7 +89,7 @@
         $ext = explode('.',$input);
         $ext = end($ext);
         $ext = strtolower($ext);
-        $valid = ['pdf','doc','docx','xls','xlsx','odf','ods','mp3','wav','ogg'];
+        $valid = ['pdf','doc','docx','xls','xlsx','odf','ods','mp3','wav','ogg','jpg','jpeg','gif','png','tif','tiff'];
         return in_array($ext,$valid);
     }
  }

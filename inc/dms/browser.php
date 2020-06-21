@@ -34,6 +34,10 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
         echo '<li class="folder"><a href="' . $uri->folder($eachFolder->getID(), $eachFolder->getTitle()) . '">' . $eachFolder->getTitle() . ' (' . $eachFolder->getNumberFiles() .  ')</a></li>';
       }
       echo '</ul>';
+    } else {
+      if ($eachCategory['ID'] != -1) {
+        echo ' (<a href="' . $uri->delCategory($eachCategory['ID']) . '" onclick="return confirm(\'Are you sure you want to delete the category: ' . $eachCategory['name'] . '\')">x</a>)';
+      }
     }
     echo '</li>';
   }

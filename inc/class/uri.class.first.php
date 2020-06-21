@@ -188,4 +188,12 @@ Class Uri {
             return SITE_URL . '?p=restore&d=' . $d;
         }
     }
+
+    function delCategory($id) {
+        if (REWRITE) {
+            return SITE_URL . 'deleteCategory/' . $id . '/';
+        } else {
+            return SITE_URL . 'p=deleteCategory&id=' . $id;
+        }
+    }
 }

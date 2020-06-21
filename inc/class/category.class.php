@@ -39,4 +39,11 @@ Class category {
     }
     return $return;
   }
+
+  public function getNumberFolders($id) {
+    global $dbc;
+    $statement = $dbc->prepare("SELECT count(*) FROM folders WHERE category = ?");
+    $statement->execute([$id]);
+    return $statement->fetchColumn();
+  }
 }
