@@ -66,7 +66,8 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
     } else if (isset($_GET["searchString"]) || (isset($_POST['searchString']))) {
       // Force a reload if post data is present 
       if (isset($_POST['searchString'])) {
-        header("location:" . $uri->search($_POST['searchString']));
+        $uri->redirect($uri->search($_POST['searchString']));
+        //header("location:" . $uri->search($_POST['searchString']));
       }
       $search = new search($searchString);
       echo '<h2>Search: ' . $search->getTerm() . '</h2>';

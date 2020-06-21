@@ -37,7 +37,7 @@ if (isset($_POST['title'])) {
       if ($theFolder->setTitle($title) &&
           $theFolder->setDescription($description) &&
           $theFolder->setCategory($category)) {
-            header("location:" . $uri->folder($theFolder->getID(),$title));
+            $uri->redirect($uri->folder($theFolder->getID(),$title));
       } else {
         $error = true;
         $errormsg .= '<p>There was a database error.</p>';

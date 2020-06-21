@@ -9,7 +9,7 @@ $delFile = new document(['ID' => $_GET['d']]);
 
 if ($delFile->setRecycle(true)) {
   // Send header location
-  header("location:" . $uri->folder($delFile->getFolder(), $delFile->getFolderTitle()));
+  $uri->redirect($uri->folder($delFile->getFolder(), $delFile->getFolderTitle()));
 } else {
   // Show an error
   echo 'A problem occured while deleting: ' . $delFile->getTitle();

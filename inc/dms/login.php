@@ -29,7 +29,7 @@ if (isset($_POST['email'])) {
         $_SESSION['salt'] = $security->generateSessionSalt();
         $_SESSION['usertoken'] = $security->generateUserToken();
         $currentURI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        header('Location:'.$currentURI);
+        $uri->redirect($currentURI);
       } else {
         $loginerror = true;
       }

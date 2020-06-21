@@ -28,7 +28,7 @@ if (isset($_POST['title'])) {
       }
     }
     if ($error == false) {
-      header("location:" . SITE_URL);
+      $uri->redirect(SITE_URL);
     }
   }
 }

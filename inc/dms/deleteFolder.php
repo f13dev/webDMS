@@ -11,7 +11,8 @@ if ($delFolder->getNumberFiles() == 0) {
   // Process the delete
   if ($delFolder->unsetEntry()) {
     // Change header
-    header('location: ' . SITE_URL);
+    $uri->redirect(SITE_URL);
+    //header('location: ' . SITE_URL);
   } else {
     echo '<div id="form"><h2>Delete: ' . $delFolder->getTitle() . '</h2><div class="warning notice"><p>There was a database error when attempting to delete this folder.</p></div></div>';
   }

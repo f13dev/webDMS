@@ -10,7 +10,8 @@ $delFile = new document(['ID' => $_GET['id']]);
 if ($delFile->unsetFile()) {
     if ($delFile->unsetEntry()) {
         // Set a header location 
-        header('Location:' . $uri->recycleBin());
+        $uri->redirect($uri->recycleBin());
+        //header('Location:' . $uri->recycleBin());
     } else {
         echo 'A problem occured while removing the database entry for: ' . $delFile->getTitle();
     }

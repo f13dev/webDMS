@@ -41,7 +41,7 @@ if (isset($_POST['title'])) {
         $errormsg .= '<p>There was a database error.</p>';
       } else {
         // Generate the URL to direct to
-        header('location:'.$uri->document($folder->getID(),$folder->getTitle(),$dbc->lastInsertId(),$security->sanitise($_POST['title'])));
+        $uri->redirect($uri->document($folder->getID(),$folder->getTitle(),$dbc->lastInsertId(),$security->sanitise($_POST['title'])));
       }
     }
   }

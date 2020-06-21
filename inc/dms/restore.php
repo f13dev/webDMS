@@ -9,7 +9,7 @@ $restoreDoc = new document(['ID' => $d]);
 
 if ($restoreDoc->setRecycle(false)) {
     // Send header location 
-    header("location:" . $uri->recycleBin());
+    $uri->redirect($uri->recycleBin());
 } else {
     // Show an error 
     echo 'A problem occured while restoring: ' . $restoreDoc->getTitle();

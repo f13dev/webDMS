@@ -15,7 +15,8 @@ if ($_GET['id'] != '-1') {
     $statement = $dbc->prepare("DELETE FROM categories WHERE ID = ?");
     if ($statement->execute([$_GET['id']])) {
       // Header location 
-      header('location: ' . SITE_URL);
+      $uri->redirect(SITE_URL);
+      //header('location: ' . SITE_URL);
     } else {
       // Show DB error
       $error .= '<p>There was a database error while processing the category deletion.</p>';

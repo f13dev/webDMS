@@ -39,7 +39,7 @@ if (isset($_POST['title'])) {
         // Rebuild the object 
         $document = new document(['ID' => $ID]);
         // Go to document
-        header('location:' . $uri->document($document->getFolder(),$document->getFolderTitle(),$document->getID(),$document->getTitle()));        
+        $uri->redirect($uri->document($document->getFolder(),$document->getFolderTitle(),$document->getID(),$document->getTitle()));        
       } else {
         $error = true;
         $errormsg .= '<p>There was a database error.</p>';

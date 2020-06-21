@@ -34,12 +34,12 @@ Class secure {
     * Check session fingerprint
     **/
   function checkFingerprint() {
+    global $uri;
     if (isset($_SESSION['fingerprint'])) {
       if ($_SESSION['fingerprint'] != sha1($_SERVER['HTTP_USER_AGENT'] . SALT)) {
         // A session error has occured
         session_destroy();
-        header('Location: ' . SITE_URL);
-        exit;
+        $uri->redirect(SITE_URL);
       }
     } else {
       $_SESSION['fingerprint'] = sha1($_SERVER['HTTP_USER_AGENT'] . SALT);
