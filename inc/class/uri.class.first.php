@@ -157,19 +157,27 @@ Class Uri {
         }
     }
 
-    function recycleBinFolder($f,$t) {
+    function recycleBinDocument($d,$t) {
         if (REWRITE) {
-            return SITE_URL . 'recycleBin/F' . $f . '/' . $t . '/';
+            return SITE_URL . 'recycleBin/D' . $d . '/' . urlencode($t) . '/';
         } else {
-            return SITE_URL . '?recycleBin&f=' . $f . '&t=' . $t;
+            return SITE_URL . '?recycleBin&d=' . $d . '&t=' . urlencode($t); 
         }
     }
 
-    function recycleDocument($d,$t) {
+    function recycleBinFolder($f,$t) {
         if (REWRITE) {
-            return SITE_URL . 'recycleBin/D' . $d . '/' . $t . '/';
+            return SITE_URL . 'recycleBin/F' . $f . '/' . urlencode($t) . '/';
         } else {
-            return SITE_URL . '?recycleBin&d=' . $d . '&t=' . $t;
+            return SITE_URL . '?recycleBin&f=' . $f . '&t=' . urlencode($t);
+        }
+    }
+
+    function recycleDocument($d) {
+        if (REWRITE) {
+            return SITE_URL . 'recycleDocument/D' . $d . '/';
+        } else {
+            return SITE_URL . '?recycleDocument&d=' . $d;
         }
     }
 

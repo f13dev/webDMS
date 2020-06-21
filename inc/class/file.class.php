@@ -349,4 +349,32 @@ Class document {
     return $this->showFileNotExist();
   }
 
+  /**
+   * Deletes the associated files from the document folder
+   */
+  public function unsetFile() {
+    $file = SITE_DOCS . $this->getFile();
+    $pdf = SITE_DOCS . $this->getFileAsPDF(); // some files have a PDF version 
+    if (file_exists($pdf)) {
+      if (!unlink($pdf)) {
+        return false;
+      }
+    }
+    if (file_exists($file)) {
+      if (!unlink($file)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+   * Deletes the associated database entry for the file
+   */
+  public function unsetEntry() {
+    global $dbc;
+    $statement = $dbc->prepare("DELETE from documents WHERE ID = ?");
+    return $statement->execute([$this->getID()]);
+  }
+
 }

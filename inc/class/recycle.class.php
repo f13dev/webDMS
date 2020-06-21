@@ -46,7 +46,7 @@ Class recycle {
           } else {
             $output .= '<tr>';
           }
-          $output .= '<td><a href="' . $uri->recycleDocument($doc[$each['ID']]->getID(), $doc[$each['ID']]->getTitle()) . '">
+          $output .= '<td><a href="' . $uri->recycleBinDocument($doc[$each['ID']]->getID(), $doc[$each['ID']]->getTitle()) . '">
                      ' . $doc[$each['ID']]->getTitle() . '
                      </a></td>';
           $output .= '<td>' . $doc[$each['ID']]->getFileType() . '</td>';
@@ -54,7 +54,7 @@ Class recycle {
           
           $output .= '<td>' . $doc[$each['ID']]->getRecycleDate() . '</td>';
           $output .= '<td><a href="' . $uri->folder($doc[$each['ID']]->getFolder(),$doc[$each['ID']]->getFolderTitle()) . '">' . $doc[$each['ID']]->getFolderTitle() . '</a></td>';
-          $output .= '<td><a href="' . $uri->deleteDocument($doc[$each['ID']]->getID()) . '" onclick="return confirm(\'Are you sure you wish to delete: ' . $doc[$each['ID']]->getTitle() . '\')"><i class="fa fa-minus-circle"></i></a></td>';
+          $output .= '<td><a href="' . $uri->deleteDocument($doc[$each['ID']]->getID()) . '" onclick="return confirm(\'Proceeding will permanently delete the file: ' . $doc[$each['ID']]->getTitle() . '\')"><i class="fa fa-minus-circle"></i></a></td>';
           $output .= '<td><a download="' . $doc[$each['ID']]->getTitle() . '.' . $doc[$each['ID']]->getExtension() . '" href="' . $uri->downloadDocument($doc[$each['ID']]->getFile()) . '"><i class="fa fa-download"></i></a></td>';
           $output .= '<td><a href="' . $uri->restoreDocument($doc[$each['ID']]->getID()) . '"><i class="fa fa-undo"></i></a></td>';
           $output .= '</tr>';

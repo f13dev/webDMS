@@ -50,6 +50,8 @@ RewriteRule ^search/(.*)/ index.php?p=search&searchString=$1
 #recycleBin
 RewriteRule ^recycleBin/D([0-9]+)/(.*)/ index.php?recycleBin&d=$1&t=$2
 RewriteRule ^recycleBin/ index.php?recycleBin
+RewriteRule ^restore/D([0-9]+)/ index.php?p=restore&d=$1
+RewriteRule ^recycleDocument/D([0-9]+)/ index.php?p=recycleFile&d=$1
 
 #page_uri - Goes right at the bottom
 RewriteRule ^([A-Za-z]*)/ index.php?p=$1

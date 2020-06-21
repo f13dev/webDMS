@@ -50,7 +50,8 @@ $pages = array(
   "newCategory", 
   "newFile", 
   "newFolder",
-  "restore"
+  "restore",
+  "recycleFile"
 );
 if (in_array($page, $pages)) {
     require('inc/dms/' . $page . '.php');
