@@ -52,9 +52,10 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
 
     // file view
     if ($theFolder->isSet()) {
-      echo '<h2>' . $theFolder->getTitle() . '</h2>';
+      echo '<h2 style="display:inline-block;">' . $theFolder->getTitle() . '</h2>';
       if ($recycleBin->getCount($theFolder->getID()) > 0) { 
-        echo '<p>This folder contains ' . $recycleBin->getCount($theFolder->getID()) . ' file(s) in the <a href="' . $uri->recycleBin() . '">recycling bin <i class="fa fa-trash"></i></a></p>';
+        if ($recycleBin->getCount($theFolder->getID()) == 1) $fileText = 'file'; else $fileText = 'files';
+        echo '<p style="display:inline-block; margin-left:0.5em;">(' . $recycleBin->getCount($theFolder->getID()) . ' ' . $fileText . ' in the <a href="' . $uri->recycleBin() . '">recycling bin <i class="fa fa-trash"></i></a>)</p>';
       }
       echo $theFolder->buildFolderHead();
       echo $theFolder->buildDocumentTable($d, $orderBy, $asc);

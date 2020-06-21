@@ -157,6 +157,14 @@ Class Uri {
         }
     }
 
+    function recycleBinFolder($f,$t) {
+        if (REWRITE) {
+            return SITE_URL . 'recycleBin/F' . $f . '/' . $t . '/';
+        } else {
+            return SITE_URL . '?recycleBin&f=' . $f . '&t=' . $t;
+        }
+    }
+
     function recycleDocument($d,$t) {
         if (REWRITE) {
             return SITE_URL . 'recycleBin/D' . $d . '/' . $t . '/';

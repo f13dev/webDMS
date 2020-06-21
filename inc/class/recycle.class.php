@@ -12,7 +12,7 @@ Class recycle {
      */
     public function getCount($folder = '%') {
         global $dbc;
-        $statement = $dbc->prepare("SELECT count(*) FROM documents WHERE recycle = 1 AND folder = ?");
+        $statement = $dbc->prepare("SELECT count(*) FROM documents WHERE recycle = 1 AND folder LIKE ?");
         $statement->execute([$folder]);
         return $statement->fetchColumn();
     }
@@ -53,7 +53,7 @@ Class recycle {
           
           
           $output .= '<td>' . $doc[$each['ID']]->getRecycleDate() . '</td>';
-          $output .= '<td>' . $doc[$each['ID']]->getFolderTitle() . '</td>';
+          $output .= '<td><a href="' . $uri->folder($doc[$each['ID']]->getFolder(),$doc[$each['ID']]->getFolderTitle()) . '">' . $doc[$each['ID']]->getFolderTitle() . '</a></td>';
           $output .= '<td><a href="' . $uri->deleteDocument($doc[$each['ID']]->getID()) . '" onclick="return confirm(\'Are you sure you wish to delete: ' . $doc[$each['ID']]->getTitle() . '\')"><i class="fa fa-minus-circle"></i></a></td>';
           $output .= '<td><a download="' . $doc[$each['ID']]->getTitle() . '.' . $doc[$each['ID']]->getExtension() . '" href="' . $uri->downloadDocument($doc[$each['ID']]->getFile()) . '"><i class="fa fa-download"></i></a></td>';
           $output .= '<td><a href="' . $uri->restoreDocument($doc[$each['ID']]->getID()) . '"><i class="fa fa-undo"></i></a></td>';
