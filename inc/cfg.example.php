@@ -49,9 +49,11 @@ define('REWRITE', true);
 
 // Supported filetypes
 define('FILE_TYPES',[
-  'pdf' => 'pdf',
-  'office' => [
-    'doc', 'docx', 'odf','xls','xlsx','ods'
+  'doc' => [
+    'doc', 'docx', 'odf'
+  ],
+  'sheet' => [
+    'xls','xlsx','ods'
   ],
   'image' => [
     'jpg','jpeg','png','gif'

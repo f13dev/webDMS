@@ -25,7 +25,14 @@ if (isset($_POST['title'])) {
     }
     if (!$validate->file($_FILES['file']['name'])) {
       $error = true;
-      $errormsg .= '<p>Please select a valid file [pdf,doc,docx,xls,xlsx,odf,ods,mp3,wav,ogg,jpg,gif,png,tiff].</p>';
+      $valid = 'pdf,';
+      foreach (FILE_TYPES as $filetype) {
+        foreach ($filetype as $eachtype) {
+          $valid .= $eachtype . ',';
+        }
+      }
+      $valid = substr($valid, 0, -1); // remove last comma
+      $errormsg .= '<p>Please select a valid file [' . $valid . '].</p>';
     }
     if ($error == false) {
       // If no errors, process the new file

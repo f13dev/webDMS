@@ -71,7 +71,7 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
       }
       $search = new search($searchString);
       echo '<h2>Search: ' . $search->getTerm() . '</h2>';
-      echo 'The search term ' . $search->getTerm() . ' returned ' . $search->getResultCount() . ' results';
+      echo 'The search term \'' . $search->getTerm() . '\' returned ' . $search->getResultCount() . ' results';
       echo $search->buildSearchResultsTable($d);
     } else if (isset($_GET['recycleBin'])) {
       echo '<h2>Recycling bin</h2>';

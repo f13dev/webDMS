@@ -210,19 +210,15 @@ Class document {
   }
 
   public function getFileType() {
-    $doc = ['doc','docx','odf'];
-    $spr = ['xls','xlsx','ods'];
-    $img = ['jpg','jpeg','tif','tiff','gif','png'];
-    $aud = ['mp3','wav','ogg'];
     if (strtolower($this->getExtension()) == 'pdf') {
       return '<i class="fa fa-image"></i> PDF';
-    } else if (in_array(strtolower($this->getExtension()),$doc)) {
+    } else if (in_array(strtolower($this->getExtension()),FILE_TYPES['doc'])) {
       return '<i class="fa fa-file-word"></i> Document';
-    } else if (in_array(strtolower($this->getExtension()),$spr)) {
+    } else if (in_array(strtolower($this->getExtension()),FILE_TYPES['sheet'])) {
       return '<i class="fa fa-file-excel"></i> Sheet';
-    } else if (in_array(strtolower($this->getExtension()),$img)) {
+    } else if (in_array(strtolower($this->getExtension()),FILE_TYPES['image'])) {
       return '<i class="fa fa-image"></i> Image';
-    } else if (in_array(strtolower($this->getExtension()),$aud)) {
+    } else if (in_array(strtolower($this->getExtension()),FILE_TYPES['audio'])) {
       return '<i class="fa fa-file-audio"></i> Audio';
     } else {
       return '<i class="fa fa-file"></i> Unknown';
@@ -334,14 +330,14 @@ Class document {
   public function showFile() {
     if (file_exists($this->getFileLocation())) {
       $ext = $this->getExtension();
-      if (in_array($ext, array('jpg','jpeg','png','gif','tiff'))) {
+      if (in_array($ext, FILE_TYPES['image'])) {
         return $this->showImage();
       } else if ($ext == 'pdf') {
         return $this->showPDF();
-      } else if (in_array($ext, array('mp3', 'wav', 'ogg', 'aac', 'webm', 'flac'))) {
+      } else if (in_array($ext, FILE_TYPES['audio'])) {
         if ($ext == 'mp3') { $ext = 'mpeg'; }
         return $this->showAudio($ext);
-      } else if (in_array($ext, array('doc', 'docx', 'xls', 'xlsx', 'odf', 'ods'))) {
+      } else if (in_array($ext, FILE_TYPES['doc']) || in_array($ext,FILE_TYPES['sheet'])) {
         return $this->showOfficeFile();
       }
       return $this->showFileNotSupported();

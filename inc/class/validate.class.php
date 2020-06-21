@@ -89,7 +89,15 @@
         $ext = explode('.',$input);
         $ext = end($ext);
         $ext = strtolower($ext);
-        $valid = ['pdf','doc','docx','xls','xlsx','odf','ods','mp3','wav','ogg','jpg','jpeg','gif','png','tif','tiff'];
-        return in_array($ext,$valid);
+        $return = false;
+        if ($ext == 'pdf' || 
+            in_array($ext,FILE_TYPES['doc']) || 
+            in_array($ext,FILE_TYPES['spread']) || 
+            in_array($ext,FILE_TYPES['audio']) || 
+            in_array($ext,FILE_TYPES['image'])) {
+            return true;
+        } else {
+            return false;
+        }
     }
  }

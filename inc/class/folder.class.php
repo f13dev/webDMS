@@ -121,14 +121,14 @@
     */
    public function buildFolderHead() {
      global $uri;
-     $return = '<table width="100%">';
+     $return = '<table width="100%" style="border:1px solid black; margin-bottom:1em;">';
      if ($this->getDescription() != '') {
        $return .= '<tr><td colspan="3"><strong>Description: </strong>' . nl2br($this->getDescription()) . '</td></tr>';
      }
      $return .= '<tr>';
-      $return .= '<td><a href="' . $uri->newDocument($this->getID(), $this->getTitle()) . '">Upload document</a></td>';
-      $return .= '<td><a href="' . $uri->editFolder($this->getID(), $this->getTitle()) . '">Edit folder</a></td>';
-      $return .= '<td><a href="' . $uri->deleteFolder($this->getID(), $this->getTitle()) . '" onclick="return confirm(\'Are you sure you want to delete the folder: ' . $this->getTitle() . '\')">Delete folder</a></td>';
+      $return .= '<td style="width:33%;text-align:center;"><a href="' . $uri->newDocument($this->getID(), $this->getTitle()) . '">Upload document</a></td>';
+      $return .= '<td style="width:34%;text-align:center;"><a href="' . $uri->editFolder($this->getID(), $this->getTitle()) . '">Edit folder</a></td>';
+      $return .= '<td style="width:33%;text-align:center;"><a href="' . $uri->deleteFolder($this->getID(), $this->getTitle()) . '" onclick="return confirm(\'Are you sure you want to delete the folder: ' . $this->getTitle() . '\')">Delete folder</a></td>';
      $return .= '</tr>';
      $return .= '</table>';
      return $return;
