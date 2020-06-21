@@ -10,10 +10,10 @@ Class recycle {
     /**
      * Returns the numer of documents in the recycling bin
      */
-    public function getCount() {
+    public function getCount($folder = '%') {
         global $dbc;
-        $statement = $dbc->prepare("SELECT count(*) FROM documents WHERE recycle = 1");
-        $statement->execute();
+        $statement = $dbc->prepare("SELECT count(*) FROM documents WHERE recycle = 1 AND folder = ?");
+        $statement->execute([$folder]);
         return $statement->fetchColumn();
     }
 
