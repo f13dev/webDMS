@@ -94,7 +94,7 @@ Class document {
     } else {
       // Set as false 
       $statement = $dbc->prepare("UPDATE documents SET recycle = 0, recycledate = null WHERE ID = ?");
-      return $statement->execute();
+      return $statement->execute([$this->getID()]);
     }
   }
 

@@ -49,7 +49,8 @@ $pages = array(
   "getFile", 
   "newCategory", 
   "newFile", 
-  "newFolder"
+  "newFolder",
+  "restore"
 );
 if (in_array($page, $pages)) {
     require('inc/dms/' . $page . '.php');
