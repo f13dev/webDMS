@@ -43,3 +43,21 @@ define('SESSION_TIME', 900);
 
 // Formatting
 define('DATE_FORMAT', 'd-M-Y');
+
+// Rewrite URI's
+define('REWRITE', true);
+
+// Supported filetypes
+define('FILE_TYPES',[
+  'pdf' => 'pdf',
+  'office' => [
+    'doc', 'docx', 'odf','xls','xlsx','ods'
+  ],
+  'image' => [
+    'jpg','jpeg','png','gif'
+  ],
+  'audio' => [
+    'mp3','wav','ogg'
+  ]
+]
+);
