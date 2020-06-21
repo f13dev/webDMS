@@ -270,7 +270,7 @@ Class document {
    * Returns the HTML value to embed the file as a PDF
    */
   private function showPDF() {
-    return '<object data="' . $this->getFilePath(true) . '#toolbar=0" type="application/pdf" width="100%" height="99%">
+    return '<object data="' . $this->getFilePath(true) . '#toolbar=0" type="application/pdf" width="100%" height="100%" style="position:absolute">
       There was an error displaying this PDF.
     </object>';
   }
