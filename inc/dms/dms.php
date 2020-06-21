@@ -14,6 +14,7 @@ if (isset($_GET['searchString'])) { $searchString = $security->sanitise($_GET['s
 // Create new folder
 $theFolder = new folder(['ID' => $f]);
 $theDocument = new document(['ID'=>$d]);
+$recycleBin = new recycle();
 
 // Page layout
 ?>
@@ -27,6 +28,7 @@ $theDocument = new document(['ID'=>$d]);
   <!-- Breadcrumb -->
   <?php
   if (isset($page)) { echo $page . ' >> '; }
+  if (isset($_GET['recycleBin'])) { echo 'RecycleBin >> '; }
   if ($theFolder->isSet()) { echo $theFolder->getTitle() . ' >> '; }
   if (isset($searchString)) { echo $searchString . ' >> '; }
   if ($theDocument->isSet()) { echo $theDocument->getTitle() . ' >> '; }

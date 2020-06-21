@@ -13,6 +13,8 @@ Class document {
   private $upload_date;
   private $document_date;
   private $file;
+  private $recycle;
+  private $recycleDate;
 
   /**
    * Constructor
@@ -38,7 +40,7 @@ Class document {
    */
   public function get($id) {
     global $dbc;
-    $statement = $dbc->prepare("SELECT ID, title, notes, folder, upload_date, document_date, file FROM documents WHERE ID = ?");
+    $statement = $dbc->prepare("SELECT ID, title, notes, folder, upload_date, document_date, file, recycle, recycledate FROM documents WHERE ID = ?");
     $statement->execute([$id]);
     $document = $statement->fetch();
 
@@ -55,6 +57,8 @@ Class document {
       $this->upload_date = $document['upload_date'];
       $this->document_date = $document['document_date'];
       $this->file = $document['file'];
+      $this->recycle = $document['recycle'];
+      $this->recycleDate = $document['recycledate'];
     }
     return $this->isSet;
   }
@@ -119,6 +123,9 @@ Class document {
     return $statement->execute([$folder,$this->getID()]);
   }
 
+  public function getRecycleDate($format = DATE_FORMAT) {
+    return date($format, strtotime($this->recycleDate));
+  }
   /**
    * Uploads and renames a file to associated with the document object 
    * file = array(tmp_name), filename = new unique filename

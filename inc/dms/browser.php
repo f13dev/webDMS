@@ -35,8 +35,15 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
       }
       echo '</ul>';
     }
+    echo '</li>';
   }
+  echo '<li class="category">Recycle bin
+          <ul>
+            <li class="folder"><a href="' . $uri->recycleBin() . '"><i class="fa fa-trash"></i> (' . $recycleBin->getCount() . ')</a></li>
+          </ul>
+        </li>';
   echo '</ul>';
+
   ?>
 </div>
 <div id="page-middle-right">
@@ -57,6 +64,9 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
       echo '<h2>Search: ' . $search->getTerm() . '</h2>';
       echo 'The search term ' . $search->getTerm() . ' returned ' . $search->getResultCount() . ' results';
       echo $search->buildSearchResultsTable($d);
+    } else if (isset($_GET['recycleBin'])) {
+      echo '<h2>Recycling bin</h2>';
+      echo $recycleBin->buildRecycleTable($d);
     } else {
       echo '<h2>Please select a folder</h2>';
     }

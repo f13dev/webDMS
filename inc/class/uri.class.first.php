@@ -148,4 +148,28 @@ Class Uri {
         return SITE_URL . '?p=search&searchString=' . $term . '&d=' . $doc . '&title=' . urlencode($title);
     }
     }
+
+    function recycleBin() {
+        if (REWRITE) {
+            return SITE_URL . 'recycleBin/';
+        } else {
+            return SITE_URL . '?recycleBin';
+        }
+    }
+
+    function recycleDocument($d,$t) {
+        if (REWRITE) {
+            return SITE_URL . 'recycleBin/D' . $d . '/' . $t . '/';
+        } else {
+            return SITE_URL . '?recycleBin&d=' . $d . '&t=' . $t;
+        }
+    }
+
+    function restoreDocument($d) {
+        if (REWRITE) {
+            return SITE_URL . 'restore/D' . $d . '/';
+        } else {
+            return SITE_URL . '?p=restore&d=' . $d;
+        }
+    }
 }
