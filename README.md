@@ -19,8 +19,6 @@ New repo for 0.4b
 
 
 # Features left to implement
-* Delete folder
-* Delete category
 * Manage details
 * Email notifications
 * Reset password via email
@@ -32,6 +30,8 @@ New repo for 0.4b
 * Documentation
 
 # Feature list done
+* Delete folder
+* Delete category
 * Permenently delete from recycle bin
 * Restore from recycle bin
 * Recycling bin
