@@ -128,7 +128,7 @@
      $return .= '<tr>';
       $return .= '<td><a href="' . $uri->newDocument($this->getID(), $this->getTitle()) . '">Upload document</a></td>';
       $return .= '<td><a href="' . $uri->editFolder($this->getID(), $this->getTitle()) . '">Edit folder</a></td>';
-      $return .= '<td><a href="' . $uri->deleteFolder($this->getID(), $this->getTitle()) . '">Delete folder</a></td>';
+      $return .= '<td><a href="' . $uri->deleteFolder($this->getID(), $this->getTitle()) . '" onclick="return confirm(\'Are you sure you want to delete the folder: ' . $this->getTitle() . '\')">Delete folder</a></td>';
      $return .= '</tr>';
      $return .= '</table>';
      return $return;
@@ -220,6 +220,12 @@
      }
      $output .= '</table>';
      return $output;
+   }
+
+   public function unsetEntry() {
+    global $dbc;
+    $statement = $dbc->prepare("DELETE from folders WHERE ID = ?");
+    return $statement->execute([$this->getID()]);
    }
 
  }
