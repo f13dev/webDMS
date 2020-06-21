@@ -32,7 +32,7 @@ RewriteRule ^F([0-9]+)/(.*)/ index.php?f=$1&folder=$2
 #editFile
 RewriteRule ^editDoc/D([0-9]+)/(.*)/ index.php?p=editFile&id=$1&title=$2
 #doc_del_uri
-RewriteRule ^deleletFile/D([0-9]+)/ index.php?p=deleteFile&id=$1
+RewriteRule ^deleteFile/D([0-9]+)/ index.php?p=deleteFile&id=$1
 #doc_download_uri
 RewriteRule ^download/(.*)/  fileScraper.php?file=$1
 #newFile uri 

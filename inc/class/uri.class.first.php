@@ -77,9 +77,9 @@ Class Uri {
     **/
     function deleteDocument($id) {
     if (REWRITE) {
-        return SITE_URL . 'delDoc/D' . $id . '/';
+        return SITE_URL . 'deleteFile/D' . $id . '/';
     } else {
-        return SITE_URL . '?p=delDoc&id=' . $id;
+        return SITE_URL . '?p=deleteFile&id=' . $id;
     }
     }
 

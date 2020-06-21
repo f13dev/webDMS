@@ -107,7 +107,7 @@
    }
 
    /**
-    * Returns the numer of files associated with the folder object
+    * Returns the numer of files associated with the folder object, this includes files in the recycling bin
     */
    public function getNumberFiles() {
      global $dbc;
@@ -135,7 +135,7 @@
    }
 
    /**
-    * Returns an array of documentt objects associated with the folder object
+    * Returns an array of document objects associated with the folder object
     */
    public function getDocuments($orderBy = 'document_date', $asc = 'false') {
      if ($asc == 'false') {
@@ -147,7 +147,7 @@
      if (!in_array($orderBy,$orders)) { $orderBy = 'document_date'; }
      $orderBy = $orderBy . ' ' . $order;
      global $dbc;
-     $statement = $dbc->prepare("SELECT ID FROM documents WHERE folder = ? ORDER BY $orderBy");
+     $statement = $dbc->prepare("SELECT ID FROM documents WHERE folder = ? AND recycle = 0 ORDER BY $orderBy");
      $statement->execute([$this->getID()]);
      return $statement->fetchAll();
    }
@@ -214,7 +214,7 @@
        
        $output .= '<td>' . $doc[$each['ID']]->getUploadDate() . '</td>';
        $output .= '<td><a href="' . $uri->editDocument($doc[$each['ID']]->getID(),$doc[$each['ID']]->getTitle()) . '"><i class="fa fa-edit"></a></td>';
-       $output .= '<td><a href="' . $uri->deleteDocument($doc[$each['ID']]->getID()) . '"<i class="fa fa-minus-circle"></i></a></td>';
+       $output .= '<td><a href="' . $uri->deleteDocument($doc[$each['ID']]->getID()) . '" onclick="return confirm(\'Are you sure you wish to delete: ' . $doc[$each['ID']]->getTitle() . '\')"><i class="fa fa-minus-circle"></i></a></td>';
        $output .= '<td><a download="' . $doc[$each['ID']]->getTitle() . '.' . $doc[$each['ID']]->getExtension() . '" href="' . $uri->downloadDocument($doc[$each['ID']]->getFile()) . '"><i class="fa fa-download"></i></a></td>';
        $output .= '</tr>';
      }

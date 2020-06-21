@@ -80,6 +80,20 @@ Class document {
     }
   }
 
+  public function setRecycle($bool) {
+    global $dbc;
+    $today = date('Y-m-d');
+    if ($bool) {
+      // Set as true
+      $statement = $dbc->prepare("UPDATE documents SET recycle = 1, recycledate = ? WHERE ID = ?");
+      return $statement->execute([$today,$this->getID()]);
+    } else {
+      // Set as false 
+      $statement = $dbc->prepare("UPDATE documents SET recycle = 0, recycledate = null WHERE ID = ?");
+      return $statement->execute();
+    }
+  }
+
   public function setTitle($title) {
     global $dbc;
     $statement = $dbc->prepare("UPDATE documents SET title = ? WHERE ID = ?");

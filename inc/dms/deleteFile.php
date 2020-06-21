@@ -4,13 +4,13 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
   header("Location: ../../");
 }
 
-$theFolder = new folder(['ID'=>$_GET['id']]);
-if ($theFolder->getNumberFiles() == 0) {
-  if (!isset($_GET['confirm'])) {
-    // Show confirmation message
-  } else {
-    // Delete the folder
-  }
+// Create a file object 
+$delFile = new document(['ID' => $_GET['id']]);
+
+if ($delFile->setRecycle(true)) {
+  // Send header location
+  header("location:" . $uri->folder($delFile->getFolder(), $delFile->getFolderTitle()));
 } else {
-  // Alert the user that the folder must be empty
+  // Show an error
+  echo 'A problem occured while deleting: ' . $delFile->getTitle();
 }
