@@ -29,7 +29,7 @@ if (isset($_POST['title'])) {
         $error = true;
         $errormsg .= '<p>There was a database error.</p>';
       } else {
-        $uri->redirect('location:'.$uri->folder($dbc->lastInsertId(), $security->sanitise($_POST['title'])));
+        $uri->redirect($uri->folder($dbc->lastInsertId(), $security->sanitise($_POST['title'])));
       }
     }
   }

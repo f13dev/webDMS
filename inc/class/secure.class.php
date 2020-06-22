@@ -87,7 +87,7 @@ Class secure {
   }
 
   function generateUserToken() {
-    return hash('sha256',$_SESSION['email'] . $_SESSION['salt'] . SALT);
+    return hash('sha256',$_SESSION['email'] . $_SESSION['ID'] . $_SESSION['type'] . $_SESSION['salt'] . SALT);
   }
 
   function checkUserToken() {

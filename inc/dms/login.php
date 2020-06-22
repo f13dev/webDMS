@@ -16,7 +16,7 @@ if (isset($_POST['email'])) {
       // email exists in db, check password
       $password = $security->password_hash($_POST['password'], $user['user_salt']);
       // Check the password is correct
-      $statement = $dbc->prepare("SELECT ID, first_name, last_name FROM users WHERE email = ? AND password = ?");
+      $statement = $dbc->prepare("SELECT ID, first_name, last_name, type FROM users WHERE email = ? AND password = ?");
       $statement->execute([$email,$password]);
       $password = $statement->fetch();
       if (!empty($password)) {
@@ -26,6 +26,7 @@ if (isset($_POST['email'])) {
         $_SESSION['ID'] = $password['ID'];
         $_SESSION['email'] = $user['email'];
         $_SESSION['name'] = $password['first_name'] . ' ' . $password['last_name'];
+        $_SESSION['type'] = $password['type'];
         $_SESSION['salt'] = $security->generateSessionSalt();
         $_SESSION['usertoken'] = $security->generateUserToken();
         $currentURI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
