@@ -23,7 +23,12 @@
      * Check max length 
      */
     public function length($input, $length=32) {
-        return strlen($input) <= $length;
+        if (strlen($input) <= $length) {
+            return false;
+        } else {
+            return true;
+        }
+        return (strlen($input) <= $length);
     }
 
     /**

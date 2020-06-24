@@ -64,7 +64,6 @@ Class secure {
     return base64_encode(openssl_encrypt($data, $encrypt_method, $theKey, 0, $theIV));
   }
 
-
   /**
     * Decrypt data
     **/
