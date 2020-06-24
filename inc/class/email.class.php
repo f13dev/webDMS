@@ -17,6 +17,7 @@ Class email {
      */
     public function __construct() {
         $this->html = false;
+        $this->setFrom(EMAIL_FROM);
     }
 
     /**

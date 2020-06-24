@@ -104,6 +104,14 @@ Class secure {
   }
 
   /**
+   * Generate a reset code based on the previous password and the date
+   */
+  function generateResetCode($email_secure,$password,$user_salt) {
+    $code = hash('sha256',$password.$user_salt.date('Y-m-d'));
+    return $email_secure . '-' . $code;
+  }
+
+  /**
     * JS Session timeout
     **/
   function t800() {

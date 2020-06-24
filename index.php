@@ -47,6 +47,8 @@ require_once('inc/theme/head.php');
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
   $security->checkUserToken();
   require_once('inc/dms/dms.php');
+} else if (isset($_GET['reset'])) {
+  require_once('inc/dms/password_reset.php');
 } else {
   require_once('inc/dms/login.php');
 }

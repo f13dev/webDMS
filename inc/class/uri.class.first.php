@@ -205,4 +205,20 @@ Class Uri {
         // Stop processing
         exit;
     }
+
+    function reset() {
+        if (REWRITE) {
+            return SITE_URL . 'reset/';
+        } else {
+            return SITE_URL . '?reset';
+        }
+    }
+
+    function resetCode($code) {
+        if (REWRITE) {
+            return SITE_URL . 'reset/' . $code . '/';
+        } else {
+            return SITE_URL . '?reset&code=' . $code;
+        }
+    }
 }
