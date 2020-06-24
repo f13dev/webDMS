@@ -63,3 +63,10 @@ define('FILE_TYPES',[
   ]
 ]
 );
+
+// If true a SMTP server will be used, else revert to standard PHPMail
+define('MAIL_SERVER',false);
+define('MAIL_HOST','');
+define('MAIL_PORT','');
+define('MAIL_USER','');
+define('MAIL_PASS','');
