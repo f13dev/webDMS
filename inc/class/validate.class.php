@@ -105,4 +105,11 @@
             return false;
         }
     }
+
+    /**
+     * Return true if a valid email address is provided 
+     */
+    public function email($input) {
+        return filter_var($input, FILTER_VALIDATE_EMAIL);
+    }
  }
