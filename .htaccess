@@ -43,6 +43,8 @@ RewriteRule ^editFolder/F([0-9]+)/(.*)/ index.php?p=editFolder&id=$1&title=$2
 #deleteFolder
 RewriteRule ^deleteFolder/F([0-9]+)/(.*)/ index.php?p=deleteFolder&id=$1&title=$2
 
+#delCategory 
+RewriteRule ^deleteCategory/([0-9]+)/ index.php?p=deleteCategory&id=$1
 # Search
 RewriteRule ^search/(.*)/D([0-9]+) index.php?p=search&searchString=$1&d=$2
 RewriteRule ^search/(.*)/ index.php?p=search&searchString=$1
@@ -52,6 +54,11 @@ RewriteRule ^recycleBin/D([0-9]+)/(.*)/ index.php?recycleBin&d=$1&t=$2
 RewriteRule ^recycleBin/ index.php?recycleBin
 RewriteRule ^restore/D([0-9]+)/ index.php?p=restore&d=$1
 RewriteRule ^recycleDocument/D([0-9]+)/ index.php?p=recycleFile&d=$1
+
+#Password reset 
+RewriteRule ^reset/complete/ index.php?resetComplete
+RewriteRule ^reset/(.*)/ index.php?reset&code=$1
+RewriteRule ^reset/ index.php?reset
 
 #page_uri - Goes right at the bottom
 RewriteRule ^([A-Za-z]*)/ index.php?p=$1
