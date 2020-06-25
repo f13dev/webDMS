@@ -28,7 +28,6 @@ $security = new Secure();
 // Initiate validate
 $validate = new Validate();
 
-
 // Session data
 session_start();
 
