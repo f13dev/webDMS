@@ -20,7 +20,6 @@ New repo for 0.4b
 
 # Features left to implement
 * Email notifications
-* Reset password via email
 * Add Access level checks to the required pages - i.e. disallow delete file from level 3 or 4
 * Remove links depending on access level - i.e. hide file delete link for level 3 or 4
 * User management
@@ -29,6 +28,7 @@ New repo for 0.4b
 * Documentation
 
 # Feature list done
+* Reset password via email
 * Manage details
 * Delete folder
 * Delete category
