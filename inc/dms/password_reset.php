@@ -43,7 +43,7 @@ if (isset($_GET['code'])) {
                         $statement = $dbc->prepare("UPDATE users SET password = ? WHERE email = ?");
                         if ($statement->execute([$newPassHash,$email])) {
                             // redirect to the home page
-                            $uri->redirect(SITE_URL);
+                            $uri->redirect($uri->resetComplete());
                         } else {
                             $error = true;
                             $errormsg .= '<p>There was a database error.</p>';

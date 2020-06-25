@@ -221,4 +221,12 @@ Class Uri {
             return SITE_URL . '?reset&code=' . $code;
         }
     }
+
+    function resetComplete() {
+        if (REWRITE) {
+            return SITE_URL . 'reset/complete/';
+        } else {
+            return SITE_URL . '?resetComplete';
+        }
+    }
 }

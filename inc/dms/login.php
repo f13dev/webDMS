@@ -39,6 +39,14 @@ if (isset($_POST['email'])) {
     }
   }
 }
+
+if (isset($_GET['resetComplete'])) {
+?>
+<div class="notice notification">
+  <p>Your password has been reset</p>
+</div>
+<?php
+}
 ?>
 
 <div id="form">
@@ -49,7 +57,8 @@ if (isset($_POST['email'])) {
       <label for="password" class="text-info">Password:</label><br>
       <input type="password" name="password" class="form-control"><br>
       <?php echo $security->generate_token(); ?>
-      <input type="submit" name="submit" class="btn btn-info btn-md" value="Login">
+      <input type="submit" name="submit" class="btn btn-info btn-md" value="Login"><br>
+      <p>Having trouble logging in? <a href="<?php echo $uri->reset(); ?>">Reset your password.</a></p>
   </form>
   <?php if (isset($loginerror) && $loginerror == true) { ?>
   <div class="notice warning">
