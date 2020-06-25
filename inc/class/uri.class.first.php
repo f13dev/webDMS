@@ -131,6 +131,7 @@ Class Uri {
      * Get search term URI
      */
     function search($term) {
+        $term = str_replace('/','',$term);
     if (REWRITE) {
         return SITE_URL . 'search/' . urlencode($term) . '/';
     } else {
