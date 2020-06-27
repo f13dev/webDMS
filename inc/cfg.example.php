@@ -70,3 +70,33 @@ define('MAIL_HOST','');
 define('MAIL_PORT','');
 define('MAIL_USER','');
 define('MAIL_PASS','');
+
+// User accounts permissions
+define('PERM_USER_CREATE',0);
+define('PERM_USER_DELETE',0);
+define('PERM_USER_EDIT',0);
+define('PERM_USER_VIEW',1);
+// Category permissions
+define('PERM_CAT_CREATE',1);
+define('PERM_CAT_DELETE',1);
+// Folder permissions
+define('PERM_FOLDER_CREATE',1);
+define('PERM_FOLDER_DELETE',1);
+define('PERM_FOLDER_EDIT',1);
+// Document permissions
+define('PERM_DOC_CREATE',3);
+define('PERM_DOC_DELETE',2);
+define('PERM_DOC_EDIT',2);
+
+// User types
+define('USER_TYPES', [
+  0 => 'Super Admin',
+  1 => 'Organiser',
+  2 => 'Editor',
+  3 => 'Uploader',
+  4 => 'Browser'
+]);
+
+
+// Debug data - If true, session and get data is shown in the folder view
+define('DEBUG', true);
