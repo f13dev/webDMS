@@ -3,13 +3,29 @@ New repo for 0.4b
 
 
 # Notes
-## Access levels 
-* 4 = read only
-* 3 = 4 + upload documents
-* 2 = 3 + delete documents, folders and categories
-* 1 = 2 + create and delete users
-* 0 = 1 + master admin, cannot be deleted
-
+## Default access levels 
+* 0 = Super Admin
+* 1 = Organiser
+* 2 = Editor
+* 3 = Uploader
+* 4 = Browser
+## Default permissions 
+### User 
+* Create = 0
+* Delete = 0
+* Edit = 0
+* View = 1
+### Category
+* Create = 1
+* Delete = 1
+### Folder
+* Create = 1
+* Delete = 1
+* Edit = 1
+### Document
+* Create = 3
+* Delete = 2
+* Edit = 2
 
 # Documents folder
 * Create a folder outside web root such as /home/name/docs
