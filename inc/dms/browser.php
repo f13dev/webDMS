@@ -80,6 +80,16 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
       echo '<h2>Please select a folder</h2>';
     }
 
+    if (DEBUG) {
+      echo '<h3>Session data</h3>';
+      foreach ($_SESSION as $key=>$value) {
+        echo $key . ' => ' . $value . '<br>';
+      }
+      echo '<h3>Get data</h3>';
+      foreach ($_GET as $key=>$value) {
+        echo $key . ' => ' . $value . '<br>';
+      }
+    }
     ?>
   </div>
   <div id="page-middle-right-bottom">
