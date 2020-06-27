@@ -35,7 +35,6 @@ New repo for 0.4b
 
 
 # Features left to implement
-* Email notifications
 * User management
 * User creation
 * Installation script
