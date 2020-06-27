@@ -5,6 +5,7 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
 }
 
 Class users {
+
     public function getAll($orderby = 'ID', $order = 'ASC') {
         global $dbc;
         if ($order != 'ASC') $order = 'DESC';

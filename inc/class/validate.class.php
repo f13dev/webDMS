@@ -112,4 +112,20 @@
     public function email($input) {
         return filter_var($input, FILTER_VALIDATE_EMAIL);
     }
+
+    public function emailUnique($input) {
+        global $dbc,$security;
+        $statement = $dbc->prepare("SELECT email FROM users WHERE email = ?");
+        $statement->execute([$security->make_secure($input)]);
+        if ($statement->rowCount() != 0) {
+            return false;
+        } else {
+            return true;
+        }
+        $count = $del->rowCount();
+    }
+
+    public function userType($type) {
+        return array_key_exists($type,USER_TYPES);
+    }
  }

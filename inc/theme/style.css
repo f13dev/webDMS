@@ -231,6 +231,26 @@ ul.list > li.category > ul > li.folder {
 .fileTable tr.thead:hover {
   background: unset;
 }
+
+.userTable {
+  padding: 1em 15%;
+}
+
+.href-button {
+  display: inline-block;
+  width: 10em;
+  border: 1px solid var(--main);
+  padding: 0.5em 0;
+  text-align: center;
+  margin-bottom: 0.5em;
+  margin-top:0.5em; 
+  margin-right: 1em;
+}
+
+.href-button:hover{
+  background: var(--main);
+  color: #fff;
+}
 /* Countdown timer */
 #timer {
   position: absolute;

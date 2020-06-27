@@ -126,25 +126,21 @@
        $return .= '<tr><td colspan="3"><strong>Description: </strong>' . nl2br($this->getDescription()) . '</td></tr>';
      }
      $return .= '<tr>';
-      $return .= '<td style="width:33%;text-align:center;">';
+      $return .= '<td colspan="3" style="text-align:center">';
       if ($_SESSION['type'] <= PERM_DOC_CREATE ) {
-        $return .= '<a href="' . $uri->newDocument($this->getID(), $this->getTitle()) . '">Upload document</a>';
+        $return .= '<a class="href-button" href="' . $uri->newDocument($this->getID(), $this->getTitle()) . '">Upload document</a>';
       } else {
         $return .= '<strike>Upload document</strike>';
       }
-      $return .= '</td>';
 
-      $return .= '<td style="width:34%;text-align:center;">';
       if ($_SESSION['type'] <= PERM_FOLDER_EDIT ) {
-        $return .= '<a href="' . $uri->editFolder($this->getID(), $this->getTitle()) . '">Edit folder</a>';
+        $return .= '<a class="href-button" href="' . $uri->editFolder($this->getID(), $this->getTitle()) . '">Edit folder</a>';
       } else {
         $return .= '<strike>Edit folder</strike>';
       }
-      $return .= '</td>';
 
-      $return .= '<td style="width:34%;text-align:center;">';
       if ($_SESSION['type'] <= PERM_FOLDER_EDIT ) {
-        $return .= '<a href="' . $uri->deleteFolder($this->getID(), $this->getTitle()) . '" onclick="return confirm(\'Are you sure you want to delete the folder: ' . $this->getTitle() . '\')">Delete folder</a>';
+        $return .= '<a class="href-button" href="' . $uri->deleteFolder($this->getID(), $this->getTitle()) . '" onclick="return confirm(\'Are you sure you want to delete the folder: ' . $this->getTitle() . '\')">Delete folder</a>';
       } else {
         $return .= '<strike>Delete folder</strike>';
       }

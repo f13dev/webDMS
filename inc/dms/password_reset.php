@@ -107,8 +107,9 @@ if (isset($_GET['code'])) {
                 $email = new email();
                 $email->setTo($security->revert_secure($user['email']));
                 $email->setSubject('webDMS password reset');
-                $message = "A password reset has been requested \r\n";
-                $message .= "To reset your password, visit: " . $url . "\r\n";
+                $message = "A password reset has been requested \r\n\r\n";
+                $message .= "To reset your password, visit: " . $url . "\r\n\r\n";
+                $message .= "This code is valid for one password reset and will expire at midnight.";
                 $email->setbody($message);
                 $email->send();
             }

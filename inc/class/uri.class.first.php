@@ -247,4 +247,12 @@ Class Uri {
         }
     }
 
+    function userCreate() {
+        if (REWRITE) {
+            return SITE_URL . 'users/new/';
+        } else {
+            return SITE_URL . '?p=user&new';
+        }
+    }
+
 }
