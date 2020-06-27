@@ -205,7 +205,7 @@
        } else {
          $output .= '<tr>';
        }
-       $output .= '<td><a href="' . $uri->document($this->getID(), $this->getTitle(), $doc[$each['ID']]->getID(), $doc[$each['ID']]->getTitle(), $orderBy, $asc) . '">
+       $output .= '<td><a href="' . $uri->downloadDocument($doc[$each['ID']]->showFile()) . '" data-rel="lightcase">
                   ' . $doc[$each['ID']]->getTitle() . '
                   </a></td>';
        $output .= '<td>' . $doc[$each['ID']]->getDocDate() . '</td>';

@@ -230,4 +230,14 @@ Class Uri {
             return SITE_URL . '?resetComplete';
         }
     }
+
+    function users() {
+        if (REWRITE) {
+            return SITE_URL . 'users/';
+        } else {
+            return SITE_URL . '?p=users';
+        }
+    }
+
+
 }

@@ -14,7 +14,6 @@ if (isset($_GET['new'])) {
 
 } else {
     // Show user table 
-    echo "Show users table";
     $users = new users();
     echo $users->getAllTable();
 }

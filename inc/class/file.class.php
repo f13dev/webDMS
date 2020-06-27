@@ -211,7 +211,7 @@ Class document {
 
   public function getFileType() {
     if (strtolower($this->getExtension()) == 'pdf') {
-      return '<i class="fa fa-image"></i> PDF';
+      return '<i class="fa fa-file-pdf"></i> PDF';
     } else if (in_array(strtolower($this->getExtension()),FILE_TYPES['doc'])) {
       return '<i class="fa fa-file-word"></i> Document';
     } else if (in_array(strtolower($this->getExtension()),FILE_TYPES['sheet'])) {
@@ -259,6 +259,7 @@ Class document {
    * Returns the file name as a PDF
    */
   private function getFileAsPDF() {
+    // If extension in array FILE_TYPES['doc] or sheet return pdf, else return original
     return str_replace($this->getExtension(), 'pdf', $this->getFile());
   }
 
@@ -327,7 +328,7 @@ Class document {
   /**
    * Returns HTML to embed a file, or an error message
    */
-  public function showFile() {
+  public function showFile1() {
     if (file_exists($this->getFileLocation())) {
       $ext = $this->getExtension();
       if (in_array($ext, FILE_TYPES['image'])) {
@@ -343,6 +344,25 @@ Class document {
       return $this->showFileNotSupported();
     }
     return $this->showFileNotExist();
+  }
+
+  /**
+   * Returns a file to be shown in a lightbox
+   */
+  public function showFile() {
+    if (file_exists($this->getFileLocation())) {
+      $ext = $this->getExtension();
+      if (in_array($ext, FILE_TYPES['image'])) {
+        return $this->getFile();
+      } else if ($ext == 'pdf') {
+        return $this->getFile();
+      } else if (in_array($ext, FILE_TYPES['audio'])) {
+        if ($ext == 'mp3') { $ext = 'mpeg'; }
+        return $this->getFile();
+      } else if (in_array($ext, FILE_TYPES['doc']) || in_array($ext,FILE_TYPES['sheet'])) {
+        return $this->getFileAsPDF();
+      }
+    }
   }
 
   /**

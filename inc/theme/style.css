@@ -121,8 +121,7 @@ input[type=submit] {
   top: 0px;
   left: 0px;
   right: 0px;
-  bottom: 50%;
-  border-bottom: 1px solid var(--main);
+  bottom: 0px;
   overflow-y: auto;
   padding: 0 1.2em;
   padding-bottom: 1em;
@@ -135,6 +134,7 @@ input[type=submit] {
   right: 0px;
   bottom: 0px;
   overflow-y:auto;
+  display: none;
 }
 
 #page-middle-right-bottom h2 {

@@ -17,8 +17,8 @@ Class users {
         global $security ;
         $users = $this->getAll($orderby,$order);
         // Table header
-        $return = '<table width="60%">';
-        $return .= '<tr>';
+        $return = '<table class="fileTable">';
+        $return .= '<tr class="thead">';
         $return .= '<th>ID</th>';
         $return .= '<th>Name</th>';
         $return .= '<th>Email</th>';
@@ -49,8 +49,8 @@ Class users {
                     break;
             }
             $return .= '<td>' . $type . '</td>';
-            $return .= '<td><i class="fa fa-trash"></i></td>';
             $return .= '<td><i class="fa fa-edit"></i></td>';
+            $return .= '<td><i class="fa fa-trash"></i></td>';
             $return .= '</tr>';
         }
         $return .= '</table>';
