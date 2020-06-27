@@ -255,4 +255,12 @@ Class Uri {
         }
     }
 
+    function userDelete($id) {
+        if (REWRITE) {
+            return SITE_URL . 'users/' . $id . '/delete/';
+        } else {
+            return SITE_URL . '?p=users&id=' . $id . '&delete';
+        }
+    }
+
 }

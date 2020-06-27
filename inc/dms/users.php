@@ -7,13 +7,19 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
 if (isset($_GET['delete'])) {
     if ($_SESSION['type'] <= PERM_USER_DELETE ) {
         // Delete a user
-        echo "Delete user";
-        
+        $id = $_GET['id'];
+        if ($id != 1) {
+            $statement = $dbc->prepare("DELETE FROM users WHERE ID = ?");
+            $statement->execute([$id]);
+            $uri->redirect($uri->users());
+        } else {
+            echo permissionDeny();
+        }
     } else {
         echo permissionDeny();
     }
 }
-if (isset($_GET['new'])) {
+else if (isset($_GET['new'])) {
     if ($_SESSION['type'] <= PERM_USER_CREATE) {
         // Check for post data
         if (isset($_POST['submit'])) {

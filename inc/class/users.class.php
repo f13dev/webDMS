@@ -58,7 +58,11 @@ Class users {
                 $return .= '<td><a href="' . $uri->user($user['ID']) . '"><i class="fa fa-edit"></i></a></td>';
             }
             if ($_SESSION['type'] <= PERM_USER_DELETE) {
-                $return .= '<td><i class="fa fa-trash"></i></td>';
+                if ($user['ID'] == 1) {
+                    $return .= '<td><i class="fa fa-trash"></i></td>';
+                } else {
+                    $return .= '<td><a href="' . $uri->userDelete($user['ID']) . '" onclick="return confirm(\'Are you sure you want to delete this user account\')"><i class="fa fa-trash"></i></a></td>';
+                }
             }
             $return .= '</tr>';
         }
