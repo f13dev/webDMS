@@ -1,7 +1,6 @@
 # webDMS
 New repo for 0.4b
 
-
 # Notes
 ## Default access levels 
 * 0 = Super Admin
@@ -35,12 +34,14 @@ New repo for 0.4b
 
 
 # Features left to implement
-* User management
-* User creation
+* User edit
 * Installation script
 * Documentation
 
 # Feature list done
+* User creation
+* User deletion
+* User table
 * Add Access level checks to the required pages - i.e. disallow delete file from level 3 or 4
 * Remove links depending on access level - i.e. hide file delete link for level 3 or 4
 * Reset password via email
