@@ -126,7 +126,11 @@
        $return .= '<tr><td colspan="3"><strong>Description: </strong>' . nl2br($this->getDescription()) . '</td></tr>';
      }
      $return .= '<tr>';
-      $return .= '<td style="width:33%;text-align:center;"><a href="' . $uri->newDocument($this->getID(), $this->getTitle()) . '">Upload document</a></td>';
+      $return .= '<td style="width:33%;text-align:center;">';
+      if ($_SESSION['type'] <= 3 ) {
+        $return .= '<a href="' . $uri->newDocument($this->getID(), $this->getTitle()) . '">Upload document</a>';
+      }
+      $return .= '</td>';
       $return .= '<td style="width:34%;text-align:center;"><a href="' . $uri->editFolder($this->getID(), $this->getTitle()) . '">Edit folder</a></td>';
       $return .= '<td style="width:33%;text-align:center;"><a href="' . $uri->deleteFolder($this->getID(), $this->getTitle()) . '" onclick="return confirm(\'Are you sure you want to delete the folder: ' . $this->getTitle() . '\')">Delete folder</a></td>';
      $return .= '</tr>';

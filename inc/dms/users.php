@@ -4,10 +4,8 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
   header("Location: ../../");
 }
 
-if ($_SESSION['type'] <= 1 ) {
-
 if (isset($_GET['delete'])) {
-    if ($_SESSION['type'] <= 0 ) {
+    if ($_SESSION['type'] <= PERM_USER_DELETE ) {
         // Delete a user
         echo "Delete user";
         
@@ -16,18 +14,29 @@ if (isset($_GET['delete'])) {
     }
 }
 if (isset($_GET['new'])) {
-    // Show new user form
-    echo "New user form";
+    if ($_SESSION['type'] <= PERM_USER_CREATE) {
+        // Show new user form
+        echo "New user form";
+
+    } else {
+        echo permissionDeny();
+    }
 
 } else if (isset($_GET['id'])) {
-    // Show user details/update form
-    echo "Showing user ID " . $_GET['id'];
+    if ($_SESSION['type'] <= PERM_USER_EDIT) {
+        // Show user details/update form
+        echo "Showing user ID " . $_GET['id'];
+    
+    } else {
+        echo permissionDeny();
+    }
 
 } else {
-    // Show user table 
-    $users = new users();
-    echo $users->getAllTable();
-}
-} else {
-    echo permissionDeny();
+    if ($_SESSION['type'] <= PERM_USER_VIEW) {
+        // Show user table 
+        $users = new users();
+        echo $users->getAllTable();
+    } else {
+        echo permissionDeny();
+    }
 }

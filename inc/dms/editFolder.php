@@ -4,7 +4,7 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
   header("Location: ../../");
 }
 
-if ($_SESSION['type'] <= 2) {
+if ($_SESSION['type'] <= PERM_FOLDER_EDIT) {
 
 // Get the ID
 $ID = $security->sanitise($_GET['id']);

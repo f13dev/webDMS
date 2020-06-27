@@ -4,7 +4,7 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
   header("Location: ../../");
 }
 
-if ($_SESSION['type'] <= 2) {
+if ($_SESSION['type'] <= PERM_DOC_DELETE) {
 // Create a file object 
 $delFile = new document(['ID' => $_GET['id']]);
 

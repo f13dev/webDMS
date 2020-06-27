@@ -4,6 +4,8 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
   header("Location: ../../");
 }
 
+if ($_SESSION['type'] <= PERM_FOLDER_CREATE) {
+
 if (isset($_POST['title'])) {
   $error = false;
   $errormsg = '';
@@ -65,3 +67,7 @@ if (isset($_POST['title'])) {
   </div>
   <?php } ?>
 </div>
+<?php 
+} else {
+  echo permissionDeny();
+}
