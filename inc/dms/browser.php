@@ -11,8 +11,14 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
     <input type="text" name="searchString" placeholder="Search..." style="display:inline-block; width:250px">
     <input type="submit" value="Go" style="display:inline-block; width: 58px">
   </form>
-  <a href="<?php echo $uri->page('newCategory'); ?>">New category +</a><br>
-  <a href="<?php echo $uri->page('newFolder'); ?>">New folder +</a>
+  <?php 
+  if ($_SESSION['type'] <= PERM_CAT_CREATE) {
+    echo '<a href="' . $uri->page('newCategory') . '">New category +</a><br>';
+  }
+  if ($_SESSION['type'] <= PERM_FOLDER_CREATE) {
+    echo '<a href="' . $uri->page('newFolder') . '">New folder +</a>';
+  }
+  ?>
   <hr>
   <?php
   // Shift this to category.class.php
@@ -35,17 +41,19 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
       }
       echo '</ul>';
     } else {
-      if ($eachCategory['ID'] != -1) {
+      if ($eachCategory['ID'] != -1 && $_SESSION['type'] <= PERM_CAT_DELETE) {
         echo ' (<a href="' . $uri->delCategory($eachCategory['ID']) . '" onclick="return confirm(\'Are you sure you want to delete the category: ' . $eachCategory['name'] . '\')">x</a>)';
       }
     }
     echo '</li>';
   }
-  echo '<li class="category">Recycle bin
-          <ul>
-            <li class="folder"><a href="' . $uri->recycleBin() . '"><i class="fa fa-trash"></i> (' . $recycleBin->getCount() . ')</a></li>
-          </ul>
-        </li>';
+  if ($_SESSION['type'] <= PERM_DOC_DELETE) {
+    echo '<li class="category">Recycle bin
+            <ul>
+              <li class="folder"><a href="' . $uri->recycleBin() . '"><i class="fa fa-trash"></i> (' . $recycleBin->getCount() . ')</a></li>
+            </ul>
+          </li>';
+  }
   echo '</ul>';
 
   ?>

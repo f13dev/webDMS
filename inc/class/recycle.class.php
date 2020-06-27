@@ -28,6 +28,7 @@ Class recycle {
      * Returns a HTML table for the documents in the recycling bin
      */
     public function buildRecycleTable($selected = -1) {
+      if ($_SESSION['type'] <= PERM_DOC_DELETE) {
         global $d,$title,$uri;
         $output  = '<table class="fileTable">';
         $output .= '<tr class="thead">';
@@ -61,5 +62,8 @@ Class recycle {
         }
         $output .= '</table>';
         return $output;   
+      } else {
+        return permissionDeny();
+      }
     }
 }

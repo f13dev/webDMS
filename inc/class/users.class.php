@@ -14,7 +14,7 @@ Class users {
     }
 
     public function getAllTable($orderby = 'ID', $order = 'ASC') {
-        global $security, $uri ;
+        global $security, $uri;
         $users = $this->getAll($orderby,$order);
         // Table header
         $return = '<table class="fileTable">';
@@ -23,8 +23,12 @@ Class users {
         $return .= '<th>Name</th>';
         $return .= '<th>Email</th>';
         $return .= '<th>Type</th>';
-        $return .= '<th>Edit</th>';
-        $return .= '<th>Delete</th>';
+        if ($_SESSION['type'] <= PERM_USER_EDIT) {
+            $return .= '<th>Edit</th>';
+        }
+        if ($_SESSION['type'] <= PERM_USER_DELETE) {
+            $return .= '<th>Delete</th>';
+        }
         $return .= '</tr>';
         foreach ($users as $user) {
             $return .= '<tr>';
@@ -49,8 +53,12 @@ Class users {
                     break;
             }
             $return .= '<td>' . $type . '</td>';
-            $return .= '<td><a href="' . $uri->user($user['ID']) . '"><i class="fa fa-edit"></i></a></td>';
-            $return .= '<td><i class="fa fa-trash"></i></td>';
+            if ($_SESSION['type'] <= PERM_USER_EDIT) {
+                $return .= '<td><a href="' . $uri->user($user['ID']) . '"><i class="fa fa-edit"></i></a></td>';
+            }
+            if ($_SESSION['type'] <= PERM_USER_DELETE) {
+                $return .= '<td><i class="fa fa-trash"></i></td>';
+            }
             $return .= '</tr>';
         }
         $return .= '</table>';

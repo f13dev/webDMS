@@ -127,12 +127,29 @@
      }
      $return .= '<tr>';
       $return .= '<td style="width:33%;text-align:center;">';
-      if ($_SESSION['type'] <= 3 ) {
+      if ($_SESSION['type'] <= PERM_DOC_CREATE ) {
         $return .= '<a href="' . $uri->newDocument($this->getID(), $this->getTitle()) . '">Upload document</a>';
+      } else {
+        $return .= '<strike>Upload document</strike>';
       }
       $return .= '</td>';
-      $return .= '<td style="width:34%;text-align:center;"><a href="' . $uri->editFolder($this->getID(), $this->getTitle()) . '">Edit folder</a></td>';
-      $return .= '<td style="width:33%;text-align:center;"><a href="' . $uri->deleteFolder($this->getID(), $this->getTitle()) . '" onclick="return confirm(\'Are you sure you want to delete the folder: ' . $this->getTitle() . '\')">Delete folder</a></td>';
+
+      $return .= '<td style="width:34%;text-align:center;">';
+      if ($_SESSION['type'] <= PERM_FOLDER_EDIT ) {
+        $return .= '<a href="' . $uri->editFolder($this->getID(), $this->getTitle()) . '">Edit folder</a>';
+      } else {
+        $return .= '<strike>Edit folder</strike>';
+      }
+      $return .= '</td>';
+
+      $return .= '<td style="width:34%;text-align:center;">';
+      if ($_SESSION['type'] <= PERM_FOLDER_EDIT ) {
+        $return .= '<a href="' . $uri->deleteFolder($this->getID(), $this->getTitle()) . '" onclick="return confirm(\'Are you sure you want to delete the folder: ' . $this->getTitle() . '\')">Delete folder</a>';
+      } else {
+        $return .= '<strike>Delete folder</strike>';
+      }
+      $return .= '</td>';
+
      $return .= '</tr>';
      $return .= '</table>';
      return $return;
@@ -198,8 +215,12 @@
                    <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'upload_date','true') . '"><i class="fa fa-angle-up"></i></a>
                    <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'upload_date','false') . '"><i class="fa fa-angle-down"></i></a>
                  </th>';
-     $output .= '<th>Edit</th>';
-     $output .= '<th>Delete</th>';
+     if ($_SESSION['type'] <= PERM_DOC_EDIT) {
+       $output .= '<th>Edit</th>';
+     }
+     if ($_SESSION['type'] <= PERM_DOC_DELETE) {
+       $output .= '<th>Delete</th>';
+     }
      $output .= '<th>Download</th>';
      $output .= '</tr>';
      foreach ($this->getDocuments($orderBy, $asc) as $each) {
@@ -217,8 +238,12 @@
        
        
        $output .= '<td>' . $doc[$each['ID']]->getUploadDate() . '</td>';
-       $output .= '<td><a href="' . $uri->editDocument($doc[$each['ID']]->getID(),$doc[$each['ID']]->getTitle()) . '"><i class="fa fa-edit"></a></td>';
-       $output .= '<td><a href="' . $uri->recycleDocument($doc[$each['ID']]->getID()) . '" onclick="return confirm(\'Are you sure you wish to delete: ' . $doc[$each['ID']]->getTitle() . '\')"><i class="fa fa-minus-circle"></i></a></td>';
+       if ($_SESSION['type'] <= PERM_DOC_EDIT) {
+          $output .= '<td><a href="' . $uri->editDocument($doc[$each['ID']]->getID(),$doc[$each['ID']]->getTitle()) . '"><i class="fa fa-edit"></a></td>';
+       }
+       if ($_SESSION['type'] <= PERM_DOC_DELETE) {
+          $output .= '<td><a href="' . $uri->recycleDocument($doc[$each['ID']]->getID()) . '" onclick="return confirm(\'Are you sure you wish to delete: ' . $doc[$each['ID']]->getTitle() . '\')"><i class="fa fa-minus-circle"></i></a></td>';
+       }
        $output .= '<td><a download="' . $doc[$each['ID']]->getTitle() . '.' . $doc[$each['ID']]->getExtension() . '" href="' . $uri->downloadDocument($doc[$each['ID']]->getFile()) . '"><i class="fa fa-download"></i></a></td>';
        $output .= '</tr>';
      }
