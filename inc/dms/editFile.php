@@ -3,6 +3,9 @@
 if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
   header("Location: ../../");
 }
+
+if ($_SESSION['type'] <= 2) {
+
 // Get the ID
 $ID = $security->sanitise($_GET['id']);
 // Create a new document object and populate variables
@@ -76,3 +79,8 @@ if (isset($_POST['title'])) {
     </div>
     <?php } ?>
 </div>
+
+<?php 
+} else {
+  echo permissionDeny();
+}

@@ -14,7 +14,7 @@ Class users {
     }
 
     public function getAllTable($orderby = 'ID', $order = 'ASC') {
-        global $security ;
+        global $security, $uri ;
         $users = $this->getAll($orderby,$order);
         // Table header
         $return = '<table class="fileTable">';
@@ -49,7 +49,7 @@ Class users {
                     break;
             }
             $return .= '<td>' . $type . '</td>';
-            $return .= '<td><i class="fa fa-edit"></i></td>';
+            $return .= '<td><a href="' . $uri->user($user['ID']) . '"><i class="fa fa-edit"></i></a></td>';
             $return .= '<td><i class="fa fa-trash"></i></td>';
             $return .= '</tr>';
         }

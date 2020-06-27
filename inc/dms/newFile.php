@@ -9,6 +9,8 @@ if (!$folder->isSet()) {
   // kill
 }
 
+if ($_SESSION['type'] <= 3) {
+
 if (isset($_POST['title'])) {
   $error = false;
   $errormsg = '';
@@ -77,3 +79,7 @@ if (isset($_POST['title'])) {
   </div>
   <?php } ?>
 </div>
+<?php
+} else {
+  echo permissionDeny();
+}

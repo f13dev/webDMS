@@ -23,6 +23,7 @@ $recycleBin = new recycle();
   <img src="<?php echo SITE_URL; ?>favicon-32x32.png" id="logo">
   <a href="<?php echo SITE_URL; ?>">webDMS</a> -
   <a href="<?php echo $uri->page('account'); ?>">Account details</a> -
+  <a href="<?php echo $uri->users(); ?>">Users</a> -
   <a href="<?php echo $uri->page('logout'); ?>">Logout</a>
   (<?php echo $_SESSION['name']; ?>)<br>
   <!-- Breadcrumb -->

@@ -27,3 +27,11 @@ function getDocumentCount() {
   $statement->execute();
   return $statement->fetch()['count(ID)'];
 }
+
+function permissionDeny() {
+  $return =  '<div id="form">';
+  $return .= '<h2>Permission denied</h2>';
+  $return .= '<p>You do not have permission to perform this action</p>';
+  $return .= '</div>';
+  return $return;
+}

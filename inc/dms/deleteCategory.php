@@ -4,6 +4,7 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
   header("Location: ../../");
 }
 
+if ($_SESSION['type'] <= 2) {
 // Check that there's no folders in the category, check that it's not -1 (uncategorised)
 
 $category = new category();
@@ -36,3 +37,7 @@ echo '<div id="form">
           ' . $error . '
         </div>
       </div>';
+
+} else {
+  echo permissionDeny();
+}

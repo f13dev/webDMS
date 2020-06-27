@@ -92,21 +92,4 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
     }
     ?>
   </div>
-  <div id="page-middle-right-bottom">
-  <?php
-    if ($theDocument->isSet()) {
-      echo $theDocument->showFile();
-    } else {
-      echo '<h2>Please select a file</h2>';
-      // Test code to view session data
-      foreach ($_SESSION as $key=>$value) {
-        echo $key . ' => ' . $value . '<br>';
-      }
-      print_r($_GET);
-      foreach ($_GET as $key=>$value) {
-        echo $key . ' => ' . $value . '<br>';
-      }
-    }
-  ?>
-  </div>
 </div>

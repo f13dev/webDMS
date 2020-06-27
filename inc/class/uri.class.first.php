@@ -239,5 +239,12 @@ Class Uri {
         }
     }
 
+    function user($id) {
+        if (REWRITE) {
+            return SITE_URL .  'users/' . $id . '/';
+        } else {
+            return SITE_URL . '?p=users&id=' . $id;
+        }
+    }
 
 }
