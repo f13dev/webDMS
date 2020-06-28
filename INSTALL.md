@@ -50,7 +50,7 @@
 * Check Site Docs folder exists and is writeable
 * Append Structure to cfg
 
-### Page 2
+### Page 3
 * Mail server 
 * Mail from
 * Mail host
@@ -62,7 +62,7 @@
 * Check mail settings
 * Append mail settings to cfg
 
-### Page 3
+### Page 4
 * Create the master user account
 
 #### Process
@@ -70,7 +70,7 @@
 * Add account to database
 * Send activation email
 
-### Page 4
+### Page 5
 * Show completion message 
 * Add link to delete the install file and direct to homepage
 
