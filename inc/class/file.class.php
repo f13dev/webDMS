@@ -74,9 +74,10 @@ Class document {
     $ext = explode('.',$file['file']['name']);
     $ext = end($ext);
     $filename = $security->generateFileName() . '.' . $ext;
-    $this->file = $filename;
     if (in_array($ext, FILE_TYPES['doc']) || in_array($ext, FILE_TYPES['sheet'])) {
-      $this->generatePDF();
+      $cmd = 'export HOME=/tmp && soffice --headless --invisible --nolockcheck --convert-to pdf --outdir ' . SITE_DOCS . ' ' . SITE_DOCS . $filename;
+      exec($cmd);
+      chmod(SITE_DOCS . $this->getFile(true), 777);
     }
     $today = date('Y-m-d');
     if ($this->setFile($file['file'],$filename)) {
