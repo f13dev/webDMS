@@ -74,6 +74,10 @@ Class document {
     $ext = explode('.',$file['file']['name']);
     $ext = end($ext);
     $filename = $security->generateFileName() . '.' . $ext;
+    $this->file = $filename;
+    if (in_array($ext, FILE_TYPES['doc']) || in_array($ext, FILE_TYPES['sheet'])) {
+      $this->generatePDF();
+    }
     $today = date('Y-m-d');
     if ($this->setFile($file['file'],$filename)) {
       $statement = $dbc->prepare("INSERT INTO documents (title,notes,folder,upload_date,document_date,file) VALUES (?,?,?,?,?,?)");
