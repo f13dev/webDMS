@@ -55,7 +55,7 @@ Class users {
             }
             $return .= '<td>' . $type . '</td>';
             if ($_SESSION['type'] <= PERM_USER_EDIT) {
-                $return .= '<td><a href="' . $uri->user($user['ID']) . '"><i class="fa fa-edit"></i></a></td>';
+                $return .= '<td><a href="' . $uri->user($user['ID'], $user['first_name'] . ' ' . $user['last_name']) . '"><i class="fa fa-edit"></i></a></td>';
             }
             if ($_SESSION['type'] <= PERM_USER_DELETE) {
                 if ($user['ID'] == 1) {

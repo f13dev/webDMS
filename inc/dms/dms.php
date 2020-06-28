@@ -37,6 +37,7 @@ $recycleBin = new recycle();
   if ($theFolder->isSet()) { echo $theFolder->getTitle() . ' >> '; }
   if (isset($searchString)) { echo $searchString . ' >> '; }
   if ($theDocument->isSet()) { echo $theDocument->getTitle() . ' >> '; }
+  if (isset($_GET['name'])) { echo $security->sanitise($_GET['name']) . ' >> '; }
   ?>
 </div>
 

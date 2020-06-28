@@ -239,11 +239,11 @@ Class Uri {
         }
     }
 
-    function user($id) {
+    function user($id, $name) {
         if (REWRITE) {
-            return SITE_URL .  'users/' . $id . '/';
+            return SITE_URL .  'users/' . $id . '/' . urlencode($name) . '/';
         } else {
-            return SITE_URL . '?p=users&id=' . $id;
+            return SITE_URL . '?p=users&id=' . $id . '&name=' . urlencode($name);
         }
     }
 
