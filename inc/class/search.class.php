@@ -12,7 +12,7 @@
         $this->term = $term;
         $term = '%' . str_replace('*','%',$term) . '%';
         global $dbc;
-        $statement = $dbc->prepare("SELECT ID, title FROM documents WHERE title LIKE ? AND recycle = 0");
+        $statement = $dbc->prepare("SELECT ID, title FROM documents WHERE title LIKE ? AND recycle = 0 ORDER BY document_date DESC");
         $statement->execute([$term]);
         $results = $statement->fetchAll();
 
@@ -49,8 +49,8 @@
                 } else {
                     $return .= '<tr>';
                 }
-                    $return .= '<td><a href="' . $uri->searchDocument($this->getTerm(), $result->getID(), $result->getTitle()) . '">'. $result->getTitle() . '</a></td>';
-                    $return .= '<td>' . $result->getDocDate() . '</td>';
+                $return .= '<td><a href="' . $uri->downloadDocument($result->showFile()) . '" target="_blank" data-rel="lightcase">' . $result->getTitle() . '</a></td>';
+                $return .= '<td>' . $result->getDocDate() . '</td>';
                     $return .= '<td>' . $result->getFile() . '</td>';
                     $return .= '<td>' . $result->getUploadDate() . '</td>';
                     $return .= '<td><a href="' . $uri->folder($result->getFolder(), $result->getFolderTitle()) . '">' . $result->getFolderTitle() . '</a></td>';

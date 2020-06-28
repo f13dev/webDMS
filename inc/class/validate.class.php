@@ -51,7 +51,7 @@
      * Validate the strength of a password
      */
     public function password($input) {
-        return $this->length($input, 7) && $this->hasUpper($input) && $this->hasLower($input) && $this->hasSpecial($input);
+        return $this->length($input, 8) && $this->hasUpper($input) && $this->hasLower($input) && $this->hasSpecial($input);
     }
 
     /**
@@ -59,7 +59,7 @@
      */
     public function title($input) {
         // alpha numeric, between 1 and 32 characters
-        return $this->alphaNum($input) && !$this->length($input, 0) && $this->length($input);
+        return $this->alphaNum($input) && $this->length($input,1) && !$this->length($input,32);
     }
 
     /**
@@ -92,7 +92,7 @@
         $return = false;
         if ($ext == 'pdf' || 
             in_array($ext,FILE_TYPES['doc']) || 
-            in_array($ext,FILE_TYPES['spread']) || 
+            in_array($ext,FILE_TYPES['sheet']) || 
             in_array($ext,FILE_TYPES['audio']) || 
             in_array($ext,FILE_TYPES['image'])) {
             return true;
