@@ -60,6 +60,11 @@ RewriteRule ^reset/complete/ index.php?resetComplete
 RewriteRule ^reset/(.*)/ index.php?reset&code=$1
 RewriteRule ^reset/ index.php?reset
 
+# Users 
+RewriteRule ^users/new/ index.php?p=users&new
+RewriteRule ^users/([0-9]+)/delete/ index.php?p=users&id=$1&delete
+RewriteRule ^users/([0-9]+)/(.*)/ index.php?p=users&id=$1&name=$2
+
 #page_uri - Goes right at the bottom
 RewriteRule ^([A-Za-z]*)/ index.php?p=$1
 
