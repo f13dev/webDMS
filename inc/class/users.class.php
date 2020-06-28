@@ -36,24 +36,7 @@ Class users {
             $return .= '<td>' . $user['ID'] . '</td>';
             $return .= '<td>' . $user['first_name'] . ' ' . $user['last_name'] . '</td>';
             $return .= '<td>' . $security->revert_secure($user['email']) . '</td>';
-            switch ($user['type']) {
-                case 0:
-                    $type = 'Super admin';
-                    break;
-                case 1:
-                    $type = 'Admin';
-                    break;
-                case 2:
-                    $type = 'Manager';
-                    break;
-                case 3:
-                    $type = 'Uploader';
-                    break;
-                case 4:
-                    $type = 'Read only';
-                    break;
-            }
-            $return .= '<td>' . $type . '</td>';
+            $return .= '<td>' . USER_TYPES[$user['type']] . '</td>';
             if ($_SESSION['type'] <= PERM_USER_EDIT) {
                 $return .= '<td><a href="' . $uri->user($user['ID'], $user['first_name'] . ' ' . $user['last_name']) . '"><i class="fa fa-edit"></i></a></td>';
             }
