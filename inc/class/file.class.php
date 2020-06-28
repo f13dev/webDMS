@@ -77,7 +77,7 @@ Class document {
     if (in_array($ext, FILE_TYPES['doc']) || in_array($ext, FILE_TYPES['sheet'])) {
       $cmd = 'export HOME=/tmp && soffice --headless --invisible --nolockcheck --convert-to pdf --outdir ' . SITE_DOCS . ' ' . SITE_DOCS . $filename;
       exec($cmd);
-      chmod(SITE_DOCS . $this->getFile(true), 777);
+      chmod(SITE_DOCS . SITE_DOCS . $filename, 777);
     }
     $today = date('Y-m-d');
     if ($this->setFile($file['file'],$filename)) {
