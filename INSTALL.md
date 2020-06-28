@@ -24,3 +24,56 @@
 * account permissions - (create default list)
 * user types - (create default list)
 * debug - false
+
+## Pages
+### Page 1
+* Database name
+* Database user
+* Database pass
+* Database host
+
+#### Process
+* Check settings work
+* Write Database details, Create a connection to cfg
+* Generate and write Security settings to cfg
+* Generate and write permissions to cfg
+* Generate and write user types
+* Write debug false to cfg
+* Import blank database
+
+### Page 2
+* Site URL - Automatic
+* Site Root - Automatic
+* Site Docs
+
+#### Process
+* Check Site Docs folder exists and is writeable
+* Append Structure to cfg
+
+### Page 2
+* Mail server 
+* Mail from
+* Mail host
+* Mail Port
+* Mail user
+* Mail pass
+
+#### Process
+* Check mail settings
+* Append mail settings to cfg
+
+### Page 3
+* Create the master user account
+
+#### Process
+* Check account details are valid
+* Add account to database
+* Send activation email
+
+### Page 4
+* Show completion message 
+* Add link to delete the install file and direct to homepage
+
+#### Process
+* unset install file
+* direct to SITE_URL
