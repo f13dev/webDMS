@@ -305,7 +305,7 @@ Class document {
    * Generate a PDF file from an existing office file
    */
   private function generatePDF() {
-    $cmd = 'export HOME=/tmp && soffice --headless --convert-to pdf --outdir ' . SITE_DOCS . ' ' . SITE_DOCS . $this->getFile();
+    $cmd = 'export HOME=/tmp && soffice --headless --invisible --nolockcheck --convert-to pdf --outdir ' . SITE_DOCS . ' ' . SITE_DOCS . $this->getFile();
     exec($cmd);
     chmod(SITE_DOCS . $this->getFile(true), 777);
     return file_exists($this->getFileLocation(true));
