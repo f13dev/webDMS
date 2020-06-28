@@ -34,11 +34,11 @@ New repo for 0.4b
 
 
 # Features left to implement
-* User edit
 * Installation script
 * Documentation
 
 # Feature list done
+* User edit
 * User creation
 * User deletion
 * User table
@@ -54,3 +54,8 @@ New repo for 0.4b
 * Edit folder
 * New file
 * Edit file
+
+# To do
+* Code tidying
+* Commenting
+* Move reusable code to classes or functions
