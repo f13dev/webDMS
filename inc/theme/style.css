@@ -306,3 +306,20 @@ input[type=file]:hover::before {
 input[type=file]:active::beffore {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
+
+/* Scroll bars */
+::-webkit-scrollbar {
+  width:20px;
+}
+
+::-webkit-scrollbar-track {
+  border-left: 1px solid var(--main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main);
+}
