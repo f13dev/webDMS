@@ -29,7 +29,7 @@ $recycleBin = new recycle();
   }
   ?>
   <a href="<?php echo $uri->page('logout'); ?>">Logout</a>
-  (<?php echo $_SESSION['name']; ?>)<br>
+  (<?php echo $_SESSION['name']; ?> - <?php echo USER_TYPES[$_SESSION['type']]; ?>)<br>
   <!-- Breadcrumb -->
   <?php
   if (isset($page)) { echo $page . ' >> '; }
