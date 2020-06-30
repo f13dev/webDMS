@@ -49,7 +49,7 @@
                 } else {
                     $return .= '<tr>';
                 }
-                $return .= '<td><a href="' . $uri->downloadDocument($result->showFile()) . '" target="_blank" data-rel="lightcase">' . $result->getTitle() . '</a></td>';
+                $return .= '<td><a href="' . $uri->downloadDocument($result->showFile()) . '" target="_blank" data-rel="lightcase:group">' . $result->getTitle() . '</a></td>';
                 $return .= '<td>' . $result->getDocDate() . '</td>';
                     $return .= '<td>' . $result->getFile() . '</td>';
                     $return .= '<td>' . $result->getUploadDate() . '</td>';

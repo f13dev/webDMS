@@ -56,6 +56,7 @@ New repo for 0.4b
 * Edit file
 
 # To do
+* check if session CSRF token isn't set, if so direct to login with error message rather than die
 * Code tidying
 * Commenting
 * Move reusable code to classes or functions
