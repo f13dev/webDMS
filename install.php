@@ -19,12 +19,30 @@
     $validate = new Validate();
 
     // Get the step
-    if (isset($_GET['step'])) { $step = $_GET['step']; } else { $step = '1'; }
+    if (isset($_GET['step'])) { $step = $_GET['step']; } else { $step = '0'; }
 
     // Create basic template
     echo '<div id="form">';
     echo '<h2 class="text-center">webDMS Installation</h2>';
-    if ($step == '1') {
+    if ($step == '0') {
+        if (isset($_POST['submit'])) {
+            header('location: ?step=1');
+        }
+        echo '<form method="POST">';
+            echo '<h2 class="text-center">Pre-install checks</h2>';
+            echo '<label for="php_version" class="text-info">PHP Version</label><br>';
+            echo '<input type="text" class="form-control" name="php_version" value="7.3" disabled><br>';
+            echo '<label for="cfg_writeable" class="text-info">inc/cfg.php writeable</label><br>';
+            echo '<input type="text" class="form-control" name="cfg_writeable" value="No" disabled><br>';
+            echo '<label for="exec" class="text-info">PHP Exec enabled</label><br>';
+            echo '<input type="text" class="form-control" name="exec" value="Yes" disabled><br>';
+            echo '<label for="libreoffice" class="text-info">Libreoffice present</label><br>';
+            echo '<input type="text" class="form-control" name="libreoffice" value="Yes" disabled><br>';
+            echo $security->generate_token();
+            echo '<input type="submit" name="submit" class="btn btn-info btn-md" value="Next >>">';
+            echo '<input type="submit" name="refresh" class="btn btn-info btn-md" value="Refresh">';
+        echo '</form>';
+    } else if ($step == '1') {
         // Check for step 1 POST
         if (isset($_POST['submit'])) {
             header('location: ?step=2');
