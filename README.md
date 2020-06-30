@@ -26,7 +26,7 @@ A simple Document Management System designed for home users who do not need the 
   * Edit cfg.php to enter your database, site settings and generate some random strings
   * Manually reate a user (via PHPMyAdmin or MySQL terminal)
     * Enter first and last name in plain text
-    * Edit temp.secureEmail.php to add your email address, visit the page and copy the content to the email field (delete the file afterwards)
+    * Edit temp/secureEmail.php to add your email address, visit the page and copy the content to the email field (delete the file afterwards)
     * Leave the password blank for now, this will be reset later 
     * Generate a random user salt (this is unique to each user)
     * Set type as 0
