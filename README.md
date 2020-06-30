@@ -20,7 +20,7 @@ A simple Document Management System designed for home users who do not need the 
     * chmod -R 0644 /path/to/documents
 3. Create a temporary directory outside the web root
   * Ensure the temporary folder is owned by www-data and is writeable
-4. Until the install script has been reated:
+4. Until the install script has been created:
   * Create a database and dump webDMS.sql to it
   * Copy cfg.example.php to cfg.php
   * Edit cfg.php to enter your database, site settings and generate some random strings
