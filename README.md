@@ -20,7 +20,18 @@ A simple Document Management System designed for home users who do not need the 
     * chmod -R 0644 /path/to/documents
 3. Create a temporary directory outside the web root
   * Ensure the temporary folder is owned by www-data and is writeable
-4. Run the install script (yet to be written)
+4. Until the install script has been reated:
+  1. Create a database and dump webDMS.sql to it
+  2. Copy cfg.example.php to cfg.php
+  3. Edit cfg.php to enter your database, site settings and generate some random strings
+  4. Manually reate a user (via PHPMyAdmin or MySQL terminal)
+    * Enter first and last name in plain text
+    * Edit temp.secureEmail.php to add your email address, visit the page and copy the content to the email field (delete the file afterwards)
+    * Leave the password blank for now, this will be reset later 
+    * Generate a random user salt (this is unique to each user)
+    * Set type as 0
+  5. Visit https://domain.com/webDMS and click "Reset your password"
+  6. Once the master account has been created, you can create new accounts from the admin panel
 
 # Notes
 ## Default access levels 
