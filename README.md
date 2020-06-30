@@ -1,5 +1,26 @@
 # webDMS
-New repo for 0.4b
+A simple Document Management System designed for home users who do not need the advanced features found on bloated commercial sollutions.
+
+## webDMS 0.4 requires:
+* A Linux web server (local or remote, a Windows server would reqire some modification)
+* PHP 7
+* MySQL/MariaDB or similar database system with availability for 1 database
+* libreoffice-headless is required for generating PDFs
+--* sudo apt-get install libreoffice-headless (Debian/Ubuntu/Mint)
+--* sudo yum install libreoffice-headless (Red Hat/Centos/Fedora)
+* Mod Rewrite if you wish to have tidier URLs
+
+# Installation
+* Clone the repository to your server 
+--* git clone https://github.com/f13dev/webDMS /path/to/webDMS
+* Create a folder outside the web root for docuuments (not accessible externally)
+--* Ensure the folder is owned by www-root 
+----* chown -R www-data:www-data /path/to/documents
+--* Ensure the folder is writeable 
+----* chmod -R 0644 /path/to/documents
+* Create a temporary directory outside the web root
+--* Ensure the temporary folder is owned by www-data and is writeable
+* Run the install script (yet to be written)
 
 # Notes
 ## Default access levels 
