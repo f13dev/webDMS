@@ -19,7 +19,12 @@ Class secure {
     * Validate form token
     **/
   function validate_token($token) {
-    $tokenHash = hash('sha256', $_SESSION['csrf_token'] . SALT);
+    global $uri;
+    if (isset($_SESSION['csrf_token'])) {
+      $tokenHash = hash('sha256', $_SESSION['csrf_token'] . SALT);
+    } else {
+      $uri->redirect($uri->csrfError());
+    }
     if (hash_equals($token, $tokenHash)) {
       return true;
     } else {

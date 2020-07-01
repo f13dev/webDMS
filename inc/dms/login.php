@@ -39,7 +39,11 @@ if (isset($_POST['email'])) {
     }
   }
 }
-
+if (isset($_GET['token-error'])) {
+  echo '<div class="notice warning">';
+    echo '<p>A CSRF token error occured, please login again. This can happen if the login screen is left open for a long time before logging in.</p>';
+  echo '</div>';
+}
 if (isset($_GET['resetComplete'])) {
 ?>
 <div class="notice notification">

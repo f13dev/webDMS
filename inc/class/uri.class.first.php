@@ -263,4 +263,12 @@ Class Uri {
         }
     }
 
+    function csrfError() {
+        if (REWRITE) {
+            return SITE_URL . 'token-error/';
+        } else {
+            return SITE_URL . '?token-error';
+        }
+    }
+
 }
