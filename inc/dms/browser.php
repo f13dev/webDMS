@@ -8,7 +8,7 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
 <div id="page-middle-left">
   <form method="POST" action="<?php echo SITE_URL; ?>">
     <input type="hidden" name="p" value="search">
-    <input type="text" name="searchString" placeholder="Search..." style="display:inline-block; width:250px">
+    <input type="text" name="searchString" placeholder="Search..." style="display:inline-block; width:245px">
     <input type="submit" value="Go" style="display:inline-block; width: 58px">
   </form>
   <?php 
