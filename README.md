@@ -22,8 +22,8 @@ A simple Document Management System designed for home users who do not need the 
   * Ensure the temporary folder is owned by www-data and is writeable
 4. Until the install script has been created:
   * Create a database and dump webDMS.sql to it
-  * Copy cfg.example.php to cfg.php
-  * Edit cfg.php to enter your database, site settings and generate some random strings
+  * Copy inc/cfg.example.php to inc/cfg.php
+  * Edit inc/cfg.php to enter your database, site settings and generate some random strings
   * Manually reate a user (via PHPMyAdmin or MySQL terminal)
     * Enter first and last name in plain text
     * Edit temp/secureEmail.php to add your email address, visit the page and copy the content to the email field (delete the file afterwards)
@@ -61,6 +61,11 @@ A simple Document Management System designed for home users who do not need the 
 # Features left to implement
 * Installation script
 * Documentation
+* Move some settings from cfg to database
+  * User account levels
+  * Salts and keys (updatable - Will need to regnerate encryptions and hashes)
+* Create budge planner
+  * Users can create bill categories add bills, income etc...
 
 # Feature list done
 * User edit
