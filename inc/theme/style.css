@@ -307,9 +307,10 @@ input[type=file]:active::beffore {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 
+
 /* Scroll bars */
 ::-webkit-scrollbar {
-  width:20px;
+  width: 20px;
 }
 
 ::-webkit-scrollbar-track {
@@ -322,4 +323,53 @@ input[type=file]:active::beffore {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--main);
+}
+
+
+/* Expenditure charts */
+
+.page-middle-right {
+  overflow: scroll;
+}
+#expContainer {
+  padding:1em 4em;
+}
+
+#docTable a.link, #expContainer a, #expContainer input[type=submit] {
+  color: #E2611B;
+  display: block;
+  border: 1px solid #E2611B;
+  padding: 0.3em;
+  text-decoration: none;
+  background: #fff;
+  margin-bottom: 0.5em;
+  text-align:center;
+}
+
+#docTable a.inactive {
+  color: grey;
+  border: 1px solid grey;
+}
+
+#docTable a.doc {
+  display: block;
+}
+
+#docTable a.link:hover, #expContainer a:hover, #expContainer input[type=submit]:hover {
+  background-color: #E2611B;
+  color: #fff;
+}
+
+#docTable a.inactive:hover {
+  color: grey;
+  border: 1px solid grey;
+  background: white;
+}
+
+#expContainer .hidden {
+  display: none;
+}
+
+#expContainer a > h2 {
+  display: block;
 }

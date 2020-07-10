@@ -196,53 +196,89 @@
    public function buildDocumentTable($selected, $orderBy = 'document_date', $asc = 'false') {
      global $d,$title,$uri;
 
-     $output  = '<table class="fileTable">';
-     $output .= '<tr class="thead">';
-     $output .= '<th>Title
-                   <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'title','true') . '"><i class="fa fa-angle-up"></i></a>
-                   <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'title','false') . '"><i class="fa fa-angle-down"></i></a>
-                 </th>';
-     $output .= '<th>Date
-                   <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'document_date','true') . '"><i class="fa fa-angle-up"></i></a>
-                   <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'document_date','false') . '"><i class="fa fa-angle-down"></i></a>
-                 </th>';
-     $output .= '<th>Filetype</th>';
-     $output .= '<th>Uploaded
-                   <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'upload_date','true') . '"><i class="fa fa-angle-up"></i></a>
-                   <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'upload_date','false') . '"><i class="fa fa-angle-down"></i></a>
-                 </th>';
-     if ($_SESSION['type'] <= PERM_DOC_EDIT) {
-       $output .= '<th>Edit</th>';
-     }
-     if ($_SESSION['type'] <= PERM_DOC_DELETE) {
-       $output .= '<th>Delete</th>';
-     }
-     $output .= '<th>Download</th>';
-     $output .= '</tr>';
+     $output  = '<table id="docTable" class="display" style="width:100%">';
+        $output .= '<thead>';
+            $output .= '<th>Title</th>';
+            $output .= '<th>Date</th>';
+            $output .= '<th>Filetype</th>';
+            $output .= '<th>Uploaded</th>';
+            if ($_SESSION['type'] <= PERM_DOC_EDIT) {
+              $output .= '<th>Edit</th>';
+            }
+            if ($_SESSION['type'] <= PERM_DOC_DELETE) {
+              $output .= '<th>Delete</th>';
+            }
+            $output .= '<th>Download</th>';
+        $output .= '</thead>';
+        $output .= '<tbody>';
+
+     //$output  = '<table class="fileTable">';
+     //$output .= '<tr class="thead">';
+     //$output .= '<th>Title
+     //              <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'title','true') . '"><i class="fa fa-angle-up"></i></a>
+     //              <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'title','false') . '"><i class="fa fa-angle-down"></i></a>
+     //           </th>';
+     //$output .= '<th>Date
+     //              <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'document_date','true') . '"><i class="fa fa-angle-up"></i></a>
+     //              <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'document_date','false') . '"><i class="fa fa-angle-down"></i></a>
+     //            </th>';
+     //$output .= '<th>Filetype</th>';
+     //$output .= '<th>Uploaded
+     //              <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'upload_date','true') . '"><i class="fa fa-angle-up"></i></a>
+     //              <a href="' .  $uri->document($this->getID(), $this->getTitle(),$d,$title,'upload_date','false') . '"><i class="fa fa-angle-down"></i></a>
+     //            </th>';
+     //if ($_SESSION['type'] <= PERM_DOC_EDIT) {
+     //  $output .= '<th>Edit</th>';
+     //}
+     //if ($_SESSION['type'] <= PERM_DOC_DELETE) {
+     //  $output .= '<th>Delete</th>';
+     //}
+     //$output .= '<th>Download</th>';
+     //$output .= '</tr>';
      foreach ($this->getDocuments($orderBy, $asc) as $each) {
        $doc[$each['ID']] = new document(['ID'=>$each['ID']]);
-       if ($doc[$each['ID']]->getID() == $selected) {
-         $output .= '<tr class="selected">';
-       } else {
-         $output .= '<tr>';
-       }
-       $output .= '<td><a href="' . $uri->downloadDocument($doc[$each['ID']]->showFile()) . '" target="_blank" data-rel="lightcase:group">
-                  ' . $doc[$each['ID']]->getTitle() . '
-                  </a></td>';
-       $output .= '<td>' . $doc[$each['ID']]->getDocDate() . '</td>';
-       $output .= '<td>' . $doc[$each['ID']]->getFileType() . '</td>';
+       $sortDoc = new DateTime($doc[$each['ID']]->getDocDate());
+       $sortUp  = new DateTime($doc[$each['ID']]->getUploadDate());
+
+      $output .= '<tr>';
+        $output .= '<td><a class="doc" href="' . $uri->downloadDocument($doc[$each['ID']]->showFile()) . '" target="_blank" data-rel="lightcase:collection" data-lc-caption="' . $doc[$each['ID']]->getTitle() . '">
+                   ' . $doc[$each['ID']]->getTitle() . '
+                   </a></td>';
+        $output .= '<td data-sort="' . $sortDoc->format('Y-m-d') . '">' . $doc[$each['ID']]->getDocDate() . '</td>';
+        $output .= '<td>' . $doc[$each['ID']]->getFileType() . '</td>';
+        $output .= '<td data-sort="' . $sortUp->format('Y-m-d') . '">' . $doc[$each['ID']]->getUploadDate() . '</td>';
+        if ($_SESSION['type'] <= PERM_DOC_EDIT) {
+          $output .= '<td><a class="link" href="' . $uri->editDocument($doc[$each['ID']]->getID(),$doc[$each['ID']]->getTitle()) . '"><i class="fa fa-edit"></a></td>';
+        }
+        if ($_SESSION['type'] <= PERM_DOC_DELETE) {
+          $output .= '<td><a class="link" href="' . $uri->recycleDocument($doc[$each['ID']]->getID()) . '" onclick="return confirm(\'Are you sure you wish to delete: ' . $doc[$each['ID']]->getTitle() . '\')"><i class="fa fa-minus-circle"></i></a></td>';
+        }
+        $output .= '<td><a class="link" download="' . $doc[$each['ID']]->getTitle() . '.' . $doc[$each['ID']]->getExtension() . '" href="' . $uri->downloadDocument($doc[$each['ID']]->getFile()) . '"><i class="fa fa-download"></i></a></td>';
+      $output .= '</tr>'; 
+
+       //if ($doc[$each['ID']]->getID() == $selected) {
+       //  $output .= '<tr class="selected">';
+       //} else {
+       //  $output .= '<tr>';
+       //}
+       //$output .= '<td><a href="' . $uri->downloadDocument($doc[$each['ID']]->showFile()) . '" target="_blank" data-rel="lightcase:collection" data-lc-caption="' . $doc[$each['ID']]->getTitle() . '">
+       //           ' . $doc[$each['ID']]->getTitle() . '
+       //           </a></td>';
+       //$output .= '<td>' . $doc[$each['ID']]->getDocDate() . '</td>';
+       //$output .= '<td>' . $doc[$each['ID']]->getFileType() . '</td>';
        
        
-       $output .= '<td>' . $doc[$each['ID']]->getUploadDate() . '</td>';
-       if ($_SESSION['type'] <= PERM_DOC_EDIT) {
-          $output .= '<td><a href="' . $uri->editDocument($doc[$each['ID']]->getID(),$doc[$each['ID']]->getTitle()) . '"><i class="fa fa-edit"></a></td>';
-       }
-       if ($_SESSION['type'] <= PERM_DOC_DELETE) {
-          $output .= '<td><a href="' . $uri->recycleDocument($doc[$each['ID']]->getID()) . '" onclick="return confirm(\'Are you sure you wish to delete: ' . $doc[$each['ID']]->getTitle() . '\')"><i class="fa fa-minus-circle"></i></a></td>';
-       }
-       $output .= '<td><a download="' . $doc[$each['ID']]->getTitle() . '.' . $doc[$each['ID']]->getExtension() . '" href="' . $uri->downloadDocument($doc[$each['ID']]->getFile()) . '"><i class="fa fa-download"></i></a></td>';
-       $output .= '</tr>';
+       //$output .= '<td>' . $doc[$each['ID']]->getUploadDate() . '</td>';
+       //if ($_SESSION['type'] <= PERM_DOC_EDIT) {
+       //   $output .= '<td><a href="' . $uri->editDocument($doc[$each['ID']]->getID(),$doc[$each['ID']]->getTitle()) . '"><i class="fa fa-edit"></a></td>';
+       //}
+       //if ($_SESSION['type'] <= PERM_DOC_DELETE) {
+       //   $output .= '<td><a href="' . $uri->recycleDocument($doc[$each['ID']]->getID()) . '" onclick="return confirm(\'Are you sure you wish to delete: ' . $doc[$each['ID']]->getTitle() . '\')"><i class="fa fa-minus-circle"></i></a></td>';
+       //}
+       //$output .= '<td><a download="' . $doc[$each['ID']]->getTitle() . '.' . $doc[$each['ID']]->getExtension() . '" href="' . $uri->downloadDocument($doc[$each['ID']]->getFile()) . '"><i class="fa fa-download"></i></a></td>';
+       //$output .= '</tr>';
      }
+     $output .= '</tbody>';
      $output .= '</table>';
      return $output;
    }

@@ -30,34 +30,51 @@ Class recycle {
     public function buildRecycleTable($selected = -1) {
       if ($_SESSION['type'] <= PERM_DOC_DELETE) {
         global $d,$title,$uri;
-        $output  = '<table class="fileTable">';
-        $output .= '<tr class="thead">';
-        $output .= '<th>Title</th>';
-        $output .= '<th>FileType</th>';
-        $output .= '<th>Recycled</th>';
-        $output .= '<th>Folder</th>';
-        $output .= '<th>Delete</th>';
-        $output .= '<th>Download</th>';
-        $output .= '<th>Restore</th>';
-        $output .= '</tr>';
+
+        $output  = '<table id="docTable" class="display" style="width:100%">';
+        $output .= '<thead>';
+            $output .= '<th>Title</th>';
+            $output .= '<th>Recycled</th>';
+            $output .= '<th>Filetype</th>';
+            $output .= '<th>Folder</th>';
+            $output .= '<th>Delete</th>';
+            $output .= '<th>Download</th>';
+            $output .= '<th>Restore</th>';
+        $output .= '</thead>';
+        $output .= '<tbody>';
+
+        //$output  = '<table class="fileTable">';
+        //$output .= '<tr class="thead">';
+        //$output .= '<th>Title</th>';
+        //$output .= '<th>FileType</th>';
+        //$output .= '<th>Recycled</th>';
+        //$output .= '<th>Folder</th>';
+        //$output .= '<th>Delete</th>';
+        //$output .= '<th>Download</th>';
+        //$output .= '<th>Restore</th>';
+        //$output .= '</tr>';
         foreach ($this->getDocuments() as $each) {
           $doc[$each['ID']] = new document(['ID'=>$each['ID']]);
+
+          $sortRecycle = new DateTime($doc[$each['ID']]->getRecycleDate());
+
+
           if ($doc[$each['ID']]->getID() == $selected) {
             $output .= '<tr class="selected">';
           } else {
             $output .= '<tr>';
           }
-          $output .= '<td><a href="' . $uri->recycleBinDocument($doc[$each['ID']]->getID(), $doc[$each['ID']]->getTitle()) . '">
+          $output .= '<td><a class="doc" href="' . $uri->recycleBinDocument($doc[$each['ID']]->getID(), $doc[$each['ID']]->getTitle()) . '">
                      ' . $doc[$each['ID']]->getTitle() . '
                      </a></td>';
+          $output .= '<td data-sort="' . $sortRecycle->format('Y-m-d') . '">' . $doc[$each['ID']]->getRecycleDate() . '</td>';
           $output .= '<td>' . $doc[$each['ID']]->getFileType() . '</td>';
           
           
-          $output .= '<td>' . $doc[$each['ID']]->getRecycleDate() . '</td>';
-          $output .= '<td><a href="' . $uri->folder($doc[$each['ID']]->getFolder(),$doc[$each['ID']]->getFolderTitle()) . '">' . $doc[$each['ID']]->getFolderTitle() . '</a></td>';
-          $output .= '<td><a href="' . $uri->deleteDocument($doc[$each['ID']]->getID()) . '" onclick="return confirm(\'Proceeding will permanently delete the file: ' . $doc[$each['ID']]->getTitle() . '\')"><i class="fa fa-minus-circle"></i></a></td>';
-          $output .= '<td><a download="' . $doc[$each['ID']]->getTitle() . '.' . $doc[$each['ID']]->getExtension() . '" href="' . $uri->downloadDocument($doc[$each['ID']]->getFile()) . '"><i class="fa fa-download"></i></a></td>';
-          $output .= '<td><a href="' . $uri->restoreDocument($doc[$each['ID']]->getID()) . '"><i class="fa fa-undo"></i></a></td>';
+          $output .= '<td><a class="doc" href="' . $uri->folder($doc[$each['ID']]->getFolder(),$doc[$each['ID']]->getFolderTitle()) . '">' . $doc[$each['ID']]->getFolderTitle() . '</a></td>';
+          $output .= '<td><a class="link" href="' . $uri->deleteDocument($doc[$each['ID']]->getID()) . '" onclick="return confirm(\'Proceeding will permanently delete the file: ' . $doc[$each['ID']]->getTitle() . '\')"><i class="fa fa-minus-circle"></i></a></td>';
+          $output .= '<td><a class="link" download="' . $doc[$each['ID']]->getTitle() . '.' . $doc[$each['ID']]->getExtension() . '" href="' . $uri->downloadDocument($doc[$each['ID']]->getFile()) . '"><i class="fa fa-download"></i></a></td>';
+          $output .= '<td><a class="link"href="' . $uri->restoreDocument($doc[$each['ID']]->getID()) . '"><i class="fa fa-undo"></i></a></td>';
           $output .= '</tr>';
         }
         $output .= '</table>';

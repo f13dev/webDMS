@@ -271,4 +271,27 @@ Class Uri {
         }
     }
 
+    function expenditure() {
+        if (REWRITE) {
+            return SITE_URL . 'expenditure/';
+        } else {
+            return SITE_URL . '?expenditure';
+        }
+    }
+
+    function expenditureDelete($id) {
+        if (REWRITE) {
+            return SITE_URL . 'expenditure/delete/' . $id . '/';
+        } else {
+            return SITE_URL . '?expenditure&delete=' . $id;
+        }
+    }
+
+    function expenditureEdit($id) {
+        if (REWRITE) {
+            return SITE_URL . 'expenditure/edit/' . $id . '/';
+        } else {
+            return SITE_URL . '?expenditure&edit=' . $id;
+        }
+    }
 }

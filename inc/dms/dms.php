@@ -22,6 +22,7 @@ $recycleBin = new recycle();
 <div id="page-top">
   <img src="<?php echo SITE_URL; ?>favicon-32x32.png" id="logo">
   <a href="<?php echo SITE_URL; ?>">webDMS</a> -
+  <a href="<?php echo $uri->page('expenditure'); ?>">Money</a> - 
   <a href="<?php echo $uri->page('account'); ?>">Account details</a> -
   <?php
   if ($_SESSION['type'] <= PERM_USER_VIEW) {
@@ -58,7 +59,8 @@ $pages = array(
   "newFolder",
   "restore",
   "recycleFile",
-  "users"
+  "users",
+  "expenditure"
 );
 if (in_array($page, $pages)) {
     require('inc/dms/' . $page . '.php');

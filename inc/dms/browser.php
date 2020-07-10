@@ -58,6 +58,15 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
 
   ?>
 </div>
+<?php if (isset($_GET['expenditure'])) {
+?>
+<div id="page-middle-right" style="overflow: scroll;">
+<?php include('inc/dms/expenditure.php');
+?>
+</div>
+<?php 
+} else {
+  ?>
 <div id="page-middle-right">
   <div id="page-middle-right-top">
     <?php
@@ -101,3 +110,4 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
     ?>
   </div>
 </div>
+  <?php } ?>

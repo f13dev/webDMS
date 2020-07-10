@@ -1,4 +1,4 @@
-Options +FollowSymlinks
+#Options +FollowSymlinks
 RewriteEngine On
 
 # Don't rewrite files that already exist
@@ -67,6 +67,11 @@ RewriteRule ^users/([0-9]+)/(.*)/ index.php?p=users&id=$1&name=$2
 
 # CSRF token error
 RewriteRule ^token-error/ index.php?token-error
+
+# Expenditure
+RewriteRule ^expenditure/delete/([0-9]+)/ index.php?expenditure&delete=$1
+RewriteRule ^expenditure/edit/([0-9]+)/ index.php?expenditure&edit=$1
+RewriteRule ^expenditure/ index.php?expenditure
 
 #page_uri - Goes right at the bottom
 RewriteRule ^([A-Za-z]*)/ index.php?p=$1
