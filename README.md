@@ -89,7 +89,7 @@ A simple Document Management System designed for home users who do not need the 
 * Edit file
 
 # To do
-* check if session CSRF token isn't set, if so direct to login with error message rather than die
+* ~~check if session CSRF token isn't set, if so direct to login with error message rather than die~~
 * Code tidying
 * Commenting
 * Move reusable code to classes or functions
