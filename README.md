@@ -64,10 +64,13 @@ A simple Document Management System designed for home users who do not need the 
 * Move some settings from cfg to database
   * User account levels
   * Salts and keys (updatable - Will need to regnerate encryptions and hashes)
-* Create budge planner
-  * Users can create bill categories add bills, income etc...
+* Add permissions to budget planner so x user level can create edit and delete items
 
 # Feature list done
+* Budget planner
+  * Add/edit income
+  * Add/edit bills
+  * Tables and graphs show your budgeting
 * User edit
 * User creation
 * User deletion
