@@ -16,6 +16,7 @@ if (isset($_POST['new'])) {
     $statement = $dbc->prepare("INSERT INTO bills (name,unit,frequency,start,amount,income) VALUES (?,?,?,?,?,?)");
     $statement->execute([$item,$unit,$frequency,$start,$amount,$income]);
 
+
 }
 
 // Delete an entry 
@@ -27,7 +28,7 @@ if (isset($_GET['delete'])) {
 }
 
 ?>
-<div id="expContainer">
+<div id="page-middle-right-top" class="expContainer">
 <?php
     if (isset($_GET['edit'])) {        
         if (isset($_POST['submit'])) {
@@ -55,9 +56,9 @@ if (isset($_GET['delete'])) {
         <h2>Edit: <?php echo $result['name']; ?></h2>
         <form method="POST">
             <label for="item">Item</label><br>
-            <input type="text" name="item" value="<?php echo $result['name']; ?>"><br>
+            <input type="text" name="item" value="<?php echo $result['name']; ?>" required><br>
             <label for="frequency">Frequency</label><br>
-            <input type="number" name="frequency" value="<?php echo $result['frequency']; ?>">
+            <input type="number" name="frequency" value="<?php echo $result['frequency']; ?>" required>
             <select name="unit">
                 <option value="365"<?php if ($result['unit'] == '365') echo ' selected'; ?>>Day</option>
                 <option value="52"<?php if ($result['unit'] == '52') echo ' selected'; ?>>Week</option>
@@ -65,9 +66,9 @@ if (isset($_GET['delete'])) {
                 <option value="1"<?php if ($result['unit'] == '1') echo ' selected'; ?>>Year</option>
             </select><br>
             <label for="start">Last payment</label><br>
-            <input type="date" name="start" value="<?php echo $result['start']; ?>"><br>
-            <label for="amount">Amount</label><br>
-            <input type="number" name="amount" step="0.01" value="<?php echo $result['amount']; ?>"><br>
+            <input type="date" name="start" value="<?php echo $result['start']; ?>" required><br>
+            <label for="amount" required>Amount</label><br>
+            <input type="number" name="amount" step="0.01" value="<?php echo $result['amount']; ?>" required><br>
             <input type="submit" name="submit" value="Submit">
         </form>
 
@@ -122,13 +123,13 @@ if (isset($_GET['delete'])) {
 
     <a id="showIncomeDiv"><h2>Income</h2></a>
     <div id="incomeDiv">
-        <a id="showIncome">Add new item</a>
+        <a id="showIncome">Add income</a>
         <div class="hidden" id="addIncome">
             <form method="POST">
                 <label for="item">Item</label><br>
-                <input type="text" name="item"><br>
+                <input type="text" name="item" required><br>
                 <label for="frequency">Frequency</label><br>
-                <input type="number" name="frequency">
+                <input type="number" name="frequency" required>
                 <select name="unit">
                     <option value="365">Day</option>
                     <option value="52">Week</option>
@@ -136,9 +137,9 @@ if (isset($_GET['delete'])) {
                     <option value="1">Year</option>
                 </select><br>
                 <label for="start">Last payment</label><br>
-                <input type="date" name="start"><br>
+                <input type="date" name="start" required><br>
                 <label for="amount">Amount</label><br>
-                <input type="number" name="amount" step="0.01"><br>
+                <input type="number" name="amount" step="0.01" required><br>
                 <input type="hidden" name="income" value="1"><br>
                 <input type="submit" name="new" value="Add new income">
             </form>
@@ -166,14 +167,15 @@ if (isset($_GET['delete'])) {
             <?php
             foreach($bills as $each) {
                 if ($each->getIncome()) {
+                    $next = new DateTime($each->setNext());
                     echo '<tr>';
                         echo '<td>' . $each->getName() . '</td>';
-                        echo '<td align="right">£' . $each->getDaily() . '</td>';
-                        echo '<td align="right">£' . $each->getWeekly() . '</td>';
-                        echo '<td align="right">£' . $each->getMonthly() . '</td>';
-                        echo '<td align="right">£' . $each->getAnnual() . '</td>';
-                        echo '<td>' . $each->setNext() . '</td>';
-                        echo '<td align="right">£' . $each->getAmount() . '</td>';
+                        echo '<td align="right">' . CURRENCY . number_format($each->getDaily(),2) . '</td>';
+                        echo '<td align="right">' . CURRENCY . number_format($each->getWeekly(),2) . '</td>';
+                        echo '<td align="right">' . CURRENCY . number_format($each->getMonthly(),2) . '</td>';
+                        echo '<td align="right">' . CURRENCY . number_format($each->getAnnual(),2) . '</td>';
+                        echo '<td data-sort="' . $next->format('Y-m-d') . '">' . $next->format(DATE_FORMAT) . '</td>';
+                        echo '<td align="right">' . CURRENCY . number_format($each->getAmount(),2) . '</td>';
                         echo '<td><a href="' . $uri->expenditureEdit($each->getId()) . '"><i class="fa fa-edit"></i></a></td>';
                         echo '<td><a href="' . $uri->expenditureDelete($each->getId()) . '" onclick="return confirm(\'Are you sure?\')"><i class="fa fa-trash"></i></a></td>';
                 echo '</tr>';
@@ -211,13 +213,13 @@ if (isset($_GET['delete'])) {
 
     <a id="showExpenditureDiv"><h2>Expenditure</h2></a>
     <div id="expenditureDiv">
-        <a id="showExpenditure">Add new item</a>
+        <a id="showExpenditure">Add expenditure</a>
         <div class="hidden" id="addExpenditure">
             <form method="POST">
                 <label for="item">Item</label><br>
-                <input type="text" name="item"><br>
+                <input type="text" name="item" required><br>
                 <label for="frequency">Frequency</label><br>
-                <input type="number" name="frequency">
+                <input type="number" name="frequency" required>
                 <select name="unit">
                     <option value="365">Day</option>
                     <option value="52">Week</option>
@@ -225,9 +227,9 @@ if (isset($_GET['delete'])) {
                     <option value="1">Year</option>
                 </select><br>
                 <label for="start">Last payment</label><br>
-                <input type="date" name="start"><br>
+                <input type="date" name="start" required><br>
                 <label for="amount">Amount</label><br>
-                <input type="number" name="amount" step="0.01"><br>
+                <input type="number" name="amount" step="0.01" required><br>
                 <input type="hidden" name="income" value="0"><br>
                 <input type="submit" name="new" value="Add new expenditure">
             </form>
@@ -255,15 +257,16 @@ if (isset($_GET['delete'])) {
             <?php
             foreach($bills as $each) {
                 if (!$each->getIncome()) {
+                    $next = new DateTime($each->setNext());
                     echo '<tr>';
                         echo '<td>' . $each->getName() . '</td>';
-                        echo '<td align="right">£' . $each->getDaily() . '</td>';
-                        echo '<td align="right">£' . $each->getWeekly() . '</td>';
-                        echo '<td align="right">£' . $each->getMonthly() . '</td>';
-                        echo '<td align="right">£' . $each->getAnnual() . '</td>';
-                        echo '<td>' . $each->setNext() . '</td>';
-                        echo '<td align="right">£' . $each->getAmount() . '</td>';
-                        echo '<td><a href="' . $uri->expenditureDelete($each->getId()) . '"><i class="fa fa-edit"></i></a></td>';
+                        echo '<td align="right">' . CURRENCY . number_format($each->getDaily(),2) . '</td>';
+                        echo '<td align="right">' . CURRENCY . number_format($each->getWeekly(),2) . '</td>';
+                        echo '<td align="right">' . CURRENCY . number_format($each->getMonthly(),2) . '</td>';
+                        echo '<td align="right">' . CURRENCY . number_format($each->getAnnual(),2) . '</td>';
+                        echo '<td data-sort="' . $next->format('Y-m-d') . '">' . $next->format(DATE_FORMAT) . '</td>';
+                        echo '<td align="right">' . CURRENCY . number_format($each->getAmount(),2) . '</td>';
+                        echo '<td><a href="' . $uri->expenditureEdit($each->getId()) . '"><i class="fa fa-edit"></i></a></td>';
                         echo '<td><a href="' . $uri->expenditureDelete($each->getId()) . '" onclick="return confirm(\'Are you sure?\')"><i class="fa fa-trash"></i></a></td>';
                 echo '</tr>';
                 }
@@ -297,7 +300,6 @@ if (isset($_GET['delete'])) {
         });
     </script>
 
-
     <a id="showTotalDiv"><h2>Totals</h2></a>
     <div id="totalDiv">
         <table id="totals" class="display" style="width:100%">
@@ -311,24 +313,24 @@ if (isset($_GET['delete'])) {
             <tbody>
                 <tr>
                     <td>Income</td>
-                    <td><?php echo $totals['income']['daily']; ?></td>
-                    <td><?php echo $totals['income']['weekly']; ?></td>
-                    <td><?php echo $totals['income']['monthly']; ?></td>
-                    <td><?php echo $totals['income']['yearly']; ?></td>
+                    <td align="right"><?php echo CURRENCY . number_format($totals['income']['daily'],2); ?></td>
+                    <td align="right"><?php echo CURRENCY . number_format($totals['income']['weekly'],2); ?></td>
+                    <td align="right"><?php echo CURRENCY . number_format($totals['income']['monthly'],2); ?></td>
+                    <td align="right"><?php echo CURRENCY . number_format($totals['income']['yearly'],2); ?></td>
                 </tr>
                 <tr>
                     <td>Outgoing</td>
-                    <td><?php echo $totals['out']['daily']; ?></td>
-                    <td><?php echo $totals['out']['weekly']; ?></td>
-                    <td><?php echo $totals['out']['monthly']; ?></td>
-                    <td><?php echo $totals['out']['yearly']; ?></td>
+                    <td align="right"><?php echo CURRENCY . number_format($totals['out']['daily'],2); ?></td>
+                    <td align="right"><?php echo CURRENCY . number_format($totals['out']['weekly'],2); ?></td>
+                    <td align="right"><?php echo CURRENCY . number_format($totals['out']['monthly'],2); ?></td>
+                    <td align="right"><?php echo CURRENCY . number_format($totals['out']['yearly'],2); ?></td>
                 </tr>
                 <tr>
                     <td>Remaining</td>
-                    <td><?php echo round($totals['income']['daily'] - $totals['out']['daily'],2); ?></td>
-                    <td><?php echo round($totals['income']['weekly'] - $totals['out']['weekly'],2); ?></td>
-                    <td><?php echo round($totals['income']['monthly'] - $totals['out']['monthly'],2); ?></td>
-                    <td><?php echo round($totals['income']['yearly'] - $totals['out']['yearly'],2); ?></td>
+                    <td align="right"><?php echo CURRENCY . number_format($totals['income']['daily'] - $totals['out']['daily'],2); ?></td>
+                    <td align="right"><?php echo CURRENCY . number_format($totals['income']['weekly'] - $totals['out']['weekly'],2); ?></td>
+                    <td align="right"><?php echo CURRENCY . number_format($totals['income']['monthly'] - $totals['out']['monthly'],2); ?></td>
+                    <td align="right"><?php echo CURRENCY . number_format($totals['income']['yearly'] - $totals['out']['yearly'],2); ?></td>
 
                 </tr>
             </tbody>
@@ -358,15 +360,18 @@ if (isset($_GET['delete'])) {
     }),
     $(document).ready(function() {
         $('#income').DataTable({
+            "order": [[ 5, "asc" ]],
             "bPaginate":false,
-
+            "columnDefs": [
+                { "orderable": false, "targets": [7,8] }
+            ],
             "footerCallback": function ( row, data, start, end, display ) {
                 var api = this.api(), data;
     
                 // Remove the formatting to get integer data for summation
                 var intVal = function ( i ) {
                     return typeof i === 'string' ?
-                        i.replace(/[\£,]/g, '')*1 :
+                        i.replace(/[\<?php echo CURRENCY; ?>,]/g, '')*1 :
                         typeof i === 'number' ?
                             i : 0;
                 };
@@ -399,16 +404,16 @@ if (isset($_GET['delete'])) {
     
                 // Update footer
                 $( api.column( 4 ).footer() ).html(
-                    '£'+ totalYear.toFixed(2)
+                    '<?php echo CURRENCY; ?>' + totalYear.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                 );
                 $( api.column( 3 ).footer() ).html(
-                    '£'+ totalMonth.toFixed(2)
+                    '<?php echo CURRENCY; ?>' + totalMonth.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                 );
                 $( api.column( 2 ).footer() ).html(
-                    '£'+ totalWeek.toFixed(2)
+                    '<?php echo CURRENCY; ?>' + totalWeek.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                 );
                 $( api.column( 1 ).footer() ).html(
-                    '£'+ totalDay.toFixed(2)
+                    '<?php echo CURRENCY; ?>' + totalDay.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                 );
             }
 
@@ -418,15 +423,18 @@ if (isset($_GET['delete'])) {
 
     $(document).ready(function() {
         $('#outgoing').DataTable({
+            "order": [[ 5, "asc" ]],
             "bPaginate":false,
-
+            "columnDefs": [
+                { "orderable": false, "targets": [7,8] }
+            ],
             "footerCallback": function ( row, data, start, end, display ) {
                 var api = this.api(), data;
     
                 // Remove the formatting to get integer data for summation
                 var intVal = function ( i ) {
                     return typeof i === 'string' ?
-                        i.replace(/[\£,]/g, '')*1 :
+                        i.replace(/[\<?php echo CURRENCY; ?>,]/g, '')*1 :
                         typeof i === 'number' ?
                             i : 0;
                 };
@@ -459,16 +467,16 @@ if (isset($_GET['delete'])) {
     
                 // Update footer
                 $( api.column( 4 ).footer() ).html(
-                    '£'+ totalYear.toFixed(2)
+                    '<?php echo CURRENCY; ?>' + totalYear.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                 );
                 $( api.column( 3 ).footer() ).html(
-                    '£'+ totalMonth.toFixed(2)
+                    '<?php echo CURRENCY; ?>' + totalMonth.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                 );
                 $( api.column( 2 ).footer() ).html(
-                    '£'+ totalWeek.toFixed(2)
+                    '<?php echo CURRENCY; ?>' + totalWeek.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                 );
                 $( api.column( 1 ).footer() ).html(
-                    '£'+ totalDay.toFixed(2)
+                    '<?php echo CURRENCY; ?>' + totalDay.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                 );
             }
 
@@ -572,7 +580,7 @@ if (isset($_GET['delete'])) {
 
                 ]);
 
-                var options = {title: 'Income', isStacked:true, legend: {position: 'top'}, xAxis: {textPosition:'none'}};  
+                var options = {title: 'Annual Income', isStacked:true, legend: {position: 'top'}, xAxis: {textPosition:'none'}};  
 
                 // Instantiate and draw the chart.
                 var chart = new google.visualization.BarChart(document.getElementById('incomePiechart'));
@@ -602,7 +610,7 @@ if (isset($_GET['delete'])) {
 
                 ]);
 
-                var options = {title: 'Expenditure', isStacked:true, legend: {position: 'top'}, xAxis: {textPosition:'none'}};  
+                var options = {title: 'Annual Expenditure', isStacked:true, legend: {position: 'top'}, xAxis: {textPosition:'none'}};  
 
                 // Instantiate and draw the chart.
                 var chart = new google.visualization.BarChart(document.getElementById('outgoingPiechart'));

@@ -188,6 +188,9 @@ Class document {
    * Returns the date the file was uploaded
    */
   public function getUploadDate() {
+    if ($this->upload_date == '0000-00-00') {
+      return date(DATE_FORMAT, strtotime('1970-01-01'));
+    }
     return date(DATE_FORMAT, strtotime($this->upload_date));
   }
 

@@ -1,0 +1,65 @@
+Options +FollowSymlinks
+RewriteEngine On
+
+# Don't rewrite files that already exist
+RewriteCond %{REQUEST_FILENAME} -d [OR]
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule (.*) $1 [QSA,L]
+
+#document_uri($f,$n,$d,$t,$orderBy,$asc)
+RewriteRule ^F([0-9]+)/(.*)/order-(.*)/asc-(.*)/D([0-9]+)/(.*)/ index.php?f=$1&folder=$2&orderBy=$3&asc=$4&d=$5&title=$6
+#folder_uri($f,$n,$orderBy,$asc)
+RewriteRule ^F([0-9]+)/(.*)/order-(.*)/asc-(.*)/ index.php?f=$1&folder=$2&orderBy=$3&asc=$4
+
+#Without $asc
+#document_uri($f,$n,$d,$t,$orderBy)
+RewriteRule ^F([0-9]+)/(.*)/order-(.*)/D([0-9]+)/(.*)/ index.php?f=$1&folder=$2&orderBy=$3&d=$4&title=$5
+#folder_uri($f,$n,$orderBy)
+RewriteRule ^F([0-9]+)/(.*)/order-(.*)/ index.php?f=$1&folder=$2&orderBy=$3
+
+#Without $orderBy
+#document_uri($f,$n,$d,$t,$asc)
+RewriteRule ^F([0-9]+)/(.*)/asc-(.*)/D([0-9]+)/(.*)/ index.php?f=$1&folder=$2&asc=$3&d=$4&title=$5
+#folder_uri($f,$n,$asc)
+RewriteRule ^F([0-9]+)/(.*)/asc-(.*)/ index.php?f=$1&folder=$2&asc=$3
+
+#Without &orderBy and $asc
+#document_uri($f,$n,$d,$t)
+RewriteRule ^F([0-9]+)/(.*)/D([0-9]+)/(.*)/ index.php?f=$1&folder=$2&d=$3&title=$4
+#folder_uri($f,$n)
+RewriteRule ^F([0-9]+)/(.*)/ index.php?f=$1&folder=$2
+
+#editFile
+RewriteRule ^editDoc/D([0-9]+)/(.*)/ index.php?p=editFile&id=$1&title=$2
+#doc_del_uri
+RewriteRule ^deleteFile/D([0-9]+)/ index.php?p=deleteFile&id=$1
+#doc_download_uri
+RewriteRule ^download/(.*)/  fileScraper.php?file=$1
+#newFile uri 
+RewriteRule ^newFile/F([0-9]+)/(.*)/ index.php?p=newFile&id=$1&title=$2
+
+#editFolder 
+RewriteRule ^editFolder/F([0-9]+)/(.*)/ index.php?p=editFolder&id=$1&title=$2
+#deleteFolder
+RewriteRule ^deleteFolder/F([0-9]+)/(.*)/ index.php?p=deleteFolder&id=$1&title=$2
+
+#delCategory 
+RewriteRule ^deleteCategory/([0-9]+)/ index.php?p=deleteCategory&id=$1
+# Search
+RewriteRule ^search/(.*)/D([0-9]+) index.php?p=search&searchString=$1&d=$2
+RewriteRule ^search/(.*)/ index.php?p=search&searchString=$1
+
+#recycleBin
+RewriteRule ^recycleBin/D([0-9]+)/(.*)/ index.php?recycleBin&d=$1&t=$2
+RewriteRule ^recycleBin/ index.php?recycleBin
+RewriteRule ^restore/D([0-9]+)/ index.php?p=restore&d=$1
+RewriteRule ^recycleDocument/D([0-9]+)/ index.php?p=recycleFile&d=$1
+
+#Password reset 
+RewriteRule ^reset/complete/ index.php?resetComplete
+RewriteRule ^reset/(.*)/ index.php?reset&code=$1
+RewriteRule ^reset/ index.php?reset
+
+#page_uri - Goes right at the bottom
+RewriteRule ^([A-Za-z]*)/ index.php?p=$1
+

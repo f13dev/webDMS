@@ -12,6 +12,9 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
 $(document).ready(function() {
         $('#docTable').DataTable({
             "order": [[ 1, "desc" ]],
+            "columnDefs": [
+                { "orderable": false, "targets": [4,5,6] }
+            ],
             "bPaginate":false,
 
             "footerCallback": function ( row, data, start, end, display ) {

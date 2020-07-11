@@ -328,14 +328,16 @@ input[type=file]:active::beffore {
 
 /* Expenditure charts */
 
-.page-middle-right {
-  overflow: scroll;
-}
 #expContainer {
   padding:1em 4em;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
 }
 
-#docTable a.link, #expContainer a, #expContainer input[type=submit] {
+#docTable a.link, .expContainer a, .expContainer input[type=submit] {
   color: #E2611B;
   display: block;
   border: 1px solid #E2611B;
@@ -355,7 +357,7 @@ input[type=file]:active::beffore {
   display: block;
 }
 
-#docTable a.link:hover, #expContainer a:hover, #expContainer input[type=submit]:hover {
+#docTable a.link:hover, .expContainer a:hover, .expContainer input[type=submit]:hover {
   background-color: #E2611B;
   color: #fff;
 }
@@ -366,10 +368,14 @@ input[type=file]:active::beffore {
   background: white;
 }
 
-#expContainer .hidden {
+.expContainer .hidden {
   display: none;
 }
 
-#expContainer a > h2 {
+.expContainer a > h2 {
   display: block;
+}
+
+#page-middle-right .expContainer {
+  padding: 1.2em;
 }

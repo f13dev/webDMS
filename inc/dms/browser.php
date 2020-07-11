@@ -60,7 +60,7 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
 </div>
 <?php if (isset($_GET['expenditure'])) {
 ?>
-<div id="page-middle-right" style="overflow: scroll;">
+<div id="page-middle-right">
 <?php include('inc/dms/expenditure.php');
 ?>
 </div>
